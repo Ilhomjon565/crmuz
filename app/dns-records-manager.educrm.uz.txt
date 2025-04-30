@@ -1,0 +1,3 @@
+; DNS Records for manager.educrm.uz
+; Add these records to your DNS provider's configuration
+manager    IN    CNAME    cname.vercel-dns.com.
