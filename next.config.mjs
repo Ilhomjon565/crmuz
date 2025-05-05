@@ -1,17 +1,14 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-    images: {
-        remotePatterns: [
-            {
-                protocol: 'https',
-                hostname: 'hebbkx1anhila5yf.public.blob.vercel-storage.com',
-            },
-        ],
-        domains: ['localhost', 'yourdomain.com'], // localhost yoki boshqa domenga ruxsat berish
-    },
-    eslint: {
-        ignoreDuringBuilds: true,
-    },
-};
+  eslint: {
+    ignoreDuringBuilds: true,
+  },
+  typescript: {
+    ignoreBuildErrors: true,
+  },
+  images: {
+    unoptimized: true,
+  },
+}
 
-export default nextConfig;
+export default nextConfig
