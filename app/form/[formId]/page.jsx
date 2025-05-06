@@ -44,6 +44,8 @@ export default function FormPage() {
   const [error, setError] = useState(null)
   const [location, setLocation] = useState(null)
   const [locationError, setLocationError] = useState(null)
+  const [locationPermission, setLocationPermission] = useState("prompt") // "granted", "denied", "prompt"
+  const [isLocationModalOpen, setIsLocationModalOpen] = useState(false)
   const { formId } = useParams()
   const router = useRouter()
 
@@ -57,6 +59,37 @@ export default function FormPage() {
       courses: [],
     },
   })
+
+  const getLocation = () => {
+    if (typeof window !== "undefined" && "geolocation" in navigator) {
+      navigator.geolocation.getCurrentPosition(
+        (position) => {
+          setLocation({
+            latitude: position.coords.latitude,
+            longitude: position.coords.longitude,
+          })
+          setLocationError(null)
+          setLocationPermission("granted")
+        },
+        (error) => {
+          console.error("Joylashuv olishda xatolik:", error)
+          setLocationError(
+            "Joylashuv ma'lumotlarini olishda xatolik yuz berdi. Iltimos, joylashuv xizmatlarini yoqing.",
+          )
+          setLocationPermission("denied")
+        },
+        { enableHighAccuracy: true, timeout: 5000, maximumAge: 0 },
+      )
+    } else {
+      setLocationError("Joylashuv xizmati mavjud emas")
+      setLocationPermission("denied")
+    }
+  }
+
+  const requestLocationPermission = () => {
+    setIsLocationModalOpen(true)
+    getLocation()
+  }
 
   useEffect(() => {
     const fetchFormData = async () => {
@@ -73,41 +106,16 @@ export default function FormPage() {
       }
     }
 
-    const getLocation = () => {
-      if (typeof window !== "undefined" && "geolocation" in navigator) {
-        navigator.geolocation.getCurrentPosition(
-          (position) => {
-            setLocation({
-              latitude: position.coords.latitude,
-              longitude: position.coords.longitude,
-            })
-            setLocationError(null)
-          },
-          (error) => {
-            console.error("Joylashuv olishda xatolik:", error)
-            setLocationError(
-              "Joylashuv ma'lumotlarini olishda xatolik yuz berdi. Iltimos, joylashuv xizmatlarini yoqing.",
-            )
-          },
-        )
-      } else {
-        // Default location for environments without geolocation
-        setLocation({ latitude: 41.2995, longitude: 69.2401 }) // Tashkent coordinates
-      }
-    }
-
     if (formId) {
       fetchFormData()
-      getLocation()
-      const locationInterval = setInterval(getLocation, 5000) // Update location every 5 seconds
-
-      return () => clearInterval(locationInterval)
+      getLocation() // Initial location check
     }
   }, [formId])
 
   async function onSubmit(values) {
     if (!location) {
       setLocationError("Joylashuv ma'lumotlari talab qilinadi")
+      requestLocationPermission()
       return
     }
 
@@ -193,6 +201,58 @@ export default function FormPage() {
     )
   }
 
+  if (!location && locationPermission !== "granted") {
+    return (
+      <div className="min-h-screen bg-gradient-to-b from-blue-50 to-blue-100 flex items-center justify-center p-4">
+        <motion.div
+          initial={{ opacity: 0, scale: 0.9 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 0.5 }}
+          className="w-full max-w-md"
+        >
+          <Card>
+            <CardHeader>
+              <CardTitle className="text-center">Joylashuv ruxsati kerak</CardTitle>
+              <CardDescription className="text-center">
+                Formani to'ldirish uchun joylashuv ma'lumotlaringizni ulashishingiz kerak
+              </CardDescription>
+            </CardHeader>
+            <CardContent className="flex flex-col items-center justify-center pt-6 pb-8">
+              <div className="w-16 h-16 rounded-full bg-blue-100 flex items-center justify-center mb-6">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  className="h-8 w-8 text-blue-600"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"
+                  />
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"
+                  />
+                </svg>
+              </div>
+              <p className="text-center text-muted-foreground mb-6">
+                Sizning joylashuvingiz faqat ariza maqsadida ishlatiladi va maxfiy saqlanadi.
+              </p>
+              <Button onClick={requestLocationPermission} className="w-full bg-blue-600 hover:bg-blue-700">
+                Joylashuvga ruxsat berish
+              </Button>
+            </CardContent>
+          </Card>
+        </motion.div>
+      </div>
+    )
+  }
+
   return (
     <div className="min-h-screen bg-gradient-to-b from-blue-50 to-blue-100 py-12 px-4 sm:px-6 lg:px-8">
       <motion.div
@@ -212,7 +272,7 @@ export default function FormPage() {
               alt="Education Logo"
               width={100}
               height={80}
-              className="max-w-[150px] mr-4 sm:max-w-[200px]"
+              className="max-w-[150px] rounded-full mr-4 sm:max-w-[200px]"
               unoptimized
             />
           )}
@@ -221,11 +281,18 @@ export default function FormPage() {
           </h1>
         </div>
 
-        {locationError && (
+        <br />
+
+        {locationError && locationPermission !== "granted" && (
           <Alert variant="destructive" className="mb-6">
             <AlertCircle className="h-4 w-4" />
             <AlertTitle>Joylashuv xatoligi</AlertTitle>
-            <AlertDescription>{locationError}</AlertDescription>
+            <AlertDescription>
+              {locationError}
+              <Button variant="outline" size="sm" onClick={requestLocationPermission} className="mt-2 w-full">
+                Joylashuvga ruxsat berish
+              </Button>
+            </AlertDescription>
           </Alert>
         )}
 
