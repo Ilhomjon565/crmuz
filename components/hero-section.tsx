@@ -5,6 +5,7 @@ import { Button } from "@/components/ui/button"
 import { Play, ChevronRight } from "lucide-react"
 import DashboardPreview from "@/components/dashboard-preview"
 import CanvasBackground from "@/components/canvas-background"
+import { motion } from "framer-motion"
 
 export default function HeroSection() {
   return (
@@ -16,21 +17,41 @@ export default function HeroSection() {
 
       <div className="container relative mx-auto z-10">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-          <div className="space-y-8 relative z-10">
+          <motion.div
+            initial={{ opacity: 0, x: -50 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.5 }}
+            className="space-y-8 relative z-10"
+          >
             <div className="inline-flex items-center px-3 py-1 rounded-full bg-indigo-100 dark:bg-indigo-900/50 text-indigo-600 dark:text-indigo-300 text-sm font-medium shadow-lg shadow-indigo-600/10 dark:shadow-indigo-500/20">
               <span className="flex h-2 w-2 rounded-full bg-indigo-600 dark:bg-indigo-400 mr-2"></span>
               Ta'lim markazlari uchun #1 CRM platforma
             </div>
 
-            <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold tracking-tight bg-clip-text text-transparent bg-gradient-to-r from-indigo-600 to-blue-500 dark:from-indigo-400 dark:to-blue-300 drop-shadow-sm">
+            <motion.h1
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.2, duration: 0.7 }}
+              className="text-5xl md:text-6xl lg:text-7xl font-bold tracking-tight bg-clip-text text-transparent bg-gradient-to-r from-indigo-600 to-blue-500 dark:from-indigo-400 dark:to-blue-300 drop-shadow-sm"
+            >
               Transform Education
-            </h1>
+            </motion.h1>
 
-            <p className="text-xl text-slate-700 dark:text-slate-200 max-w-xl font-medium drop-shadow-sm">
+            <motion.p
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.3, duration: 0.7 }}
+              className="text-xl text-slate-700 dark:text-slate-200 max-w-xl font-medium drop-shadow-sm"
+            >
               O'quv markazingizni zamonaviy CRM tizimi orqali boshqaring va samaradorlikni oshiring.
-            </p>
+            </motion.p>
 
-            <div className="flex flex-col sm:flex-row gap-4">
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.4, duration: 0.7 }}
+              className="flex flex-col sm:flex-row gap-4"
+            >
               <Button
                 size="lg"
                 className="bg-gradient-to-r from-indigo-600 to-blue-600 hover:from-indigo-700 hover:to-blue-700 dark:from-indigo-500 dark:to-blue-500 dark:hover:from-indigo-600 dark:hover:to-blue-600 text-white rounded-full h-14 px-8 shadow-xl shadow-indigo-600/20 dark:shadow-indigo-900/30 group"
@@ -56,9 +77,14 @@ export default function HeroSection() {
                   <Play className="ml-2 h-4 w-4" />
                 </Link>
               </Button>
-            </div>
+            </motion.div>
 
-            <div className="flex items-center gap-4 pt-4">
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.5, duration: 0.7 }}
+              className="flex items-center gap-4 pt-4"
+            >
               <div className="flex -space-x-2">
                 <div className="w-8 h-8 rounded-full bg-indigo-400 flex items-center justify-center text-white text-xs font-medium ring-2 ring-white dark:ring-slate-900">
                   A
@@ -76,10 +102,15 @@ export default function HeroSection() {
               <p className="text-sm text-slate-700 dark:text-slate-300 font-medium">
                 <span className="font-semibold">500+</span> o'quv markazlari ishonch bildirgan
               </p>
-            </div>
-          </div>
+            </motion.div>
+          </motion.div>
 
-          <div className="relative">
+          <motion.div
+            initial={{ opacity: 0, scale: 0.9 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ delay: 0.3, duration: 0.7 }}
+            className="relative"
+          >
             <div className="absolute -inset-0.5 bg-gradient-to-r from-indigo-500 to-blue-500 rounded-2xl blur-xl opacity-70 animate-pulse"></div>
             <div className="relative bg-white dark:bg-slate-900 rounded-2xl shadow-2xl overflow-hidden border border-indigo-100 dark:border-indigo-900">
               <DashboardPreview />
@@ -87,7 +118,7 @@ export default function HeroSection() {
 
             <div className="absolute -bottom-6 -right-6 w-32 h-32 bg-blue-100 dark:bg-blue-900/20 rounded-full blur-3xl"></div>
             <div className="absolute -top-6 -left-6 w-32 h-32 bg-indigo-100 dark:bg-indigo-900/20 rounded-full blur-3xl"></div>
-          </div>
+          </motion.div>
         </div>
       </div>
     </section>

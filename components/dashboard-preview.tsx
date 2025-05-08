@@ -145,6 +145,82 @@ export default function DashboardPreview() {
           <div className="h-1 bg-white/20 rounded-full w-2/3 mt-2"></div>
         </motion.div>
       </div>
+
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-3 md:gap-4">
+        <motion.div
+          variants={item}
+          className="bg-white/10 backdrop-blur-sm p-3 md:p-4 rounded-lg border border-white/20 shadow-lg"
+        >
+          <h3 className="text-base md:text-xl font-bold mb-3 md:mb-4">Manage Students</h3>
+          <p className="text-white/80 text-xs md:text-sm mb-3 md:mb-4">
+            Easily organize student information and track academic progress
+          </p>
+
+          <div className="space-y-2 md:space-y-3">
+            {students.map((student, index) => (
+              <div key={index} className="flex items-center justify-between">
+                <div className="flex items-center">
+                  <div className="w-6 md:w-8 h-6 md:h-8 bg-white/20 rounded-full mr-2"></div>
+                  <span className="text-xs md:text-sm">{student.name}</span>
+                </div>
+                <span className="text-xs bg-white/10 px-2 py-0.5 rounded-full">{student.status}</span>
+              </div>
+            ))}
+          </div>
+        </motion.div>
+
+        <motion.div
+          variants={item}
+          className="bg-white/10 backdrop-blur-sm p-3 md:p-4 rounded-lg border border-white/20 shadow-lg"
+        >
+          <h3 className="text-base md:text-xl font-bold mb-3 md:mb-4">Payment Analytics</h3>
+          <div className="h-32 md:h-40 mb-3 md:mb-4">
+            <ResponsiveContainer width="100%" height="100%">
+              <LineChart data={data}>
+                <CartesianGrid strokeDasharray="3 3" stroke="rgba(255,255,255,0.1)" />
+                <XAxis dataKey="name" stroke="rgba(255,255,255,0.5)" tick={{ fontSize: 10 }} />
+                <YAxis stroke="rgba(255,255,255,0.5)" tick={{ fontSize: 10 }} />
+                <Tooltip
+                  contentStyle={{
+                    backgroundColor: "rgba(255,255,255,0.1)",
+                    backdropFilter: "blur(10px)",
+                    border: "none",
+                    borderRadius: "8px",
+                    color: "white",
+                  }}
+                />
+                <Line
+                  type="monotone"
+                  dataKey="payments"
+                  stroke="#3b82f6"
+                  strokeWidth={2}
+                  dot={{ r: 3, fill: "#3b82f6", strokeWidth: 0 }}
+                  activeDot={{ r: 5, fill: "#3b82f6", stroke: "white", strokeWidth: 2 }}
+                />
+                <Line
+                  type="monotone"
+                  dataKey="debts"
+                  stroke="#6366f1"
+                  strokeWidth={2}
+                  dot={{ r: 3, fill: "#6366f1", strokeWidth: 0 }}
+                  activeDot={{ r: 5, fill: "#6366f1", stroke: "white", strokeWidth: 2 }}
+                />
+              </LineChart>
+            </ResponsiveContainer>
+          </div>
+
+          <div className="flex items-center gap-4 text-xs md:text-sm">
+            <div className="flex items-center">
+              <div className="w-2 md:w-3 h-2 md:h-3 bg-blue-500 rounded-full mr-1"></div>
+              <span>Payments</span>
+            </div>
+            <div className="flex items-center">
+              <div className="w-2 md:w-3 h-2 md:h-3 bg-indigo-500 rounded-full mr-1"></div>
+              <span>Debts</span>
+            </div>
+          </div>
+        </motion.div>
+      </div>
     </motion.div>
   )
 }
