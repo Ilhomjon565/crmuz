@@ -7,9 +7,8 @@ import { ThemeProvider } from "@/components/theme-provider"
 const inter = Inter({ subsets: ["latin", "cyrillic"] })
 
 export const metadata: Metadata = {
-  title: "EduCRM - Ta'lim markazingizni raqamlashtiring",
-  description: "Zamonaviy CRM tizimi orqali o'quv markazingizni samarali boshqaring",
-    generator: 'v0.dev'
+  title: "EduCRM - Transform Education",
+  description: "Empowering schools with seamless CRM solutions",
 }
 
 export default function RootLayout({
@@ -18,9 +17,9 @@ export default function RootLayout({
   children: React.ReactNode
 }>) {
   return (
-    <html lang="uz" suppressHydrationWarning>
+    <html lang="en" suppressHydrationWarning>
       <body className={inter.className}>
-        <ThemeProvider attribute="class" defaultTheme="light" enableSystem disableTransitionOnChange>
+        <ThemeProvider attribute="class" defaultTheme="light" enableSystem>
           {children}
         </ThemeProvider>
       </body>

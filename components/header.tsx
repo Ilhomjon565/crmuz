@@ -8,7 +8,7 @@ import { useTheme } from "next-themes"
 import { Menu, Moon, Sun, Sparkles } from "lucide-react"
 import { motion } from "framer-motion"
 
-export default function Navbar() {
+export default function Header() {
   const { theme, setTheme } = useTheme()
   const [isOpen, setIsOpen] = useState(false)
   const [scrolled, setScrolled] = useState(false)
@@ -27,11 +27,13 @@ export default function Navbar() {
       initial={{ y: -100 }}
       animate={{ y: 0 }}
       transition={{ duration: 0.5 }}
-      className={`sticky top-0 z-50 w-full backdrop-blur-lg transition-all duration-300 ${
-        scrolled ? "bg-background/80 shadow-xl dark:shadow-indigo-500/20" : "bg-background/50"
+      className={`sticky top-0 z-50 w-full transition-all duration-300 ${
+        scrolled
+          ? "bg-white/80 dark:bg-slate-950/80 backdrop-blur-xl shadow-lg dark:shadow-indigo-500/10"
+          : "bg-transparent"
       }`}
     >
-      <div className="container flex h-16 items-center justify-between">
+      <div className="container flex h-20 items-center justify-between">
         <motion.div
           initial={{ opacity: 0, x: -20 }}
           animate={{ opacity: 1, x: 0 }}
@@ -40,12 +42,12 @@ export default function Navbar() {
         >
           <Link href="/" className="flex items-center gap-2">
             <div className="relative w-10 h-10">
-              <div className="h-10 w-10 rounded-full bg-gradient-to-br from-primary to-indigo-600 flex items-center justify-center text-white font-bold text-lg">
+              <div className="h-10 w-10 rounded-full bg-gradient-to-br from-indigo-600 to-blue-600 flex items-center justify-center text-white font-bold text-lg">
                 E
               </div>
-              <div className="absolute inset-0 bg-primary/20 rounded-full blur-xl -z-10"></div>
+              <div className="absolute inset-0 bg-indigo-600/20 rounded-full blur-xl -z-10"></div>
             </div>
-            <span className="text-xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-primary to-indigo-500">
+            <span className="text-xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-indigo-600 to-blue-600 dark:from-indigo-400 dark:to-blue-400">
               EduCRM
             </span>
           </Link>
@@ -55,13 +57,13 @@ export default function Navbar() {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 0.3 }}
-          className="hidden md:flex items-center gap-6"
+          className="hidden md:flex items-center gap-8"
         >
           {[
-            { name: "Xizmatlar", href: "#xizmatlar" },
-            { name: "Ustunliklar", href: "#ustunliklar" },
-            { name: "Narxlar", href: "#narxlar" },
-            { name: "Bog'lanish", href: "#boglanish" },
+            { name: "Xizmatlar", href: "#features" },
+            { name: "Narxlar", href: "#pricing" },
+            { name: "Blog", href: "#blog" },
+            { name: "Yordam", href: "#support" },
           ].map((item, index) => (
             <motion.div
               key={item.name}
@@ -69,9 +71,12 @@ export default function Navbar() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.1 * (index + 1) }}
             >
-              <Link href={item.href} className="text-sm font-medium transition-all hover:text-primary relative group">
+              <Link
+                href={item.href}
+                className="text-sm font-medium text-slate-600 dark:text-slate-300 transition-all hover:text-indigo-600 dark:hover:text-indigo-400 relative group"
+              >
                 {item.name}
-                <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-primary transition-all group-hover:w-full"></span>
+                <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-indigo-600 dark:bg-indigo-400 transition-all group-hover:w-full"></span>
               </Link>
             </motion.div>
           ))}
@@ -101,9 +106,9 @@ export default function Navbar() {
           >
             <Button
               asChild
-              className="hidden md:inline-flex bg-gradient-to-r from-primary to-indigo-600 shadow-xl shadow-primary/30"
+              className="hidden md:inline-flex bg-gradient-to-r from-indigo-600 to-blue-600 hover:from-indigo-700 hover:to-blue-700 text-white shadow-lg shadow-indigo-600/20 dark:shadow-indigo-900/20 rounded-full"
             >
-              <a
+              <Link
                 href="https://director.educrm.uz/register"
                 target="_blank"
                 rel="noopener noreferrer"
@@ -111,7 +116,7 @@ export default function Navbar() {
               >
                 <Sparkles className="h-4 w-4 mr-1" />
                 Demo versiya
-              </a>
+              </Link>
             </Button>
           </motion.div>
 
@@ -122,13 +127,13 @@ export default function Navbar() {
                 <span className="sr-only">Toggle Menu</span>
               </Button>
             </SheetTrigger>
-            <SheetContent side="right" className="backdrop-blur-lg bg-background/90">
+            <SheetContent side="right" className="backdrop-blur-lg bg-white/90 dark:bg-slate-950/90">
               <nav className="flex flex-col gap-4 mt-8">
                 {[
-                  { name: "Xizmatlar", href: "#xizmatlar" },
-                  { name: "Ustunliklar", href: "#ustunliklar" },
-                  { name: "Narxlar", href: "#narxlar" },
-                  { name: "Bog'lanish", href: "#boglanish" },
+                  { name: "Xizmatlar", href: "#features" },
+                  { name: "Narxlar", href: "#pricing" },
+                  { name: "Blog", href: "#blog" },
+                  { name: "Yordam", href: "#support" },
                 ].map((item, index) => (
                   <motion.div
                     key={item.name}
@@ -138,10 +143,10 @@ export default function Navbar() {
                   >
                     <Link
                       href={item.href}
-                      className="text-sm font-medium transition-colors hover:text-primary flex items-center gap-2"
+                      className="text-sm font-medium text-slate-600 dark:text-slate-300 hover:text-indigo-600 dark:hover:text-indigo-400 flex items-center gap-2"
                       onClick={() => setIsOpen(false)}
                     >
-                      <span className="h-1 w-1 rounded-full bg-primary"></span>
+                      <span className="h-1 w-1 rounded-full bg-indigo-600 dark:bg-indigo-400"></span>
                       {item.name}
                     </Link>
                   </motion.div>
@@ -149,9 +154,9 @@ export default function Navbar() {
                 <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.5 }}>
                   <Button
                     asChild
-                    className="mt-4 w-full bg-gradient-to-r from-primary to-indigo-600 shadow-xl shadow-primary/30"
+                    className="mt-4 w-full bg-gradient-to-r from-indigo-600 to-blue-600 hover:from-indigo-700 hover:to-blue-700 text-white shadow-lg shadow-indigo-600/20 dark:shadow-indigo-900/20 rounded-full"
                   >
-                    <a
+                    <Link
                       href="https://director.educrm.uz/register"
                       target="_blank"
                       rel="noopener noreferrer"
@@ -160,7 +165,7 @@ export default function Navbar() {
                     >
                       <Sparkles className="h-4 w-4 mr-1" />
                       Demo versiya
-                    </a>
+                    </Link>
                   </Button>
                 </motion.div>
               </nav>

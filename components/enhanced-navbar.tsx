@@ -2,13 +2,14 @@
 
 import { useState, useEffect } from "react"
 import Link from "next/link"
+import Image from "next/image"
 import { Button } from "@/components/ui/button"
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet"
 import { useTheme } from "next-themes"
 import { Menu, Moon, Sun, Sparkles } from "lucide-react"
 import { motion } from "framer-motion"
 
-export default function Navbar() {
+export default function EnhancedNavbar() {
   const { theme, setTheme } = useTheme()
   const [isOpen, setIsOpen] = useState(false)
   const [scrolled, setScrolled] = useState(false)
@@ -28,7 +29,7 @@ export default function Navbar() {
       animate={{ y: 0 }}
       transition={{ duration: 0.5 }}
       className={`sticky top-0 z-50 w-full backdrop-blur-lg transition-all duration-300 ${
-        scrolled ? "bg-background/80 shadow-xl dark:shadow-indigo-500/20" : "bg-background/50"
+        scrolled ? "bg-background/80 shadow-lg dark:shadow-indigo-500/10" : "bg-background/50"
       }`}
     >
       <div className="container flex h-16 items-center justify-between">
@@ -40,9 +41,7 @@ export default function Navbar() {
         >
           <Link href="/" className="flex items-center gap-2">
             <div className="relative w-10 h-10">
-              <div className="h-10 w-10 rounded-full bg-gradient-to-br from-primary to-indigo-600 flex items-center justify-center text-white font-bold text-lg">
-                E
-              </div>
+              <Image src="/logo.png" alt="EduCRM" width={40} height={40} className="h-10 w-10 drop-shadow-lg" />
               <div className="absolute inset-0 bg-primary/20 rounded-full blur-xl -z-10"></div>
             </div>
             <span className="text-xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-primary to-indigo-500">
@@ -57,20 +56,15 @@ export default function Navbar() {
           transition={{ delay: 0.3 }}
           className="hidden md:flex items-center gap-6"
         >
-          {[
-            { name: "Xizmatlar", href: "#xizmatlar" },
-            { name: "Ustunliklar", href: "#ustunliklar" },
-            { name: "Narxlar", href: "#narxlar" },
-            { name: "Bog'lanish", href: "#boglanish" },
-          ].map((item, index) => (
+          {["xizmatlar", "ustunliklar", "narxlar", "boglanish"].map((item, index) => (
             <motion.div
-              key={item.name}
+              key={item}
               initial={{ opacity: 0, y: -10 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.1 * (index + 1) }}
             >
-              <Link href={item.href} className="text-sm font-medium transition-all hover:text-primary relative group">
-                {item.name}
+              <Link href={`/#${item}`} className="text-sm font-medium transition-all hover:text-primary relative group">
+                {item.charAt(0).toUpperCase() + item.slice(1)}
                 <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-primary transition-all group-hover:w-full"></span>
               </Link>
             </motion.div>
@@ -101,17 +95,12 @@ export default function Navbar() {
           >
             <Button
               asChild
-              className="hidden md:inline-flex bg-gradient-to-r from-primary to-indigo-600 shadow-xl shadow-primary/30"
+              className="hidden md:inline-flex bg-gradient-to-r from-primary to-indigo-600 shadow-lg shadow-primary/20"
             >
-              <a
-                href="https://director.educrm.uz/register"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="flex items-center gap-1"
-              >
+              <Link href="/form/demo" className="flex items-center gap-1">
                 <Sparkles className="h-4 w-4 mr-1" />
                 Demo versiya
-              </a>
+              </Link>
             </Button>
           </motion.div>
 
@@ -124,43 +113,29 @@ export default function Navbar() {
             </SheetTrigger>
             <SheetContent side="right" className="backdrop-blur-lg bg-background/90">
               <nav className="flex flex-col gap-4 mt-8">
-                {[
-                  { name: "Xizmatlar", href: "#xizmatlar" },
-                  { name: "Ustunliklar", href: "#ustunliklar" },
-                  { name: "Narxlar", href: "#narxlar" },
-                  { name: "Bog'lanish", href: "#boglanish" },
-                ].map((item, index) => (
+                {["xizmatlar", "ustunliklar", "narxlar", "boglanish"].map((item, index) => (
                   <motion.div
-                    key={item.name}
+                    key={item}
                     initial={{ opacity: 0, x: 20 }}
                     animate={{ opacity: 1, x: 0 }}
                     transition={{ delay: 0.1 * index }}
                   >
                     <Link
-                      href={item.href}
+                      href={`/#${item}`}
                       className="text-sm font-medium transition-colors hover:text-primary flex items-center gap-2"
                       onClick={() => setIsOpen(false)}
                     >
                       <span className="h-1 w-1 rounded-full bg-primary"></span>
-                      {item.name}
+                      {item.charAt(0).toUpperCase() + item.slice(1)}
                     </Link>
                   </motion.div>
                 ))}
                 <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.5 }}>
-                  <Button
-                    asChild
-                    className="mt-4 w-full bg-gradient-to-r from-primary to-indigo-600 shadow-xl shadow-primary/30"
-                  >
-                    <a
-                      href="https://director.educrm.uz/register"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      onClick={() => setIsOpen(false)}
-                      className="flex items-center gap-1"
-                    >
+                  <Button asChild className="mt-4 w-full bg-gradient-to-r from-primary to-indigo-600">
+                    <Link href="/form/demo" onClick={() => setIsOpen(false)} className="flex items-center gap-1">
                       <Sparkles className="h-4 w-4 mr-1" />
                       Demo versiya
-                    </a>
+                    </Link>
                   </Button>
                 </motion.div>
               </nav>

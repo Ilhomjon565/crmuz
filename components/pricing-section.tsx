@@ -1,129 +1,164 @@
-import { Check } from "lucide-react"
+"use client"
+
+import { useRef } from "react"
+import { motion, useInView } from "framer-motion"
 import { Button } from "@/components/ui/button"
-import Link from "next/link"
+import { Check } from "lucide-react"
 
 export default function PricingSection() {
+  const sectionRef = useRef(null)
+  const isInView = useInView(sectionRef, { once: true, amount: 0.2 })
+
+  const plans = [
+    {
+      name: "Starter",
+      price: "299,000",
+      period: "oyiga",
+      description: "Kichik o'quv markazlari uchun",
+      features: [
+        "50 tagacha o'quvchi",
+        "5 tagacha o'qituvchi",
+        "Dars jadvali",
+        "To'lovlar nazorati",
+        "Davomat nazorati",
+      ],
+      cta: "Boshlash",
+      popular: false,
+    },
+    {
+      name: "Professional",
+      price: "599,000",
+      period: "oyiga",
+      description: "O'rta hajmdagi o'quv markazlari uchun",
+      features: [
+        "200 tagacha o'quvchi",
+        "15 tagacha o'qituvchi",
+        "Dars jadvali",
+        "To'lovlar nazorati",
+        "Davomat nazorati",
+        "Hisobotlar",
+        "SMS xabarnomalar",
+        "Mobil ilova",
+      ],
+      cta: "Boshlash",
+      popular: true,
+    },
+    {
+      name: "Enterprise",
+      price: "999,000",
+      period: "oyiga",
+      description: "Katta o'quv markazlari uchun",
+      features: [
+        "Cheksiz o'quvchilar",
+        "Cheksiz o'qituvchilar",
+        "Dars jadvali",
+        "To'lovlar nazorati",
+        "Davomat nazorati",
+        "Hisobotlar",
+        "SMS xabarnomalar",
+        "Mobil ilova",
+        "API integratsiya",
+        "Maxsus funksiyalar",
+        "24/7 qo'llab-quvvatlash",
+      ],
+      cta: "Boshlash",
+      popular: false,
+    },
+  ]
+
   return (
-    <section className="w-full py-12 md:py-24 lg:py-32" id="narxlar">
+    <section className="w-full py-12 md:py-24 lg:py-32 bg-gray-50 dark:bg-gray-900/50" id="narxlar" ref={sectionRef}>
       <div className="container px-4 md:px-6">
-        <div className="flex flex-col items-center justify-center space-y-4 text-center">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
+          transition={{ duration: 0.5 }}
+          className="flex flex-col items-center justify-center space-y-4 text-center"
+        >
           <div className="space-y-2">
-            <div className="inline-block rounded-lg bg-primary px-3 py-1 text-sm text-primary-foreground">Tariflar</div>
-            <h2 className="text-3xl font-bold tracking-tighter sm:text-5xl">Narxlar</h2>
-            <p className="max-w-[900px] text-muted-foreground md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed">
-              Har qanday o'quv markazi uchun mos tarif rejasi
-            </p>
+            <motion.div
+              initial={{ opacity: 0, scale: 0.8 }}
+              animate={isInView ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0.8 }}
+              transition={{ duration: 0.3 }}
+              className="inline-block rounded-lg bg-primary/10 dark:bg-primary/20 px-3 py-1 text-sm text-primary dark:text-primary-foreground"
+            >
+              Narxlar
+            </motion.div>
+            <motion.h2
+              initial={{ opacity: 0, y: 20 }}
+              animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
+              transition={{ duration: 0.5, delay: 0.1 }}
+              className="text-3xl font-bold tracking-tighter sm:text-5xl bg-clip-text text-transparent bg-gradient-to-r from-gray-900 to-gray-700 dark:from-gray-100 dark:to-gray-300"
+            >
+              Qulay narxlar
+            </motion.h2>
+            <motion.p
+              initial={{ opacity: 0, y: 20 }}
+              animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
+              transition={{ duration: 0.5, delay: 0.2 }}
+              className="max-w-[900px] text-muted-foreground md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed"
+            >
+              Har qanday hajmdagi o'quv markazi uchun mos tarif rejasi
+            </motion.p>
           </div>
-        </div>
-        <div className="grid grid-cols-1 gap-6 py-12 md:grid-cols-3 lg:gap-8">
-          <div className="flex flex-col rounded-lg border bg-card p-6 shadow-sm">
-            <div className="space-y-2">
-              <h3 className="text-2xl font-bold">Boshlang'ich</h3>
-              <p className="text-sm text-muted-foreground">Kichik o'quv markazlari uchun</p>
-            </div>
-            <div className="mt-4 flex items-baseline text-5xl font-bold">
-              150,000
-              <span className="ml-1 text-base font-medium text-muted-foreground">so'm / oyiga</span>
-            </div>
-            <ul className="mt-6 space-y-3">
-              <li className="flex items-center">
-                <Check className="mr-2 h-4 w-4 text-green-500" />
-                <span>50 tagacha o'quvchi</span>
-              </li>
-              <li className="flex items-center">
-                <Check className="mr-2 h-4 w-4 text-green-500" />
-                <span>3 ta administrator</span>
-              </li>
-              <li className="flex items-center">
-                <Check className="mr-2 h-4 w-4 text-green-500" />
-                <span>Asosiy hisobotlar</span>
-              </li>
-              <li className="flex items-center">
-                <Check className="mr-2 h-4 w-4 text-green-500" />
-                <span>Email qo'llab-quvvatlash</span>
-              </li>
-            </ul>
-            <Button className="mt-8" variant="outline" asChild>
-              <Link href="/form/demo">Tanlash</Link>
-            </Button>
-          </div>
-          <div className="relative flex flex-col rounded-lg border bg-card p-6 shadow-sm">
-            <div className="absolute -top-4 right-0 left-0 mx-auto w-fit rounded-full bg-primary px-3 py-1 text-xs font-medium text-primary-foreground">
-              Ommabop
-            </div>
-            <div className="space-y-2">
-              <h3 className="text-2xl font-bold">Professional</h3>
-              <p className="text-sm text-muted-foreground">O'rta hajmdagi markazlar uchun</p>
-            </div>
-            <div className="mt-4 flex items-baseline text-5xl font-bold">
-              400,000
-              <span className="ml-1 text-base font-medium text-muted-foreground">so'm / 3 oyga</span>
-            </div>
-            <ul className="mt-6 space-y-3">
-              <li className="flex items-center">
-                <Check className="mr-2 h-4 w-4 text-green-500" />
-                <span>200 tagacha o'quvchi</span>
-              </li>
-              <li className="flex items-center">
-                <Check className="mr-2 h-4 w-4 text-green-500" />
-                <span>10 ta administrator</span>
-              </li>
-              <li className="flex items-center">
-                <Check className="mr-2 h-4 w-4 text-green-500" />
-                <span>Kengaytirilgan hisobotlar</span>
-              </li>
-              <li className="flex items-center">
-                <Check className="mr-2 h-4 w-4 text-green-500" />
-                <span>24/7 qo'llab-quvvatlash</span>
-              </li>
-              <li className="flex items-center">
-                <Check className="mr-2 h-4 w-4 text-green-500" />
-                <span>SMS xabarnomalar</span>
-              </li>
-            </ul>
-            <Button className="mt-8" asChild>
-              <Link href="/form/demo">Tanlash</Link>
-            </Button>
-          </div>
-          <div className="flex flex-col rounded-lg border bg-card p-6 shadow-sm">
-            <div className="space-y-2">
-              <h3 className="text-2xl font-bold">Enterprise</h3>
-              <p className="text-sm text-muted-foreground">Yirik ta'lim markazlari uchun</p>
-            </div>
-            <div className="mt-4 flex items-baseline text-5xl font-bold">
-              800,000
-              <span className="ml-1 text-base font-medium text-muted-foreground">so'm / 6 oyga</span>
-            </div>
-            <ul className="mt-6 space-y-3">
-              <li className="flex items-center">
-                <Check className="mr-2 h-4 w-4 text-green-500" />
-                <span>Cheksiz o'quvchilar</span>
-              </li>
-              <li className="flex items-center">
-                <Check className="mr-2 h-4 w-4 text-green-500" />
-                <span>Cheksiz administratorlar</span>
-              </li>
-              <li className="flex items-center">
-                <Check className="mr-2 h-4 w-4 text-green-500" />
-                <span>Maxsus hisobotlar</span>
-              </li>
-              <li className="flex items-center">
-                <Check className="mr-2 h-4 w-4 text-green-500" />
-                <span>Shaxsiy menejer</span>
-              </li>
-              <li className="flex items-center">
-                <Check className="mr-2 h-4 w-4 text-green-500" />
-                <span>API integratsiya</span>
-              </li>
-              <li className="flex items-center">
-                <Check className="mr-2 h-4 w-4 text-green-500" />
-                <span>SMS va Telegram bot</span>
-              </li>
-            </ul>
-            <Button className="mt-8" variant="outline" asChild>
-              <Link href="/form/demo">Tanlash</Link>
-            </Button>
-          </div>
+        </motion.div>
+        <div className="grid grid-cols-1 gap-6 md:grid-cols-3 lg:gap-8 mt-12">
+          {plans.map((plan, index) => (
+            <motion.div
+              key={index}
+              initial={{ opacity: 0, y: 20 }}
+              animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
+              transition={{ duration: 0.5, delay: 0.2 + index * 0.1 }}
+              className={`flex flex-col rounded-xl p-6 ${
+                plan.popular
+                  ? "bg-primary text-primary-foreground shadow-2xl shadow-primary/40 scale-105 z-10"
+                  : "bg-white dark:bg-gray-800 shadow-xl"
+              }`}
+            >
+              {plan.popular && (
+                <div className="absolute top-0 right-0 -mt-2 -mr-2">
+                  <div className="rounded-full bg-green-500 px-3 py-1 text-xs font-medium text-white shadow-sm">
+                    Eng mashhur
+                  </div>
+                </div>
+              )}
+              <div className="mb-4">
+                <h3 className="text-xl font-bold">{plan.name}</h3>
+                <p className={`text-sm ${plan.popular ? "text-primary-foreground/80" : "text-muted-foreground"}`}>
+                  {plan.description}
+                </p>
+              </div>
+              <div className="mb-4 flex items-baseline">
+                <span className="text-3xl font-bold">{plan.price}</span>
+                <span
+                  className={`ml-1 text-sm ${plan.popular ? "text-primary-foreground/80" : "text-muted-foreground"}`}
+                >
+                  {plan.period}
+                </span>
+              </div>
+              <ul className="mb-6 space-y-2">
+                {plan.features.map((feature, featureIndex) => (
+                  <li key={featureIndex} className="flex items-center gap-2">
+                    <Check className={`h-4 w-4 ${plan.popular ? "text-primary-foreground" : "text-primary"}`} />
+                    <span className={`text-sm ${plan.popular ? "text-primary-foreground" : "dark:text-gray-300"}`}>
+                      {feature}
+                    </span>
+                  </li>
+                ))}
+              </ul>
+              <div className="mt-auto">
+                <Button
+                  className={`w-full ${
+                    plan.popular
+                      ? "bg-white text-primary hover:bg-gray-100"
+                      : "bg-primary text-primary-foreground hover:bg-primary/90"
+                  }`}
+                >
+                  {plan.cta}
+                </Button>
+              </div>
+            </motion.div>
+          ))}
         </div>
       </div>
     </section>

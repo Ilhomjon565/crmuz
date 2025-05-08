@@ -1,58 +1,29 @@
 "use client"
 
+import { Phone, Users, LineChart } from "lucide-react"
+import { motion } from "framer-motion"
+import { useInView } from "framer-motion"
 import { useRef } from "react"
-import { motion, useInView } from "framer-motion"
-import { Calendar, CreditCard, Users, BarChart3, MessageSquare, Bell, BookOpen, Smartphone, Clock } from "lucide-react"
 
-export default function FeaturesSection() {
+export default function EnhancedFeaturesSection() {
   const sectionRef = useRef(null)
   const isInView = useInView(sectionRef, { once: true, amount: 0.2 })
 
   const features = [
     {
-      icon: Calendar,
-      title: "Dars jadvali",
-      description: "Qulay va tushunarli dars jadvali orqali o'quv jarayonini samarali boshqaring",
-    },
-    {
-      icon: CreditCard,
-      title: "To'lovlar nazorati",
-      description: "Barcha to'lovlarni kuzatib boring va hisobotlarni avtomatik ravishda oling",
+      icon: Phone,
+      title: "24/7 Qo'llab-quvvatlash",
+      description: "Tizimdan foydalanish bo'yicha doimiy yordam",
     },
     {
       icon: Users,
-      title: "O'quvchilar boshqaruvi",
-      description: "O'quvchilar ma'lumotlarini saqlang va ularning o'zlashtirish darajasini kuzating",
+      title: "VIP Menejer yaratish",
+      description: "Cheksiz menejerlar qo'shish imkoniyati",
     },
     {
-      icon: BarChart3,
-      title: "Statistika va hisobotlar",
-      description: "Batafsil statistika va hisobotlar orqali biznesingizni tahlil qiling",
-    },
-    {
-      icon: MessageSquare,
-      title: "Ichki chat",
-      description: "O'qituvchilar va o'quvchilar bilan ichki chat orqali muloqot qiling",
-    },
-    {
-      icon: Bell,
-      title: "Eslatmalar",
-      description: "Muhim voqealar va to'lovlar haqida avtomatik eslatmalar oling",
-    },
-    {
-      icon: BookOpen,
-      title: "O'quv materiallari",
-      description: "O'quv materiallarini saqlang va o'quvchilar bilan ulashing",
-    },
-    {
-      icon: Smartphone,
-      title: "Mobil ilova",
-      description: "Mobil ilova orqali istalgan joyda va vaqtda tizimdan foydalaning",
-    },
-    {
-      icon: Clock,
-      title: "Davomat nazorati",
-      description: "O'quvchilar davomatini avtomatik ravishda kuzatib boring",
+      icon: LineChart,
+      title: "O'quv jarayoni nazorati",
+      description: "To'liq monitoring va hisobotlar",
     },
   ]
 
@@ -61,7 +32,7 @@ export default function FeaturesSection() {
     show: {
       opacity: 1,
       transition: {
-        staggerChildren: 0.1,
+        staggerChildren: 0.2,
       },
     },
   }
@@ -72,7 +43,7 @@ export default function FeaturesSection() {
   }
 
   return (
-    <section className="w-full py-12 md:py-24 lg:py-32 bg-gray-50 dark:bg-gray-900/50" id="xizmatlar" ref={sectionRef}>
+    <section className="w-full py-12 md:py-24 lg:py-32 relative" id="xizmatlar" ref={sectionRef}>
       <div className="container px-4 md:px-6">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -111,14 +82,14 @@ export default function FeaturesSection() {
           variants={container}
           initial="hidden"
           animate={isInView ? "show" : "hidden"}
-          className="mx-auto grid max-w-5xl grid-cols-1 gap-6 py-12 sm:grid-cols-2 md:grid-cols-3 lg:gap-8"
+          className="mx-auto grid max-w-5xl grid-cols-1 gap-6 py-12 md:grid-cols-3 lg:gap-12"
         >
           {features.map((feature, index) => (
             <motion.div
               key={index}
               variants={item}
               whileHover={{ y: -5, boxShadow: "0 10px 30px rgba(0,0,0,0.1)" }}
-              className="flex flex-col items-center space-y-4 rounded-lg p-6 transition-all duration-300 bg-white dark:bg-gray-800 shadow-xl dark:shadow-indigo-500/30"
+              className="flex flex-col items-center space-y-4 rounded-lg p-6 transition-all duration-300 bg-white dark:bg-gray-800 shadow-lg dark:shadow-indigo-500/10"
             >
               <div className="rounded-full bg-primary/10 dark:bg-primary/20 p-4 shadow-inner">
                 <feature.icon className="h-6 w-6 text-primary" />
