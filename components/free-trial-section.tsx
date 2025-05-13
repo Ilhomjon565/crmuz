@@ -101,7 +101,7 @@ export default function FreeTrialSection() {
                   className="h-full"
                 >
                   <Image
-                    src="https://t4.ftcdn.net/jpg/02/14/74/61/360_F_214746128_31JkeaP6rU0NzzzdFC4khGkmqc8noe6h.jpg"
+                    src="https://img.freepik.com/free-photo/young-bearded-man-with-striped-shirt_273609-5677.jpg?semt=ais_hybrid&w=740"
                     alt="EduCRM foydalanuvchilari"
                     width={600}
                     height={400}
