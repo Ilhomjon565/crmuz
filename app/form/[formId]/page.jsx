@@ -314,19 +314,18 @@ export default function FormPage() {
         >
           <div className="flex flex-col sm:flex-row items-center justify-center mb-8 space-y-4 sm:space-y-0 sm:space-x-4">
             {formData?.educationLogo && (
-              <div className="relative w-24 h-24 sm:w-32 sm:h-32 rounded-full overflow-hidden bg-white dark:bg-slate-700 p-1 shadow-lg">
-                <Image
-                  src={
-                    formData.educationLogo.startsWith("http")
-                      ? formData.educationLogo
-                      : `https://backend-edu.uz${formData.educationLogo}`
-                  }
-                  alt="Education Logo"
-                  fill
-                  className="object-contain p-2"
-                  unoptimized
-                />
-              </div>
+              <Image
+                src={
+                  formData.educationLogo.startsWith("http")
+                    ? formData.educationLogo
+                    : `https://backend-edu.uz${formData.educationLogo}`
+                }
+                alt="Education Logo"
+                width={100}
+                height={80}
+                className="max-w-[150px] rounded-full mr-4 sm:max-w-[200px]"
+                unoptimized
+              />
             )}
             <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold text-blue-800 dark:text-blue-300 text-center sm:text-left">
               {formData?.educationName || "Ariza formasi"}
