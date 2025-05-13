@@ -101,7 +101,7 @@ export default function FreeTrialSection() {
                   className="h-full"
                 >
                   <Image
-                    src="/trial-image.png"
+                    src="https://t4.ftcdn.net/jpg/02/14/74/61/360_F_214746128_31JkeaP6rU0NzzzdFC4khGkmqc8noe6h.jpg"
                     alt="EduCRM foydalanuvchilari"
                     width={600}
                     height={400}
@@ -115,7 +115,7 @@ export default function FreeTrialSection() {
                       </div>
                       <div>
                         <div className="font-medium text-white">Anvar Karimov</div>
-                        <div className="text-sm text-white/70">Direktor, Najot Ta'lim</div>
+                        <div className="text-sm text-white/70">Direktor, EDU ta'lim</div>
                         <div className="mt-2 text-sm text-white/90">
                           "EduCRM bizning o'quv markazimiz uchun eng yaxshi yechim bo'ldi!"
                         </div>

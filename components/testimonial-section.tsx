@@ -17,7 +17,7 @@ export default function TestimonialSection() {
         "EduCRM tizimi o'quvchilar ma'lumotlarini boshqarish usulimni butunlay o'zgartirdi. Intuitiv interfeys va kuchli xususiyatlar har hafta soatlab vaqtimni tejaydi!",
       author: "Sarvinoz Toshmatova",
       role: "O'quv bo'limi boshlig'i",
-      image: "/testimonial-image.png",
+      image: "https://femalefoundersfund.com/wp-content/uploads/2020/05/Headshots-132-2.jpg",
       rating: 5,
     },
     {
@@ -25,7 +25,7 @@ export default function TestimonialSection() {
         "O'quv markazimiz uchun EduCRM tizimidan foydalanib, bizning samaradorligimiz 40% ga oshdi. Juda ajoyib platforma!",
       author: "Aziz Karimov",
       role: "Ta'lim markazi direktori",
-      image: "/testimonial-2.png",
+      image: "https://images.pexels.com/photos/2379005/pexels-photo-2379005.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500",
       rating: 5,
     },
     {
@@ -33,7 +33,7 @@ export default function TestimonialSection() {
         "To'lovlar nazorati va hisobotlar tizimi bizga ko'p vaqt tejashga yordam berdi. Endi barcha ma'lumotlarni bir joyda saqlash va boshqarish imkoniyatiga egamiz.",
       author: "Nilufar Ahmedova",
       role: "Moliya menejeri",
-      image: "/testimonial-3.png",
+      image: "https://t3.ftcdn.net/jpg/02/81/81/86/360_F_281818663_XXRCNuGktKeZsnknqWkKI0rR4JPWui3H.jpg",
       rating: 4,
     },
   ]

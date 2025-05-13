@@ -15,14 +15,14 @@ export default function BlogSection() {
       title: "Tahlil vositalari",
       description:
         "Samaradorlik ko'rsatkichlarini uzluksiz kuzating. Ma'lumotlarni vizualizatsiya bilan trendlarni tahlil qiling.",
-      image: "/analytics-tools.png",
+      image: "https://www.shutterstock.com/image-vector/competitor-analysis-tools-followers-sales-600nw-2467621963.jpg",
       cta: "Batafsil",
       color: "from-blue-600 to-indigo-600",
     },
     {
       title: "Mijozlar haqida ma'lumotlar",
       description: "Mijozlar ehtiyojlarini chuqurroq tushunish. Batafsil mijoz profillariga kirish imkoniyati.",
-      image: "/customer-insights.png",
+      image: "https://img.freepik.com/free-vector/data-analysis-concept-illustration_114360-8013.jpg?semt=ais_hybrid&w=740",
       cta: "Ko'proq ma'lumot",
       color: "from-indigo-600 to-purple-600",
     },
@@ -30,7 +30,7 @@ export default function BlogSection() {
       title: "Ish jarayoni avtomatizatsiyasi",
       description:
         "Takroriy vazifalarni samarali avtomatlashtirish. Aqlli ish jarayonlari bilan samaradorlikni oshiring.",
-      image: "/workflow-automation.png",
+      image: "https://media.istockphoto.com/id/525799810/photo/presentation-about-automation-to-improve-reliability-and-productivity.jpg?s=612x612&w=0&k=20&c=Cowbyx2keomiF_Su7uTbvfnYEiZ_RkuoztbkgyZpiEg=",
       cta: "Hozir o'rganing",
       color: "from-purple-600 to-pink-600",
     },
