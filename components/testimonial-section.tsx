@@ -3,7 +3,7 @@
 import { useRef, useState } from "react"
 import { motion, useInView, AnimatePresence } from "framer-motion"
 import Image from "next/image"
-import { Star, ChevronLeft, ChevronRight } from "lucide-react"
+import { Star, ChevronLeft, ChevronRight } from 'lucide-react'
 import { Button } from "@/components/ui/button"
 
 export default function TestimonialSection() {
@@ -14,9 +14,9 @@ export default function TestimonialSection() {
   const testimonials = [
     {
       content:
-        "EduCRM has completely transformed the way I manage my student data. The intuitive interface and powerful features save me hours every week!",
-      author: "Sarah Thompson",
-      role: "Academic Advisor",
+        "EduCRM tizimi o'quvchilar ma'lumotlarini boshqarish usulimni butunlay o'zgartirdi. Intuitiv interfeys va kuchli xususiyatlar har hafta soatlab vaqtimni tejaydi!",
+      author: "Sarvinoz Toshmatova",
+      role: "O'quv bo'limi boshlig'i",
       image: "/testimonial-image.png",
       rating: 5,
     },
@@ -148,7 +148,7 @@ export default function TestimonialSection() {
                   className={`w-2.5 h-2.5 rounded-full transition-colors ${
                     index === activeIndex ? "bg-indigo-600 dark:bg-indigo-400" : "bg-slate-300 dark:bg-slate-700"
                   }`}
-                  aria-label={`Go to testimonial ${index + 1}`}
+                  aria-label={`${index + 1}-fikrga o'tish`}
                 />
               ))}
             </div>
@@ -167,3 +167,4 @@ export default function TestimonialSection() {
     </section>
   )
 }
+ 

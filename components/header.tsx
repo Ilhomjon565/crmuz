@@ -5,7 +5,7 @@ import Link from "next/link"
 import { Button } from "@/components/ui/button"
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet"
 import { useTheme } from "next-themes"
-import { Menu, Moon, Sun, Sparkles } from "lucide-react"
+import { Menu, Moon, Sun, Sparkles } from 'lucide-react'
 import { motion } from "framer-motion"
 
 export default function Header() {
@@ -87,13 +87,13 @@ export default function Header() {
             <Button
               variant="ghost"
               size="icon"
-              aria-label="Toggle Theme"
+              aria-label="Mavzuni o'zgartirish"
               className="mr-2 relative"
               onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
             >
               <Sun className="h-5 w-5 rotate-0 scale-100 transition-all dark:-rotate-90 dark:scale-0" />
               <Moon className="absolute h-5 w-5 rotate-90 scale-0 transition-all dark:rotate-0 dark:scale-100" />
-              <span className="sr-only">Toggle theme</span>
+              <span className="sr-only">Mavzuni o'zgartirish</span>
             </Button>
           </motion.div>
 
@@ -124,7 +124,7 @@ export default function Header() {
             <SheetTrigger asChild>
               <Button variant="outline" size="icon" className="md:hidden">
                 <Menu className="h-5 w-5" />
-                <span className="sr-only">Toggle Menu</span>
+                <span className="sr-only">Menyuni ochish</span>
               </Button>
             </SheetTrigger>
             <SheetContent side="right" className="backdrop-blur-lg bg-white/90 dark:bg-slate-950/90">

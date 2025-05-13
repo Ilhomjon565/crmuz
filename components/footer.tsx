@@ -3,7 +3,7 @@
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import Link from "next/link"
-import { Twitter, Facebook, Instagram, Youtube, ArrowRight } from "lucide-react"
+import { Twitter, Facebook, Instagram, Youtube, ArrowRight } from 'lucide-react'
 import { motion } from "framer-motion"
 
 export default function Footer() {

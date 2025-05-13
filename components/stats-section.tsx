@@ -2,7 +2,7 @@
 
 import { useRef } from "react"
 import { motion, useInView } from "framer-motion"
-import { Users, School, BookOpen, Award } from "lucide-react"
+import { Users, School, BookOpen, Award } from 'lucide-react'
 import CountUp from "react-countup"
 
 export default function StatsSection() {

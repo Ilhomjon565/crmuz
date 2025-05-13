@@ -2,7 +2,7 @@
 
 import Link from "next/link"
 import { Button } from "@/components/ui/button"
-import { Play, ChevronRight } from "lucide-react"
+import { Play, ChevronRight } from 'lucide-react'
 import DashboardPreview from "@/components/dashboard-preview"
 import CanvasBackground from "@/components/canvas-background"
 import { motion } from "framer-motion"
@@ -34,7 +34,7 @@ export default function HeroSection() {
               transition={{ delay: 0.2, duration: 0.7 }}
               className="text-5xl md:text-6xl lg:text-7xl font-bold tracking-tight bg-clip-text text-transparent bg-gradient-to-r from-indigo-600 to-blue-500 dark:from-indigo-400 dark:to-blue-300 drop-shadow-sm"
             >
-              Transform Education
+              Ta'limni o'zgartiring
             </motion.h1>
 
             <motion.p

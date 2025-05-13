@@ -2,7 +2,7 @@
 
 import { useRef } from "react"
 import { motion, useInView } from "framer-motion"
-import { Calendar, CreditCard, Users, BarChart3, MessageSquare, Bell, BookOpen, Smartphone, Clock } from "lucide-react"
+import { Calendar, CreditCard, Users, BarChart3, MessageSquare, Bell, BookOpen, Smartphone, Clock } from 'lucide-react'
 
 export default function FeaturesGrid() {
   const sectionRef = useRef(null)

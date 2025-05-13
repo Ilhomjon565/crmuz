@@ -12,24 +12,26 @@ export default function BlogSection() {
 
   const blogPosts = [
     {
-      title: "Analytics Tools",
-      description: "Monitor performance metrics seamlessly. Track trends with data visualization.",
+      title: "Tahlil vositalari",
+      description:
+        "Samaradorlik ko'rsatkichlarini uzluksiz kuzating. Ma'lumotlarni vizualizatsiya bilan trendlarni tahlil qiling.",
       image: "/analytics-tools.png",
-      cta: "Learn More",
+      cta: "Batafsil",
       color: "from-blue-600 to-indigo-600",
     },
     {
-      title: "Customer Insights",
-      description: "Gain deeper understanding of client needs. Access detailed customer profiles.",
+      title: "Mijozlar haqida ma'lumotlar",
+      description: "Mijozlar ehtiyojlarini chuqurroq tushunish. Batafsil mijoz profillariga kirish imkoniyati.",
       image: "/customer-insights.png",
-      cta: "Discover More",
+      cta: "Ko'proq ma'lumot",
       color: "from-indigo-600 to-purple-600",
     },
     {
-      title: "Workflow Automation",
-      description: "Automate repetitive tasks efficiently. Boost productivity with smart workflows.",
+      title: "Ish jarayoni avtomatizatsiyasi",
+      description:
+        "Takroriy vazifalarni samarali avtomatlashtirish. Aqlli ish jarayonlari bilan samaradorlikni oshiring.",
       image: "/workflow-automation.png",
-      cta: "Explore Now",
+      cta: "Hozir o'rganing",
       color: "from-purple-600 to-pink-600",
     },
   ]
@@ -67,7 +69,7 @@ export default function BlogSection() {
             Blog
           </div>
           <h2 className="text-3xl md:text-4xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-indigo-600 to-blue-500 dark:from-indigo-400 dark:to-blue-300 drop-shadow-sm">
-            From Our Blog
+            Bizning blogdan
           </h2>
           <p className="text-lg text-slate-700 dark:text-slate-200 max-w-2xl mx-auto font-medium">
             Eng so'nggi yangiliklar va foydali ma'lumotlar

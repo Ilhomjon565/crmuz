@@ -4,7 +4,7 @@ import { useRef } from "react"
 import { motion, useInView } from "framer-motion"
 import { Button } from "@/components/ui/button"
 import Image from "next/image"
-import { ArrowRight } from "lucide-react"
+import { ArrowRight } from 'lucide-react'
 
 export default function FreeTrialSection() {
   const sectionRef = useRef(null)
@@ -35,10 +35,9 @@ export default function FreeTrialSection() {
                   animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
                   transition={{ duration: 0.5, delay: 0.2 }}
                 >
-                  <h2 className="text-3xl md:text-4xl font-bold mb-6">Start Your Free Trial</h2>
+                  <h2 className="text-3xl md:text-4xl font-bold mb-6">Bepul sinov muddatini boshlang</h2>
                   <p className="text-white/80 mb-8 text-lg">
-                    Unlock the full potential of EduCRM and take your business to the next level. Sign up today for your
-                    free trial!
+                    EduCRM tizimining to'liq imkoniyatlaridan foydalaning va biznesingizni yangi bosqichga olib chiqing. Bugun ro'yxatdan o'ting!
                   </p>
 
                   <ul className="space-y-4 mb-8">
@@ -103,7 +102,7 @@ export default function FreeTrialSection() {
                 >
                   <Image
                     src="/trial-image.png"
-                    alt="People using EduCRM"
+                    alt="EduCRM foydalanuvchilari"
                     width={600}
                     height={400}
                     className="w-full h-full object-cover"
