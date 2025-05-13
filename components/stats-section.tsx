@@ -12,28 +12,28 @@ export default function StatsSection() {
   const stats = [
     {
       icon: Users,
-      value: 5000,
+      value: 600,
       label: "Foydalanuvchilar",
       color: "bg-gradient-to-r from-blue-500 to-blue-600 text-white",
       shadowColor: "shadow-blue-600/20 dark:shadow-blue-900/20",
     },
     {
       icon: School,
-      value: 200,
+      value: 20,
       label: "O'quv markazlar",
       color: "bg-gradient-to-r from-indigo-500 to-indigo-600 text-white",
       shadowColor: "shadow-indigo-600/20 dark:shadow-indigo-900/20",
     },
     {
       icon: BookOpen,
-      value: 1000,
+      value: 200,
       label: "Kurslar",
       color: "bg-gradient-to-r from-purple-500 to-purple-600 text-white",
       shadowColor: "shadow-purple-600/20 dark:shadow-purple-900/20",
     },
     {
       icon: Award,
-      value: 98,
+      value: 82,
       suffix: "%",
       label: "Mijozlar mamnuniyati",
       color: "bg-gradient-to-r from-green-500 to-green-600 text-white",

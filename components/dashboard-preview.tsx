@@ -49,9 +49,11 @@ export default function DashboardPreview() {
         <p className="text-white/90 text-sm md:text-base">
           Operatsiyalarni soddalashtirish va boshqaruvni yaxshilash uchun yagona yechim
         </p>
-        <button className="mt-3 md:mt-4 bg-white text-indigo-600 px-4 md:px-6 py-1.5 md:py-2 rounded-md font-medium text-sm md:text-base shadow-lg">
-          Boshlash
-        </button>
+        <a href="https://director.educrm.uz/register" target="_blank" rel="noopener noreferrer">
+          <button className="mt-3 md:mt-4 bg-white text-indigo-600 px-4 md:px-6 py-1.5 md:py-2 rounded-md font-medium text-sm md:text-base shadow-lg">
+            Boshlash
+          </button>
+        </a>
       </motion.div>
 
       <div className="grid grid-cols-1 md:grid-cols-3 gap-3 md:gap-4 mb-6 md:mb-8">
