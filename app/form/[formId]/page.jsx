@@ -1,11 +1,10 @@
 "use client"
 
-import { useEffect, useState } from "react"
+import { useEffect, useState, memo } from "react"
 import { useParams, useRouter } from "next/navigation"
 import { useForm } from "react-hook-form"
 import { zodResolver } from "@hookform/resolvers/zod"
 import * as z from "zod"
-import { motion } from "framer-motion"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle, CardFooter } from "@/components/ui/card"
 import { Form, FormControl, FormDescription, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form"
 import { Input } from "@/components/ui/input"
@@ -17,6 +16,30 @@ import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert"
 import { useTheme } from "next-themes"
 import Image from "next/image"
 import axios from "axios"
+
+// Theme toggle button - moved outside main component to prevent re-renders
+const ThemeToggle = () => {
+  const { theme, setTheme } = useTheme()
+  const [mounted, setMounted] = useState(false)
+
+  useEffect(() => {
+    setMounted(true)
+  }, [])
+
+  if (!mounted) return null
+
+  return (
+    <Button
+      variant="outline"
+      size="icon"
+      className="fixed top-4 right-4 rounded-full w-10 h-10 z-50 bg-white/80 dark:bg-slate-800/80 backdrop-blur-sm border-slate-200 dark:border-slate-700 shadow-md hover:shadow-lg transition-all duration-200"
+      onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
+      aria-label="Mavzu o'zgartirish"
+    >
+      {theme === "dark" ? <Sun className="h-5 w-5 text-yellow-500" /> : <Moon className="h-5 w-5 text-slate-700" />}
+    </Button>
+  )
+}
 
 // Define the form schema
 const formSchema = z.object({
@@ -37,7 +60,7 @@ const formSchema = z.object({
   }),
 })
 
-export default function FormPage() {
+function FormPage() {
   const [formData, setFormData] = useState(null)
   const [isLoading, setIsLoading] = useState(true)
   const [isSubmitting, setIsSubmitting] = useState(false)
@@ -46,15 +69,8 @@ export default function FormPage() {
   const [location, setLocation] = useState(null)
   const [locationError, setLocationError] = useState(null)
   const [locationPermission, setLocationPermission] = useState("prompt") // "granted", "denied", "prompt"
-  const [mounted, setMounted] = useState(false)
-  const { theme, setTheme } = useTheme()
   const { formId } = useParams()
   const router = useRouter()
-
-  // After mounting, we can safely show the UI
-  useEffect(() => {
-    setMounted(true)
-  }, [])
 
   const form = useForm({
     resolver: zodResolver(formSchema),
@@ -151,23 +167,6 @@ export default function FormPage() {
     }
   }
 
-  // Theme toggle button
-  const ThemeToggle = () => {
-    if (!mounted) return null
-
-    return (
-      <Button
-        variant="outline"
-        size="icon"
-        className="fixed top-4 right-4 rounded-full w-10 h-10 z-50 bg-white/80 dark:bg-slate-800/80 backdrop-blur-sm border-slate-200 dark:border-slate-700 shadow-md"
-        onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
-        aria-label="Mavzu o'zgartirish"
-      >
-        {theme === "dark" ? <Sun className="h-5 w-5 text-yellow-500" /> : <Moon className="h-5 w-5 text-slate-700" />}
-      </Button>
-    )
-  }
-
   // Background component for consistent styling
   const PageBackground = ({ children }) => (
     <div className="min-h-screen bg-gradient-to-b from-blue-50 to-blue-100 dark:from-slate-900 dark:to-slate-800 transition-colors duration-300">
@@ -180,7 +179,7 @@ export default function FormPage() {
     return (
       <PageBackground>
         <div className="flex items-center justify-center p-4 h-screen">
-          <Card className="w-full max-w-md bg-white dark:bg-slate-800 shadow-xl border-0 dark:border dark:border-slate-700">
+          <Card className="w-full max-w-md bg-white/95 dark:bg-slate-800/95 shadow-xl dark:shadow-slate-900/30 border-0 dark:border dark:border-slate-700 transition-all duration-200">
             <CardContent className="flex flex-col items-center justify-center py-12">
               <Loader2 className="h-12 w-12 text-blue-600 dark:text-blue-400 animate-spin mb-4" />
               <p className="text-lg text-center text-slate-600 dark:text-slate-300">Ma'lumotlar yuklanmoqda...</p>
@@ -195,7 +194,7 @@ export default function FormPage() {
     return (
       <PageBackground>
         <div className="flex items-center justify-center p-4 h-screen">
-          <Card className="w-full max-w-md bg-white dark:bg-slate-800 shadow-xl border-0 dark:border dark:border-slate-700">
+          <Card className="w-full max-w-md bg-white/95 dark:bg-slate-800/95 shadow-xl dark:shadow-slate-900/30 border-0 dark:border dark:border-slate-700 transition-all duration-200">
             <CardContent className="flex flex-col items-center justify-center py-12">
               <AlertCircle className="h-12 w-12 text-red-500 dark:text-red-400 mb-4" />
               <h2 className="text-xl font-semibold mb-2 text-slate-800 dark:text-white">Xatolik yuz berdi</h2>
@@ -217,13 +216,8 @@ export default function FormPage() {
     return (
       <PageBackground>
         <div className="flex items-center justify-center p-4 h-screen">
-          <motion.div
-            initial={{ opacity: 0, scale: 0.9 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.5 }}
-            className="w-full max-w-md"
-          >
-            <Card className="bg-white dark:bg-slate-800 shadow-xl border-0 dark:border dark:border-slate-700">
+          <div className="w-full max-w-md">
+            <Card className="bg-white/95 dark:bg-slate-800/95 shadow-xl dark:shadow-slate-900/30 border-0 dark:border dark:border-slate-700 transition-all duration-200">
               <CardContent className="flex flex-col items-center justify-center pt-12 pb-8">
                 <div className="w-16 h-16 rounded-full bg-green-100 dark:bg-green-900/30 flex items-center justify-center mb-6">
                   <CheckCircle2 className="h-8 w-8 text-green-600 dark:text-green-400" />
@@ -240,7 +234,7 @@ export default function FormPage() {
                 </Button>
               </CardContent>
             </Card>
-          </motion.div>
+          </div>
         </div>
       </PageBackground>
     )
@@ -250,13 +244,8 @@ export default function FormPage() {
     return (
       <PageBackground>
         <div className="flex items-center justify-center p-4 h-screen">
-          <motion.div
-            initial={{ opacity: 0, scale: 0.9 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.5 }}
-            className="w-full max-w-md"
-          >
-            <Card className="bg-white dark:bg-slate-800 shadow-xl border-0 dark:border dark:border-slate-700">
+          <div className="w-full max-w-md">
+            <Card className="bg-white/95 dark:bg-slate-800/95 shadow-xl dark:shadow-slate-900/30 border-0 dark:border dark:border-slate-700 transition-all duration-200">
               <CardHeader>
                 <CardTitle className="text-center text-slate-800 dark:text-white">Joylashuv ruxsati kerak</CardTitle>
                 <CardDescription className="text-center text-slate-600 dark:text-slate-300">
@@ -297,7 +286,7 @@ export default function FormPage() {
                 </Button>
               </CardContent>
             </Card>
-          </motion.div>
+          </div>
         </div>
       </PageBackground>
     )
@@ -305,13 +294,8 @@ export default function FormPage() {
 
   return (
     <PageBackground>
-      <div className="py-12 px-4 sm:px-6 lg:px-8">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5 }}
-          className="max-w-xl mx-auto"
-        >
+      <div className="py-6 sm:py-12 px-3 sm:px-6 lg:px-8">
+        <div className="max-w-xl mx-auto">
           <div className="flex flex-col sm:flex-row items-center justify-center mb-8 space-y-4 sm:space-y-0 sm:space-x-4">
             {formData?.educationLogo && (
               <Image
@@ -353,7 +337,7 @@ export default function FormPage() {
             </Alert>
           )}
 
-          <Card className="backdrop-blur-sm bg-white dark:bg-slate-800 shadow-xl border-0 dark:border dark:border-slate-700">
+          <Card className="backdrop-blur-sm bg-white/95 dark:bg-slate-800/95 shadow-xl dark:shadow-slate-900/30 border-0 dark:border dark:border-slate-700 transition-all duration-200 w-full mx-auto">
             <CardHeader className="border-b border-slate-100 dark:border-slate-700">
               <CardTitle className="text-slate-800 dark:text-white">{formData?.title || "Ariza topshirish"}</CardTitle>
               <CardDescription className="text-slate-600 dark:text-slate-300">
@@ -362,7 +346,7 @@ export default function FormPage() {
             </CardHeader>
             <CardContent className="pt-6">
               <Form {...form}>
-                <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
+                <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4 sm:space-y-6">
                   <FormField
                     control={form.control}
                     name="fullname"
@@ -473,7 +457,7 @@ export default function FormPage() {
                       render={({ field }) => (
                         <FormItem>
                           <FormLabel className="text-slate-800 dark:text-white">Kurslar (max 3)</FormLabel>
-                          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 w-full">
                             {formData.courses.map((course) => (
                               <FormItem key={course.id} className="flex flex-row items-start space-x-3 space-y-0">
                                 <FormControl>
@@ -489,7 +473,7 @@ export default function FormPage() {
                                       }
                                     }}
                                     disabled={!field.value?.includes(course.id) && (field.value?.length || 0) >= 3}
-                                    className="border-slate-400 dark:border-slate-500 text-blue-600 dark:text-blue-400 data-[state=checked]:bg-blue-600 dark:data-[state=checked]:bg-blue-500 data-[state=checked]:border-blue-600 dark:data-[state=checked]:border-blue-500 focus:ring-blue-500/20 dark:focus:ring-blue-400/20"
+                                    className="h-5 w-5 border-2 border-slate-400 dark:border-slate-500 text-blue-600 dark:text-blue-400 data-[state=checked]:bg-blue-600 dark:data-[state=checked]:bg-blue-500 data-[state=checked]:border-blue-600 dark:data-[state=checked]:border-blue-500 focus:ring-blue-500/20 dark:focus:ring-blue-400/20 rounded-sm"
                                   />
                                 </FormControl>
                                 <FormLabel className="font-normal text-slate-800 dark:text-white">
@@ -520,7 +504,7 @@ export default function FormPage() {
 
                   <Button
                     type="submit"
-                    className="w-full bg-blue-600 hover:bg-blue-700 text-white dark:bg-blue-700 dark:hover:bg-blue-800 shadow-lg shadow-blue-500/20 dark:shadow-blue-700/30"
+                    className="w-full bg-blue-600 hover:bg-blue-700 text-white dark:bg-blue-700 dark:hover:bg-blue-800 shadow-lg hover:shadow-xl shadow-blue-500/20 dark:shadow-blue-700/30 transition-all duration-200"
                     disabled={isSubmitting}
                   >
                     {isSubmitting ? (
@@ -541,8 +525,10 @@ export default function FormPage() {
               </p>
             </CardFooter>
           </Card>
-        </motion.div>
+        </div>
       </div>
     </PageBackground>
   )
 }
+
+export default memo(FormPage)
