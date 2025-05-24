@@ -7,6 +7,7 @@ import FeaturesGrid from "@/components/features-grid"
 import Header from "@/components/header"
 import HeroSection from "@/components/hero-section"
 import VideoSection from "@/components/video-section"
+import ContactSection from "@/components/contact-section"
 
 export default function Home() {
   return (
@@ -34,6 +35,9 @@ export default function Home() {
 
       {/* Free Trial Section */}
       <FreeTrialSection />
+
+      {/* Contact Section */}
+      <ContactSection />
 
       {/* Footer */}
       <Footer />

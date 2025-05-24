@@ -9,6 +9,7 @@ import { Input } from "@/components/ui/input"
 import { Textarea } from "@/components/ui/textarea"
 import { useToast } from "@/hooks/use-toast"
 import { Phone, Mail, MapPin, Send } from "lucide-react"
+import { FaPhone, FaTelegram, FaInstagram, FaGraduationCap, FaSchool, FaChild, FaUniversity } from 'react-icons/fa'
 
 export default function ContactSection() {
   const sectionRef = useRef(null)
@@ -40,175 +41,148 @@ export default function ContactSection() {
     })
   }
 
-  const contactInfo = [
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.2
+      }
+    }
+  }
+
+  const itemVariants = {
+    hidden: { y: 20, opacity: 0 },
+    visible: {
+      y: 0,
+      opacity: 1,
+      transition: {
+        duration: 0.5
+      }
+    }
+  }
+
+  const contactItems = [
     {
-      icon: Phone,
-      title: "Telefon",
-      content: "+998 90 123 45 67",
+      icon: FaPhone,
+      text: "+998 95 899 55 00",
+      link: "tel:+998958995500",
+      color: "text-blue-600",
+      hoverColor: "hover:text-blue-600"
     },
     {
-      icon: Mail,
-      title: "Email",
-      content: "info@educrm.uz",
+      icon: FaTelegram,
+      text: "@Educrm_pro",
+      link: "https://t.me/Educrm_pro",
+      color: "text-blue-500",
+      hoverColor: "hover:text-blue-500"
     },
     {
-      icon: MapPin,
-      title: "Manzil",
-      content: "Toshkent sh., Shayxontohur tumani, Navoiy ko'chasi, 36-uy",
-    },
+      icon: FaInstagram,
+      text: "@educrm_pro",
+      link: "https://www.instagram.com/educrm_pro",
+      color: "text-pink-600",
+      hoverColor: "hover:text-pink-600"
+    }
+  ]
+
+  const targetAudience = [
+    { icon: FaGraduationCap, text: "O'quv markazlar" },
+    { icon: FaSchool, text: "Xususiy maktablar" },
+    { icon: FaChild, text: "Xususiy bog'chalar" },
+    { icon: FaUniversity, text: "Xususiy OTM" }
   ]
 
   return (
-    <section className="w-full py-12 md:py-24 lg:py-32 bg-gray-50 dark:bg-gray-900/50" id="boglanish" ref={sectionRef}>
-      <div className="container px-4 md:px-6">
-        <motion.div
+    <section ref={sectionRef} className="bg-gradient-to-b from-gray-50 to-white py-20" id="contact">
+      <div className="container mx-auto px-4">
+        <motion.div 
+          className="max-w-4xl mx-auto text-center"
           initial={{ opacity: 0, y: 20 }}
           animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
           transition={{ duration: 0.5 }}
-          className="flex flex-col items-center justify-center space-y-4 text-center"
         >
-          <div className="space-y-2">
-            <motion.div
-              initial={{ opacity: 0, scale: 0.8 }}
-              animate={isInView ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0.8 }}
-              transition={{ duration: 0.3 }}
-              className="inline-block rounded-lg bg-primary/10 dark:bg-primary/20 px-3 py-1 text-sm text-primary dark:text-primary-foreground"
-            >
-              Bog'lanish
-            </motion.div>
-            <motion.h2
-              initial={{ opacity: 0, y: 20 }}
-              animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
-              transition={{ duration: 0.5, delay: 0.1 }}
-              className="text-3xl font-bold tracking-tighter sm:text-5xl bg-clip-text text-transparent bg-gradient-to-r from-gray-900 to-gray-700 dark:from-gray-100 dark:to-gray-300"
-            >
-              Biz bilan bog'laning
-            </motion.h2>
-            <motion.p
-              initial={{ opacity: 0, y: 20 }}
-              animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
-              transition={{ duration: 0.5, delay: 0.2 }}
-              className="max-w-[900px] text-muted-foreground md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed"
-            >
-              Savollaringiz bo'lsa, biz bilan bog'laning
-            </motion.p>
-          </div>
-        </motion.div>
-        <div className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:gap-12 mt-12">
-          <motion.div
-            initial={{ opacity: 0, x: -50 }}
-            animate={isInView ? { opacity: 1, x: 0 } : { opacity: 0, x: -50 }}
-            transition={{ duration: 0.5, delay: 0.3 }}
-            className="space-y-6"
+          <motion.h2 
+            className="text-4xl font-bold text-gray-900 mb-8"
+            initial={{ opacity: 0, y: 20 }}
+            animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
+            transition={{ duration: 0.5, delay: 0.2 }}
           >
-            <div className="space-y-4">
-              {contactInfo.map((info, index) => (
-                <motion.div
+            Biz bilan bog'laning
+          </motion.h2>
+          
+          <motion.div 
+            className="bg-white rounded-2xl shadow-xl p-8 mb-12 transform hover:scale-[1.02] transition-transform duration-300"
+            variants={containerVariants}
+            initial="hidden"
+            animate={isInView ? "visible" : "hidden"}
+          >
+            <motion.h3 
+              className="text-2xl font-semibold text-gray-800 mb-6"
+              variants={itemVariants}
+            >
+              EduCRM | Platform pro
+            </motion.h3>
+            
+            <motion.div 
+              className="space-y-6"
+              variants={containerVariants}
+              initial="hidden"
+              animate={isInView ? "visible" : "hidden"}
+            >
+              {contactItems.map((item, index) => (
+                <motion.div 
                   key={index}
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
-                  transition={{ duration: 0.5, delay: 0.4 + index * 0.1 }}
-                  className="flex items-start space-x-4"
+                  className="flex items-center justify-center space-x-4"
+                  variants={itemVariants}
                 >
-                  <div className="rounded-full bg-primary/10 dark:bg-primary/20 p-3">
-                    <info.icon className="h-5 w-5 text-primary" />
-                  </div>
-                  <div>
-                    <h3 className="text-lg font-bold dark:text-white">{info.title}</h3>
-                    <p className="text-muted-foreground dark:text-gray-300">{info.content}</p>
-                  </div>
+                  <item.icon className={`${item.color} text-2xl`} />
+                  <a 
+                    href={item.link}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className={`text-xl text-gray-700 ${item.hoverColor} transition-colors duration-300`}
+                  >
+                    {item.text}
+                  </a>
                 </motion.div>
               ))}
-            </div>
-            <motion.div
-              initial={{ opacity: 0, scale: 0.9 }}
-              animate={isInView ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0.9 }}
-              transition={{ duration: 0.5, delay: 0.7 }}
-              className="rounded-xl overflow-hidden h-[300px] shadow-xl"
-            >
-              <iframe
-                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2996.0451069433876!2d69.2392!3d41.3123!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zNDHCsDE4JzQ0LjMiTiA2OcKwMTQnMjEuMSJF!5e0!3m2!1sen!2s!4v1620120000000!5m2!1sen!2s"
-                width="100%"
-                height="100%"
-                style={{ border: 0 }}
-                allowFullScreen
-                loading="lazy"
-                referrerPolicy="no-referrer-when-downgrade"
-                title="EduCRM location"
-              ></iframe>
             </motion.div>
           </motion.div>
-          <motion.div
-            initial={{ opacity: 0, x: 50 }}
-            animate={isInView ? { opacity: 1, x: 0 } : { opacity: 0, x: 50 }}
-            transition={{ duration: 0.5, delay: 0.3 }}
-            className="rounded-xl bg-white dark:bg-gray-800 p-6 shadow-xl dark:shadow-indigo-500/30"
+
+          <motion.div 
+            className="bg-blue-50 rounded-2xl p-8 transform hover:scale-[1.02] transition-transform duration-300"
+            variants={containerVariants}
+            initial="hidden"
+            animate={isInView ? "visible" : "hidden"}
           >
-            <form onSubmit={handleSubmit} className="space-y-4">
-              <div className="space-y-2">
-                <label htmlFor="name" className="text-sm font-medium dark:text-gray-300">
-                  Ismingiz
-                </label>
-                <Input
-                  id="name"
-                  name="name"
-                  placeholder="Ismingizni kiriting"
-                  value={formData.name}
-                  onChange={handleChange}
-                  required
-                  className="dark:bg-gray-700 dark:border-gray-600"
-                />
-              </div>
-              <div className="space-y-2">
-                <label htmlFor="email" className="text-sm font-medium dark:text-gray-300">
-                  Email
-                </label>
-                <Input
-                  id="email"
-                  name="email"
-                  type="email"
-                  placeholder="Email manzilingizni kiriting"
-                  value={formData.email}
-                  onChange={handleChange}
-                  required
-                  className="dark:bg-gray-700 dark:border-gray-600"
-                />
-              </div>
-              <div className="space-y-2">
-                <label htmlFor="phone" className="text-sm font-medium dark:text-gray-300">
-                  Telefon
-                </label>
-                <Input
-                  id="phone"
-                  name="phone"
-                  placeholder="Telefon raqamingizni kiriting"
-                  value={formData.phone}
-                  onChange={handleChange}
-                  required
-                  className="dark:bg-gray-700 dark:border-gray-600"
-                />
-              </div>
-              <div className="space-y-2">
-                <label htmlFor="message" className="text-sm font-medium dark:text-gray-300">
-                  Xabar
-                </label>
-                <Textarea
-                  id="message"
-                  name="message"
-                  placeholder="Xabaringizni kiriting"
-                  value={formData.message}
-                  onChange={handleChange}
-                  required
-                  className="min-h-[120px] dark:bg-gray-700 dark:border-gray-600"
-                />
-              </div>
-              <Button type="submit" className="w-full bg-primary hover:bg-primary/90 flex items-center gap-2">
-                <Send className="h-4 w-4" />
-                Yuborish
-              </Button>
-            </form>
+            <motion.h4 
+              className="text-xl font-semibold text-gray-800 mb-6"
+              variants={itemVariants}
+            >
+              Kimlar uchun foydali?
+            </motion.h4>
+            <motion.ul 
+              className="grid grid-cols-1 md:grid-cols-2 gap-6 text-left"
+              variants={containerVariants}
+              initial="hidden"
+              animate={isInView ? "visible" : "hidden"}
+            >
+              {targetAudience.map((item, index) => (
+                <motion.li 
+                  key={index}
+                  className="flex items-center space-x-3 group"
+                  variants={itemVariants}
+                >
+                  <item.icon className="text-blue-600 text-xl group-hover:scale-110 transition-transform duration-300" />
+                  <span className="text-gray-700 group-hover:text-blue-600 transition-colors duration-300">
+                    {item.text}
+                  </span>
+                </motion.li>
+              ))}
+            </motion.ul>
           </motion.div>
-        </div>
+        </motion.div>
       </div>
     </section>
   )
