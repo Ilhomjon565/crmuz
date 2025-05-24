@@ -1,6 +1,6 @@
 "use client"
 
-import { useEffect, useState, memo } from "react"
+import { useEffect, useState, memo, useCallback, useRef } from "react"
 import { useParams, useRouter } from "next/navigation"
 import { useForm } from "react-hook-form"
 import { zodResolver } from "@hookform/resolvers/zod"
@@ -16,6 +16,7 @@ import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert"
 import { useTheme } from "next-themes"
 import Image from "next/image"
 import axios from "axios"
+import { motion } from "framer-motion"
 
 // Theme toggle button - moved outside main component to prevent re-renders
 const ThemeToggle = () => {
@@ -41,6 +42,14 @@ const ThemeToggle = () => {
   )
 }
 
+// Background component for consistent styling
+const PageBackground = ({ children }) => (
+  <div className="min-h-screen bg-gradient-to-b from-blue-50 to-blue-100 dark:from-slate-900 dark:to-slate-800 transition-colors duration-300">
+    <ThemeToggle />
+    {children}
+  </div>
+)
+
 // Define the form schema
 const formSchema = z.object({
   fullname: z.string().min(3, {
@@ -57,6 +66,8 @@ const formSchema = z.object({
   }),
   courses: z.array(z.string()).min(1, {
     message: "Kamida 1 ta kurs tanlang",
+  }).max(2, {
+    message: "Ko'pi bilan 2 ta kurs tanlash mumkin",
   }),
 })
 
@@ -68,7 +79,7 @@ function FormPage() {
   const [error, setError] = useState(null)
   const [location, setLocation] = useState(null)
   const [locationError, setLocationError] = useState(null)
-  const [locationPermission, setLocationPermission] = useState("prompt") // "granted", "denied", "prompt"
+  const [locationPermission, setLocationPermission] = useState("prompt")
   const { formId } = useParams()
   const router = useRouter()
 
@@ -82,6 +93,9 @@ function FormPage() {
       courses: [],
     },
   })
+
+  const { watch, setValue } = form
+  const courses = watch("courses")
 
   const getLocation = () => {
     if (typeof window !== "undefined" && "geolocation" in navigator) {
@@ -130,11 +144,38 @@ function FormPage() {
 
     if (formId) {
       fetchFormData()
-      getLocation() // Initial location check
+      getLocation()
     }
   }, [formId])
 
-  async function onSubmit(values) {
+  const handlePhoneChange = (e) => {
+    let value = e.target.value.replace(/[^\d+]/g, "")
+    
+    if (!value.startsWith("+998")) {
+      value = "+998" + value.replace(/^\+/, "")
+    }
+    
+    if (value.length > 13) {
+      value = value.slice(0, 13)
+    }
+    
+    setValue("phoneNumber", value)
+  }
+
+  const handleCourseChange = (courseId) => {
+    const currentCourses = form.getValues("courses")
+    const isSelected = currentCourses.includes(courseId)
+    
+    if (isSelected) {
+      setValue("courses", currentCourses.filter(id => id !== courseId))
+    } else {
+      if (currentCourses.length < 2) {
+        setValue("courses", [...currentCourses, courseId])
+      }
+    }
+  }
+
+  const onSubmit = form.handleSubmit(async (data) => {
     if (!location) {
       setLocationError("Joylashuv ma'lumotlari talab qilinadi")
       requestLocationPermission()
@@ -143,154 +184,29 @@ function FormPage() {
 
     setIsSubmitting(true)
     try {
-      // Prepare the exact payload as required
       const payload = {
         lidName: formData?.educationName,
-        fullName: values.fullname,
-        gender: Number.parseInt(values.gender),
-        address: values.address,
-        phoneNumber: values.phoneNumber,
+        fullName: data.fullname,
+        gender: Number.parseInt(data.gender),
+        address: data.address,
+        phoneNumber: data.phoneNumber,
         longitude: location.longitude,
         latitude: location.latitude,
-        courses: values.courses,
+        courses: data.courses,
       }
 
       const response = await axios.post(`https://backend-edu.uz/lids/${formId}`, payload)
       console.log("Form submitted successfully:", response.data)
-      setIsSubmitted(true)
+      
       form.reset()
+      setIsSubmitted(true)
     } catch (err) {
       console.error("Error submitting form:", err)
       setError("Formani yuborishda xatolik yuz berdi")
     } finally {
       setIsSubmitting(false)
     }
-  }
-
-  // Background component for consistent styling
-  const PageBackground = ({ children }) => (
-    <div className="min-h-screen bg-gradient-to-b from-blue-50 to-blue-100 dark:from-slate-900 dark:to-slate-800 transition-colors duration-300">
-      <ThemeToggle />
-      {children}
-    </div>
-  )
-
-  if (isLoading) {
-    return (
-      <PageBackground>
-        <div className="flex items-center justify-center p-4 h-screen">
-          <Card className="w-full max-w-md bg-white/95 dark:bg-slate-800/95 shadow-xl dark:shadow-slate-900/30 border-0 dark:border dark:border-slate-700 transition-all duration-200">
-            <CardContent className="flex flex-col items-center justify-center py-12">
-              <Loader2 className="h-12 w-12 text-blue-600 dark:text-blue-400 animate-spin mb-4" />
-              <p className="text-lg text-center text-slate-600 dark:text-slate-300">Ma'lumotlar yuklanmoqda...</p>
-            </CardContent>
-          </Card>
-        </div>
-      </PageBackground>
-    )
-  }
-
-  if (error && !formData) {
-    return (
-      <PageBackground>
-        <div className="flex items-center justify-center p-4 h-screen">
-          <Card className="w-full max-w-md bg-white/95 dark:bg-slate-800/95 shadow-xl dark:shadow-slate-900/30 border-0 dark:border dark:border-slate-700 transition-all duration-200">
-            <CardContent className="flex flex-col items-center justify-center py-12">
-              <AlertCircle className="h-12 w-12 text-red-500 dark:text-red-400 mb-4" />
-              <h2 className="text-xl font-semibold mb-2 text-slate-800 dark:text-white">Xatolik yuz berdi</h2>
-              <p className="text-center text-slate-600 dark:text-slate-300 mb-6">{error}</p>
-              <Button
-                onClick={() => router.back()}
-                className="bg-blue-600 hover:bg-blue-700 text-white dark:bg-blue-700 dark:hover:bg-blue-800"
-              >
-                Orqaga qaytish
-              </Button>
-            </CardContent>
-          </Card>
-        </div>
-      </PageBackground>
-    )
-  }
-
-  if (isSubmitted) {
-    return (
-      <PageBackground>
-        <div className="flex items-center justify-center p-4 h-screen">
-          <div className="w-full max-w-md">
-            <Card className="bg-white/95 dark:bg-slate-800/95 shadow-xl dark:shadow-slate-900/30 border-0 dark:border dark:border-slate-700 transition-all duration-200">
-              <CardContent className="flex flex-col items-center justify-center pt-12 pb-8">
-                <div className="w-16 h-16 rounded-full bg-green-100 dark:bg-green-900/30 flex items-center justify-center mb-6">
-                  <CheckCircle2 className="h-8 w-8 text-green-600 dark:text-green-400" />
-                </div>
-                <h2 className="text-2xl font-bold mb-2 text-slate-800 dark:text-white">Muvaffaqiyatli yuborildi!</h2>
-                <p className="text-center text-slate-600 dark:text-slate-300 mb-6">
-                  Sizning arizangiz qabul qilindi. Tez orada siz bilan bog'lanamiz.
-                </p>
-                <Button
-                  onClick={() => router.push("/")}
-                  className="w-full bg-blue-600 hover:bg-blue-700 text-white dark:bg-blue-700 dark:hover:bg-blue-800"
-                >
-                  Bosh sahifaga qaytish
-                </Button>
-              </CardContent>
-            </Card>
-          </div>
-        </div>
-      </PageBackground>
-    )
-  }
-
-  if (!location && locationPermission !== "granted") {
-    return (
-      <PageBackground>
-        <div className="flex items-center justify-center p-4 h-screen">
-          <div className="w-full max-w-md">
-            <Card className="bg-white/95 dark:bg-slate-800/95 shadow-xl dark:shadow-slate-900/30 border-0 dark:border dark:border-slate-700 transition-all duration-200">
-              <CardHeader>
-                <CardTitle className="text-center text-slate-800 dark:text-white">Joylashuv ruxsati kerak</CardTitle>
-                <CardDescription className="text-center text-slate-600 dark:text-slate-300">
-                  Formani to'ldirish uchun joylashuv ma'lumotlaringizni ulashishingiz kerak
-                </CardDescription>
-              </CardHeader>
-              <CardContent className="flex flex-col items-center justify-center pt-6 pb-8">
-                <div className="w-16 h-16 rounded-full bg-blue-100 dark:bg-blue-900/30 flex items-center justify-center mb-6">
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    className="h-8 w-8 text-blue-600 dark:text-blue-400"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    stroke="currentColor"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth={2}
-                      d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"
-                    />
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth={2}
-                      d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"
-                    />
-                  </svg>
-                </div>
-                <p className="text-center text-slate-600 dark:text-slate-300 mb-6">
-                  Sizning joylashuvingiz faqat ariza maqsadida ishlatiladi va maxfiy saqlanadi.
-                </p>
-                <Button
-                  onClick={requestLocationPermission}
-                  className="w-full bg-blue-600 hover:bg-blue-700 text-white dark:bg-blue-700 dark:hover:bg-blue-800"
-                >
-                  Joylashuvga ruxsat berish
-                </Button>
-              </CardContent>
-            </Card>
-          </div>
-        </div>
-      </PageBackground>
-    )
-  }
+  })
 
   return (
     <PageBackground>
@@ -337,7 +253,7 @@ function FormPage() {
             </Alert>
           )}
 
-          <Card className="backdrop-blur-sm bg-white/95 dark:bg-slate-800/95 shadow-xl dark:shadow-slate-900/30 border-0 dark:border dark:border-slate-700 transition-all duration-200 w-full mx-auto">
+          <Card className="backdrop-blur-sm bg-white/95 dark:bg-slate-800/95 shadow-xl dark:shadow-slate-900/30 border-0 dark:border dark:border-slate-700 transition-all duration-300 w-full mx-auto hover:shadow-2xl dark:hover:shadow-slate-900/40">
             <CardHeader className="border-b border-slate-100 dark:border-slate-700">
               <CardTitle className="text-slate-800 dark:text-white">{formData?.title || "Ariza topshirish"}</CardTitle>
               <CardDescription className="text-slate-600 dark:text-slate-300">
@@ -346,21 +262,21 @@ function FormPage() {
             </CardHeader>
             <CardContent className="pt-6">
               <Form {...form}>
-                <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4 sm:space-y-6">
+                <form onSubmit={onSubmit} className="space-y-4 sm:space-y-6">
                   <FormField
                     control={form.control}
                     name="fullname"
                     render={({ field }) => (
                       <FormItem>
-                        <FormLabel className="text-slate-800 dark:text-white">To'liq ism</FormLabel>
+                        <FormLabel>To'liq ism</FormLabel>
                         <FormControl>
                           <Input
-                            placeholder="Ism Familiya"
                             {...field}
+                            placeholder="Ism Familiya"
                             className="bg-slate-50 dark:bg-slate-700 border-slate-200 dark:border-slate-600 text-slate-900 dark:text-white placeholder:text-slate-400 dark:placeholder:text-slate-500 focus:border-blue-500 dark:focus:border-blue-400 focus:ring-blue-500/20 dark:focus:ring-blue-400/20"
                           />
                         </FormControl>
-                        <FormMessage className="text-red-500 dark:text-red-400" />
+                        <FormMessage />
                       </FormItem>
                     )}
                   />
@@ -370,27 +286,20 @@ function FormPage() {
                     name="phoneNumber"
                     render={({ field }) => (
                       <FormItem>
-                        <FormLabel className="text-slate-800 dark:text-white">Telefon raqam</FormLabel>
+                        <FormLabel>Telefon raqam</FormLabel>
                         <FormControl>
                           <Input
-                            placeholder="+998901234567"
                             {...field}
-                            className="bg-slate-50 dark:bg-slate-700 border-slate-200 dark:border-slate-600 text-slate-900 dark:text-white placeholder:text-slate-400 dark:placeholder:text-slate-500 focus:border-blue-500 dark:focus:border-blue-400 focus:ring-blue-500/20 dark:focus:ring-blue-400/20"
                             onChange={(e) => {
-                              let value = e.target.value
-                              value = value.replace(/[^\d+]/g, "")
-                              if (!value.startsWith("+998")) {
-                                value = "+998"
-                              }
-                              value = value.slice(0, 13)
-                              field.onChange(value)
+                              field.onChange(e)
+                              handlePhoneChange(e)
                             }}
+                            placeholder="+998901234567"
+                            className="bg-slate-50 dark:bg-slate-700 border-slate-200 dark:border-slate-600 text-slate-900 dark:text-white placeholder:text-slate-400 dark:placeholder:text-slate-500 focus:border-blue-500 dark:focus:border-blue-400 focus:ring-blue-500/20 dark:focus:ring-blue-400/20"
                           />
                         </FormControl>
-                        <FormDescription className="text-slate-500 dark:text-slate-400">
-                          Masalan: +998901234567
-                        </FormDescription>
-                        <FormMessage className="text-red-500 dark:text-red-400" />
+                        <FormDescription>Masalan: +998901234567</FormDescription>
+                        <FormMessage />
                       </FormItem>
                     )}
                   />
@@ -400,34 +309,28 @@ function FormPage() {
                     name="gender"
                     render={({ field }) => (
                       <FormItem className="space-y-3">
-                        <FormLabel className="text-slate-800 dark:text-white">Jins</FormLabel>
+                        <FormLabel>Jins</FormLabel>
                         <FormControl>
                           <RadioGroup
                             onValueChange={field.onChange}
-                            defaultValue={field.value}
+                            value={field.value}
                             className="flex space-x-4"
                           >
                             <FormItem className="flex items-center space-x-2">
                               <FormControl>
-                                <RadioGroupItem
-                                  value="1"
-                                  className="border-slate-400 dark:border-slate-500 text-blue-600 dark:text-blue-400 focus:ring-blue-500/20 dark:focus:ring-blue-400/20"
-                                />
+                                <RadioGroupItem value="1" />
                               </FormControl>
-                              <FormLabel className="font-normal text-slate-800 dark:text-white">Erkak</FormLabel>
+                              <FormLabel className="font-normal">Erkak</FormLabel>
                             </FormItem>
                             <FormItem className="flex items-center space-x-2">
                               <FormControl>
-                                <RadioGroupItem
-                                  value="2"
-                                  className="border-slate-400 dark:border-slate-500 text-blue-600 dark:text-blue-400 focus:ring-blue-500/20 dark:focus:ring-blue-400/20"
-                                />
+                                <RadioGroupItem value="2" />
                               </FormControl>
-                              <FormLabel className="font-normal text-slate-800 dark:text-white">Ayol</FormLabel>
+                              <FormLabel className="font-normal">Ayol</FormLabel>
                             </FormItem>
                           </RadioGroup>
                         </FormControl>
-                        <FormMessage className="text-red-500 dark:text-red-400" />
+                        <FormMessage />
                       </FormItem>
                     )}
                   />
@@ -437,15 +340,15 @@ function FormPage() {
                     name="address"
                     render={({ field }) => (
                       <FormItem>
-                        <FormLabel className="text-slate-800 dark:text-white">Manzil</FormLabel>
+                        <FormLabel>Manzil</FormLabel>
                         <FormControl>
                           <Input
-                            placeholder="Manzil"
                             {...field}
+                            placeholder="Manzil"
                             className="bg-slate-50 dark:bg-slate-700 border-slate-200 dark:border-slate-600 text-slate-900 dark:text-white placeholder:text-slate-400 dark:placeholder:text-slate-500 focus:border-blue-500 dark:focus:border-blue-400 focus:ring-blue-500/20 dark:focus:ring-blue-400/20"
                           />
                         </FormControl>
-                        <FormMessage className="text-red-500 dark:text-red-400" />
+                        <FormMessage />
                       </FormItem>
                     )}
                   />
@@ -454,38 +357,48 @@ function FormPage() {
                     <FormField
                       control={form.control}
                       name="courses"
-                      render={({ field }) => (
+                      render={() => (
                         <FormItem>
-                          <FormLabel className="text-slate-800 dark:text-white">Kurslar (max 3)</FormLabel>
-                          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 w-full">
+                          <FormLabel>Kurslar (max 2)</FormLabel>
+                          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                             {formData.courses.map((course) => (
-                              <FormItem key={course.id} className="flex flex-row items-start space-x-3 space-y-0">
-                                <FormControl>
-                                  <Checkbox
-                                    checked={field.value?.includes(course.id)}
-                                    onCheckedChange={(checked) => {
-                                      const updatedValue = checked
-                                        ? [...(field.value || []), course.id]
-                                        : (field.value || []).filter((id) => id !== course.id)
-
-                                      if (updatedValue.length <= 3) {
-                                        field.onChange(updatedValue)
-                                      }
-                                    }}
-                                    disabled={!field.value?.includes(course.id) && (field.value?.length || 0) >= 3}
-                                    className="h-5 w-5 border-2 border-slate-400 dark:border-slate-500 text-blue-600 dark:text-blue-400 data-[state=checked]:bg-blue-600 dark:data-[state=checked]:bg-blue-500 data-[state=checked]:border-blue-600 dark:data-[state=checked]:border-blue-500 focus:ring-blue-500/20 dark:focus:ring-blue-400/20 rounded-sm"
-                                  />
-                                </FormControl>
-                                <FormLabel className="font-normal text-slate-800 dark:text-white">
-                                  {course.courseName}
-                                </FormLabel>
-                              </FormItem>
+                              <div
+                                key={course.id}
+                                onClick={() => handleCourseChange(course.id)}
+                                className={`relative flex items-center p-4 rounded-lg border-2 cursor-pointer transition-all duration-200 ${
+                                  courses.includes(course.id)
+                                    ? 'border-blue-500 bg-blue-50 dark:bg-blue-900/20 dark:border-blue-400'
+                                    : 'border-slate-200 dark:border-slate-700 hover:border-blue-300 dark:hover:border-blue-700'
+                                }`}
+                              >
+                                <div className="flex items-center space-x-3 flex-1">
+                                  <div className={`w-5 h-5 rounded-full border-2 flex items-center justify-center ${
+                                    courses.includes(course.id)
+                                      ? 'border-blue-500 bg-blue-500 dark:border-blue-400 dark:bg-blue-400'
+                                      : 'border-slate-400 dark:border-slate-500'
+                                  }`}>
+                                    {courses.includes(course.id) && (
+                                      <div className="w-2 h-2 rounded-full bg-white dark:bg-slate-900" />
+                                    )}
+                                  </div>
+                                  <span className={`text-sm font-medium ${
+                                    courses.includes(course.id)
+                                      ? 'text-blue-700 dark:text-blue-300'
+                                      : 'text-slate-700 dark:text-slate-300'
+                                  }`}>
+                                    {course.courseName}
+                                  </span>
+                                </div>
+                                {courses.includes(course.id) && (
+                                  <div className="absolute top-2 right-2">
+                                    <CheckCircle2 className="w-4 h-4 text-blue-500 dark:text-blue-400" />
+                                  </div>
+                                )}
+                              </div>
                             ))}
                           </div>
-                          <FormDescription className="text-slate-500 dark:text-slate-400">
-                            Ko'pi bilan 3 ta kurs tanlash mumkin
-                          </FormDescription>
-                          <FormMessage className="text-red-500 dark:text-red-400" />
+                          <FormDescription>Ko'pi bilan 2 ta kurs tanlash mumkin</FormDescription>
+                          <FormMessage />
                         </FormItem>
                       )}
                     />
@@ -531,4 +444,4 @@ function FormPage() {
   )
 }
 
-export default memo(FormPage)
+export default FormPage
