@@ -5,6 +5,7 @@ import "./globals.css"
 import { ThemeProvider } from "@/components/theme-provider"
 import Analytics from "@/components/analytics"
 import PerformanceOptimizer from "@/components/performance-optimizer"
+import PerformanceMonitor from "@/components/performance-monitor"
 
 const inter = Inter({ subsets: ["latin", "cyrillic"] })
 
@@ -234,6 +235,7 @@ export default function RootLayout({
         </ThemeProvider>
         <Analytics />
         <PerformanceOptimizer />
+        <PerformanceMonitor />
       </body>
     </html>
   )

@@ -60,4 +60,28 @@
         <priority>0.6</priority>
     </url>
     
+    <!-- FAQ Page -->
+    <url>
+        <loc>https://educrm.uz/faq</loc>
+        <lastmod>2024-12-19</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.7</priority>
+    </url>
+    
+    <!-- Privacy Policy Page -->
+    <url>
+        <loc>https://educrm.uz/privacy</loc>
+        <lastmod>2024-12-19</lastmod>
+        <changefreq>yearly</changefreq>
+        <priority>0.5</priority>
+    </url>
+    
+    <!-- Terms of Service Page -->
+    <url>
+        <loc>https://educrm.uz/terms</loc>
+        <lastmod>2024-12-19</lastmod>
+        <changefreq>yearly</changefreq>
+        <priority>0.5</priority>
+    </url>
+    
 </urlset> 

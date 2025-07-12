@@ -1,5 +1,6 @@
 import Link from "next/link"
 import { Metadata } from "next"
+import StructuredData from "@/components/structured-data"
 
 export const metadata: Metadata = {
   title: "Sahifa topilmadi - EduCRM O'quv Markazlarni Avtomatlashtiruvchi Tizim",
@@ -12,7 +13,16 @@ export const metadata: Metadata = {
 
 export default function NotFound() {
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gradient-to-b from-slate-50 to-white dark:from-slate-950 dark:to-slate-900">
+    <>
+      <StructuredData
+        type="website"
+        data={{
+          name: "EduCRM - 404 Sahifa topilmadi",
+          url: "https://educrm.uz/404",
+          description: "Axtarilayotgan sahifa topilmadi"
+        }}
+      />
+      <div className="min-h-screen flex items-center justify-center bg-gradient-to-b from-slate-50 to-white dark:from-slate-950 dark:to-slate-900">
       <div className="text-center">
         <h1 className="text-6xl md:text-8xl font-bold text-indigo-600 dark:text-indigo-400 mb-4">
           404
@@ -31,5 +41,6 @@ export default function NotFound() {
         </Link>
       </div>
     </div>
+    </>
   )
 } 

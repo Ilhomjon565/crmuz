@@ -40,5 +40,29 @@
             <guid>https://educrm.uz/about</guid>
         </item>
         
+        <item>
+            <title>Ko'p so'raladigan savollar</title>
+            <link>https://educrm.uz/faq</link>
+            <description>EduCRM haqida ko'p so'raladigan savollar va javoblar. O'quv markazingiz uchun professional CRM tizimi haqida barcha ma'lumotlar.</description>
+            <pubDate>Thu, 19 Dec 2024 12:00:00 +0500</pubDate>
+            <guid>https://educrm.uz/faq</guid>
+        </item>
+        
+        <item>
+            <title>Maxfiylik siyosati</title>
+            <link>https://educrm.uz/privacy</link>
+            <description>EduCRM maxfiylik siyosati. Ma'lumotlaringizning xavfsizligi va maxfiyligi haqida batafsil ma'lumot.</description>
+            <pubDate>Thu, 19 Dec 2024 12:00:00 +0500</pubDate>
+            <guid>https://educrm.uz/privacy</guid>
+        </item>
+        
+        <item>
+            <title>Foydalanish shartlari</title>
+            <link>https://educrm.uz/terms</link>
+            <description>EduCRM foydalanish shartlari. Xizmatlardan foydalanish shartlari va qoidalari haqida batafsil ma'lumot.</description>
+            <pubDate>Thu, 19 Dec 2024 12:00:00 +0500</pubDate>
+            <guid>https://educrm.uz/terms</guid>
+        </item>
+        
     </channel>
 </rss> 
