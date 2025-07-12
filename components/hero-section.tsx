@@ -34,7 +34,7 @@ export default function HeroSection() {
               transition={{ delay: 0.2, duration: 0.7 }}
               className="text-5xl md:text-6xl lg:text-7xl font-bold tracking-tight bg-clip-text text-transparent bg-gradient-to-r from-indigo-600 to-blue-500 dark:from-indigo-400 dark:to-blue-300 drop-shadow-sm"
             >
-              Ta'limni o'zgartiring
+              O'quv Markazlarni Avtomatlashtiruvchi Tizim
             </motion.h1>
 
             <motion.p
@@ -43,7 +43,7 @@ export default function HeroSection() {
               transition={{ delay: 0.3, duration: 0.7 }}
               className="text-xl text-slate-700 dark:text-slate-200 max-w-xl font-medium drop-shadow-sm"
             >
-              O'quv markazingizni zamonaviy CRM tizimi orqali boshqaring va samaradorlikni oshiring.
+              O'zbekistondagi o'quv markazlar uchun professional CRM tizimi. O'quvchilar, o'qituvchilar va to'lovlarni nazorat qilish. EduCRM.uz - ta'lim sohasida eng yaxshi yechim.
             </motion.p>
 
             <motion.div
