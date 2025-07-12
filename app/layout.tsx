@@ -3,6 +3,8 @@ import type { Metadata } from "next"
 import { Inter } from "next/font/google"
 import "./globals.css"
 import { ThemeProvider } from "@/components/theme-provider"
+import Analytics from "@/components/analytics"
+import PerformanceOptimizer from "@/components/performance-optimizer"
 
 const inter = Inter({ subsets: ["latin", "cyrillic"] })
 
@@ -230,6 +232,8 @@ export default function RootLayout({
         <ThemeProvider attribute="class" defaultTheme="light" enableSystem>
           {children}
         </ThemeProvider>
+        <Analytics />
+        <PerformanceOptimizer />
       </body>
     </html>
   )

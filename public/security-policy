@@ -1,0 +1,47 @@
+# EduCRM Security Policy
+
+## Reporting Security Issues
+
+If you discover a security vulnerability within EduCRM, please send an email to security@educrm.uz. All security vulnerabilities will be promptly addressed.
+
+## Security Measures
+
+### Data Protection
+- All data is encrypted in transit using TLS 1.2+
+- Data at rest is encrypted using AES-256
+- Regular security audits and penetration testing
+- Compliance with GDPR and local data protection laws
+
+### Access Control
+- Multi-factor authentication for admin accounts
+- Role-based access control (RBAC)
+- Session management and timeout
+- IP whitelisting for sensitive operations
+
+### Infrastructure Security
+- Regular security updates and patches
+- DDoS protection
+- Web Application Firewall (WAF)
+- Intrusion Detection System (IDS)
+
+### Code Security
+- Regular dependency vulnerability scanning
+- Code review process
+- Secure coding practices
+- Automated security testing
+
+## Responsible Disclosure
+
+We appreciate security researchers who:
+- Report vulnerabilities privately
+- Allow reasonable time for fixes
+- Do not exploit vulnerabilities
+- Follow responsible disclosure guidelines
+
+## Contact
+
+- Security Email: security@educrm.uz
+- General Support: info@educrm.uz
+- Emergency: +998-XX-XXX-XXXX
+
+Last updated: 2024-12-19 
