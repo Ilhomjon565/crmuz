@@ -106,6 +106,32 @@ export default function RootLayout({
         <meta name="theme-color" content="#3b82f6" />
         <meta name="msapplication-TileColor" content="#3b82f6" />
         
+        {/* Additional SEO Meta Tags */}
+        <meta name="geo.region" content="UZ" />
+        <meta name="geo.placename" content="Tashkent" />
+        <meta name="geo.position" content="41.2995;69.2401" />
+        <meta name="ICBM" content="41.2995, 69.2401" />
+        <meta name="distribution" content="global" />
+        <meta name="rating" content="general" />
+        <meta name="revisit-after" content="7 days" />
+        <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
+        
+        {/* Preconnect for Performance */}
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+        
+        {/* DNS Prefetch */}
+        <link rel="dns-prefetch" href="//www.google-analytics.com" />
+        <link rel="dns-prefetch" href="//www.googletagmanager.com" />
+        
+        {/* Canonical URL */}
+        <link rel="canonical" href="https://educrm.uz/" />
+        
+        {/* Alternate Languages */}
+        <link rel="alternate" hrefLang="uz" href="https://educrm.uz/" />
+        <link rel="alternate" hrefLang="en" href="https://educrm.uz/en" />
+        <link rel="alternate" hrefLang="x-default" href="https://educrm.uz/" />
+        
         {/* Structured Data for Education CRM */}
         <script
           type="application/ld+json"
@@ -146,7 +172,7 @@ export default function RootLayout({
               "@type": "Organization",
               "name": "EduCRM",
               "url": "https://educrm.uz",
-              "logo": "https://cdn4.cdn-telegram.org/file/auSjew79KnNHmNahNdfQJLK45u2tFnNHmsDq0Zup_JvzYY4DeHt31dAiagW3Wyj6f2ccKWkUaeeKfVvHPbjau5RXvZrtqlgAl8hVZYPqOnEEfP8e1-BFn5RqZ3YJlNZkLIFWXaNOjWYwoEWLkFlLVjwh3UtN88dHAuEyV4h_k7OsqJY-a5w3ujQXduyOiStIvx2l54WhBk1hR2PqONb4UieKKKL33mrHWQBM66hsDKpDrnkwiIXcttnU_tzYaS2xbnUcIiqbqahukYHZ9ip2JdVuoP5upvRaHe2EQ7MRj3LhQxmbVNh0zL4e5DqBuo0w9g-YftG-GTJL4HbWYM8CXw.jpg",
+              "logo": "https://educrm.uz/logo.png",
               "description": "O'zbekistondagi o'quv markazlar uchun professional CRM tizimi",
               "address": {
                 "@type": "PostalAddress",
@@ -158,6 +184,44 @@ export default function RootLayout({
                 "contactType": "customer service",
                 "availableLanguage": ["Uzbek", "English"]
               }
+            })
+          }}
+        />
+        
+        {/* WebSite Schema */}
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "WebSite",
+              "name": "EduCRM",
+              "url": "https://educrm.uz",
+              "description": "O'quv markazlarni avtomatlashtiruvchi tizim",
+              "potentialAction": {
+                "@type": "SearchAction",
+                "target": "https://educrm.uz/search?q={search_term_string}",
+                "query-input": "required name=search_term_string"
+              }
+            })
+          }}
+        />
+        
+        {/* BreadcrumbList Schema */}
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "BreadcrumbList",
+              "itemListElement": [
+                {
+                  "@type": "ListItem",
+                  "position": 1,
+                  "name": "Bosh sahifa",
+                  "item": "https://educrm.uz"
+                }
+              ]
             })
           }}
         />

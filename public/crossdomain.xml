@@ -1,0 +1,7 @@
+<?xml version="1.0"?>
+<cross-domain-policy>
+    <allow-access-from domain="*.educrm.uz" />
+    <allow-access-from domain="educrm.uz" />
+    <allow-access-from domain="www.educrm.uz" />
+    <site-control permitted-cross-domain-policies="master-only" />
+</cross-domain-policy> 

@@ -1,0 +1,13 @@
+/* TEAM */
+    Developer: EduCRM Team
+    Contact: info@educrm.uz
+    From: Tashkent, Uzbekistan
+
+/* SITE */
+    Last update: 2024/12/19
+    Language: Uzbek, English
+    Doctype: HTML5
+    IDE: Visual Studio Code
+    Standards: HTML5, CSS3, JavaScript ES6+
+    Components: Next.js, React, TypeScript
+    Software: Node.js, npm 

@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+    <channel>
+        <title>EduCRM - O'quv Markazlarni Avtomatlashtiruvchi Tizim</title>
+        <link>https://educrm.uz</link>
+        <description>O'zbekistondagi o'quv markazlar uchun professional CRM tizimi. O'quvchilar, o'qituvchilar va to'lovlarni nazorat qilish.</description>
+        <language>uz</language>
+        <lastBuildDate>Thu, 19 Dec 2024 12:00:00 +0500</lastBuildDate>
+        <atom:link href="https://educrm.uz/feed.xml" rel="self" type="application/rss+xml" />
+        
+        <item>
+            <title>EduCRM - O'quv Markazlarni Avtomatlashtiruvchi Tizim</title>
+            <link>https://educrm.uz</link>
+            <description>O'zbekistondagi o'quv markazlar uchun professional CRM tizimi. O'quvchilar, o'qituvchilar va to'lovlarni nazorat qilish. EduCRM.uz - ta'lim sohasida eng yaxshi yechim.</description>
+            <pubDate>Thu, 19 Dec 2024 12:00:00 +0500</pubDate>
+            <guid>https://educrm.uz</guid>
+        </item>
+        
+        <item>
+            <title>EduCRM Xususiyatlari</title>
+            <link>https://educrm.uz/features</link>
+            <description>EduCRM ning barcha xususiyatlari: o'quvchilar boshqaruvi, o'qituvchilar nazorati, to'lovlar boshqaruvi va boshqa professional funksiyalar.</description>
+            <pubDate>Thu, 19 Dec 2024 12:00:00 +0500</pubDate>
+            <guid>https://educrm.uz/features</guid>
+        </item>
+        
+        <item>
+            <title>EduCRM Narxlari</title>
+            <link>https://educrm.uz/pricing</link>
+            <description>EduCRM ning narxlar rejalari. O'quv markazingiz uchun eng yaxshi narxda professional CRM tizimi. Bepul sinab ko'ring!</description>
+            <pubDate>Thu, 19 Dec 2024 12:00:00 +0500</pubDate>
+            <guid>https://educrm.uz/pricing</guid>
+        </item>
+        
+        <item>
+            <title>EduCRM Haqida</title>
+            <link>https://educrm.uz/about</link>
+            <description>EduCRM haqida batafsil ma'lumot. O'zbekistondagi o'quv markazlar uchun professional CRM tizimi yaratuvchilari haqida.</description>
+            <pubDate>Thu, 19 Dec 2024 12:00:00 +0500</pubDate>
+            <guid>https://educrm.uz/about</guid>
+        </item>
+        
+    </channel>
+</rss> 

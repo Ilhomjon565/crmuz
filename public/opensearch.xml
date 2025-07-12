@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<OpenSearchDescription xmlns="http://a9.com/-/spec/opensearch/1.1/">
+    <ShortName>EduCRM</ShortName>
+    <Description>O'quv markazlarni avtomatlashtiruvchi tizim - Professional CRM platforma o'quv markazlar uchun</Description>
+    <Tags>o'quv markaz crm education uzbekistan ta'lim</Tags>
+    <Contact>info@educrm.uz</Contact>
+    <Url type="application/opensearchdescription+xml" rel="self" template="https://educrm.uz/opensearch.xml"/>
+    <Url type="text/html" template="https://educrm.uz/search?q={searchTerms}"/>
+    <Url type="application/x-suggestions+json" template="https://educrm.uz/api/suggest?q={searchTerms}"/>
+    <LongName>EduCRM - O'quv Markazlarni Avtomatlashtiruvchi Tizim</LongName>
+    <Image height="16" width="16" type="image/x-icon">https://educrm.uz/favicon.ico</Image>
+    <Image height="64" width="64" type="image/png">https://educrm.uz/icon-64x64.png</Image>
+    <Query role="example" searchTerms="o'quv markaz crm"/>
+    <Developer>EduCRM Team</Developer>
+    <Attribution>EduCRM.uz</Attribution>
+    <SyndicationRight>open</SyndicationRight>
+    <AdultContent>false</AdultContent>
+    <Language>uz</Language>
+    <OutputEncoding>UTF-8</OutputEncoding>
+    <InputEncoding>UTF-8</InputEncoding>
+</OpenSearchDescription> 
