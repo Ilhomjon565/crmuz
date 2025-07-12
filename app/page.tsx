@@ -67,7 +67,7 @@ export const metadata: Metadata = {
 
 export default function Home() {
   return (
-    <>
+    <div>
       <SEOHead />
       <main className="min-h-screen">
         {/* Header */}
@@ -100,5 +100,6 @@ export default function Home() {
       {/* Footer */}
       <Footer />
     </main>
+    </div>
   )
 }

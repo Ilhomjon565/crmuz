@@ -41,7 +41,6 @@
     "analyze": "cross-env ANALYZE=true next build",
     "export": "next build && next export",
     "sitemap": "next-sitemap",
-    "robots": "next-robots",
     "seo-check": "npm run type-check && npm run lint && npm run build"
   },
   "dependencies": {
@@ -85,6 +84,8 @@
     "@types/jest": "^29.5.0",
     "@playwright/test": "^1.40.0",
     "next-sitemap": "^4.2.3",
-    "next-robots": "^1.0.0"
+    "@testing-library/jest-dom": "^6.1.0",
+    "@testing-library/react": "^14.0.0",
+    "babel-jest": "^29.7.0"
   }
 }
