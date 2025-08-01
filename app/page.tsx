@@ -11,6 +11,9 @@ import ContactSection from "@/components/contact-section"
 import SEOHead from "@/components/seo-head"
 import FreeAnnouncement from "@/components/free-announcement"
 import FreeBanner from "@/components/free-banner"
+import SEOOptimizer from "@/components/seo-optimizer"
+import KeywordOptimizer from "@/components/keyword-optimizer"
+import InternalLinks from "@/components/internal-links"
 import { Metadata } from "next"
 
 export const metadata: Metadata = {
@@ -71,6 +74,8 @@ export default function Home() {
   return (
     <div>
       <SEOHead />
+      <SEOOptimizer pageType="home" />
+      <KeywordOptimizer pageType="home" />
       <FreeAnnouncement />
       <main className="min-h-screen">
         {/* Header */}
@@ -102,6 +107,9 @@ export default function Home() {
 
       {/* Contact Section */}
       <ContactSection />
+
+      {/* Internal Links */}
+      <InternalLinks currentPage="home" />
 
       {/* Footer */}
       <Footer />

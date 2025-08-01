@@ -82,8 +82,8 @@ export const metadata: Metadata = {
     },
   },
   verification: {
-    google: "your-google-verification-code",
-    yandex: "your-yandex-verification-code",
+    google: "dfpSu7tIiE7RG1ayj4hvyvolTFICRF8nr3YCbXE2h8g",
+    yandex: "6e7431ff7c09fb78",
   },
   category: "education",
   classification: "Educational Software",
