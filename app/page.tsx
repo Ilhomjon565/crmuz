@@ -9,6 +9,8 @@ import HeroSection from "@/components/hero-section"
 import VideoSection from "@/components/video-section"
 import ContactSection from "@/components/contact-section"
 import SEOHead from "@/components/seo-head"
+import FreeAnnouncement from "@/components/free-announcement"
+import FreeBanner from "@/components/free-banner"
 import { Metadata } from "next"
 
 export const metadata: Metadata = {
@@ -69,9 +71,13 @@ export default function Home() {
   return (
     <div>
       <SEOHead />
+      <FreeAnnouncement />
       <main className="min-h-screen">
         {/* Header */}
         <Header />
+
+        {/* Free Banner */}
+        <FreeBanner />
 
         {/* Hero Section */}
         <HeroSection />
