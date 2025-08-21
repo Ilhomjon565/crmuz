@@ -33,7 +33,8 @@ export const metadata: Metadata = {
     "student management",
     "teacher management",
     "payment tracking",
-    "educational software"
+    "educational software",
+    "edu tizim"
   ].join(", "),
   authors: [{ name: "EduCRM Team" }],
   creator: "EduCRM",
