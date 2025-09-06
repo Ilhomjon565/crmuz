@@ -121,7 +121,7 @@ function FormPage() {
       setError(null)
       try {
         // Only get courses using lidId from localhost:5000
-        const coursesResponse = await axios.get(`http://localhost:5000/get-lid-courses/${formId}`)
+        const coursesResponse = await axios.get(`https://backend-edu.uz/get-lid-courses/${formId}`)
         setFormData({
           courses: coursesResponse.data.data || coursesResponse.data.data, // Handle both response formats
           educationName: "Ta'lim markazi", // Default name since we're not fetching form data
@@ -184,7 +184,7 @@ function FormPage() {
         courses: selectedCourses,
       }
 
-      const response = await axios.post(`http://localhost:5000/connect-lid/${formId}`, payload, {
+      const response = await axios.post(`https://backend-edu.uz/connect-lid/${formId}`, payload, {
         headers: {
           'Content-Type': 'application/json',
         },
