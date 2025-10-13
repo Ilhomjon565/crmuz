@@ -72,12 +72,12 @@ export const metadata: Metadata = {
 
 export default function Home() {
   return (
-    <div>
+    <div style={{ width: '100%', overflowX: 'hidden' }}>
       <SEOHead />
       <SEOOptimizer pageType="home" />
       <KeywordOptimizer pageType="home" />
       <FreeAnnouncement />
-      <main className="min-h-screen">
+      <main className="min-h-screen" style={{ width: '100%', overflowX: 'hidden' }}>
         {/* Header */}
         <Header />
 
@@ -87,33 +87,33 @@ export default function Home() {
         {/* Hero Section */}
         <HeroSection />
 
-      {/* Stats Section */}
-      <StatsSection />
+        {/* Stats Section */}
+        <StatsSection />
 
-      {/* Features Grid */}
-      <FeaturesGrid />
+        {/* Features Grid */}
+        <FeaturesGrid />
 
-      {/* Video Section */}
-      <VideoSection />
+        {/* Video Section */}
+        <VideoSection />
 
-      {/* Blog Section */}
-      <BlogSection />
+        {/* Blog Section */}
+        <BlogSection />
 
-      {/* Testimonial Section */}
-      <TestimonialSection />
+        {/* Testimonial Section */}
+        <TestimonialSection />
 
-      {/* Free Trial Section */}
-      <FreeTrialSection />
+        {/* Free Trial Section */}
+        <FreeTrialSection />
 
-      {/* Contact Section */}
-      <ContactSection />
+        {/* Contact Section */}
+        <ContactSection />
 
-      {/* Internal Links */}
-      <InternalLinks currentPage="home" />
+        {/* Internal Links */}
+        <InternalLinks currentPage="home" />
 
-      {/* Footer */}
-      <Footer />
-    </main>
+        {/* Footer */}
+        <Footer />
+      </main>
     </div>
   )
 }

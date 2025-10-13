@@ -6,6 +6,10 @@ import { ThemeProvider } from "@/components/theme-provider"
 import Analytics from "@/components/analytics"
 import PerformanceOptimizer from "@/components/performance-optimizer"
 import PerformanceMonitor from "@/components/performance-monitor"
+import OfflineNotification from "@/components/offline-notification"
+import OfflineBanner from "@/components/offline-banner"
+import ServiceWorkerRegistration from "@/components/service-worker-registration"
+import OfflinePageManager from "@/components/offline-page-manager"
 
 const inter = Inter({ subsets: ["latin", "cyrillic"] })
 
@@ -230,9 +234,16 @@ export default function RootLayout({
           }}
         />
       </head>
-      <body className={inter.className}>
+      <body className={inter.className} style={{ overflowX: 'hidden' }}>
         <ThemeProvider attribute="class" defaultTheme="light" enableSystem>
-          {children}
+          <ServiceWorkerRegistration />
+          <OfflineBanner />
+          <OfflinePageManager>
+            <OfflineNotification />
+            <div style={{ minHeight: '100vh', display: 'flex', flexDirection: 'column' }}>
+              {children}
+            </div>
+          </OfflinePageManager>
         </ThemeProvider>
         <Analytics />
         <PerformanceOptimizer />

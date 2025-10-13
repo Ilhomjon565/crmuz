@@ -1,7 +1,10 @@
 // EduCRM Service Worker
-// PWA functionality and caching
+// PWA functionality and offline caching
 
-const CACHE_NAME = 'educrm-v1.0.0'
+const CACHE_NAME = 'educrm-v1.1.0'
+const STATIC_CACHE = 'educrm-static-v1.1.0'
+const DYNAMIC_CACHE = 'educrm-dynamic-v1.1.0'
+
 const urlsToCache = [
   '/',
   '/features',
@@ -12,6 +15,7 @@ const urlsToCache = [
   '/faq',
   '/privacy',
   '/terms',
+  '/offline-test',
   '/manifest.json',
   '/favicon.ico',
   '/apple-touch-icon.png',
@@ -19,28 +23,189 @@ const urlsToCache = [
   '/icon-512x512.png'
 ]
 
+// API endpoints that should be cached
+const API_CACHE_PATTERNS = [
+  /\/api\/health/,
+  /\/api\/get-lid-users/
+]
+
 // Install event
 self.addEventListener('install', (event) => {
   event.waitUntil(
-    caches.open(CACHE_NAME)
-      .then((cache) => {
-        console.log('Opened cache')
+    Promise.all([
+      caches.open(STATIC_CACHE).then((cache) => {
+        console.log('Opened static cache')
         return cache.addAll(urlsToCache)
+      }),
+      caches.open(DYNAMIC_CACHE).then((cache) => {
+        console.log('Opened dynamic cache')
+        return cache
       })
+    ])
   )
+  // Skip waiting to activate immediately
+  self.skipWaiting()
 })
 
-// Fetch event
+// Fetch event with offline support
 self.addEventListener('fetch', (event) => {
-  event.respondWith(
-    caches.match(event.request)
-      .then((response) => {
-        // Return cached version or fetch from network
-        return response || fetch(event.request)
+  const { request } = event
+  const url = new URL(request.url)
+
+  // Handle API requests
+  if (url.pathname.startsWith('/api/')) {
+    event.respondWith(handleApiRequest(request))
+    return
+  }
+
+  // Handle CSS, JS and other assets
+  if (url.pathname.includes('/_next/static/') || 
+      url.pathname.endsWith('.css') || 
+      url.pathname.endsWith('.js') ||
+      url.pathname.endsWith('.woff2') ||
+      url.pathname.endsWith('.woff') ||
+      url.pathname.endsWith('.ttf')) {
+    event.respondWith(handleAssetRequest(request))
+    return
+  }
+
+  // Handle static assets and pages
+  event.respondWith(handleStaticRequest(request))
+})
+
+// Handle API requests with offline support
+async function handleApiRequest(request) {
+  const url = new URL(request.url)
+  
+  // Check if this API should be cached
+  const shouldCache = API_CACHE_PATTERNS.some(pattern => pattern.test(url.pathname))
+  
+  if (shouldCache) {
+    try {
+      // Try network first
+      const networkResponse = await fetch(request)
+      if (networkResponse.ok) {
+        // Cache successful responses
+        const cache = await caches.open(DYNAMIC_CACHE)
+        cache.put(request, networkResponse.clone())
+        return networkResponse
+      }
+    } catch (error) {
+      // Network failed, try cache
+      const cachedResponse = await caches.match(request)
+      if (cachedResponse) {
+        return cachedResponse
+      }
+      
+      // Return offline response for API calls
+      return new Response(
+        JSON.stringify({ 
+          error: 'Internetga bog\'lanmagansiz',
+          offline: true 
+        }),
+        { 
+          status: 503,
+          headers: { 'Content-Type': 'application/json' }
+        }
+      )
+    }
+  }
+  
+  // For non-cacheable APIs, try network or return error
+  try {
+    return await fetch(request)
+  } catch (error) {
+    return new Response(
+      JSON.stringify({ 
+        error: 'Internetga bog\'lanmagansiz',
+        offline: true 
+      }),
+      { 
+        status: 503,
+        headers: { 'Content-Type': 'application/json' }
       }
     )
-  )
-})
+  }
+}
+
+// Handle static requests with cache-first strategy
+async function handleStaticRequest(request) {
+  const url = new URL(request.url)
+  
+  // Skip caching for external requests
+  if (url.origin !== location.origin) {
+    return fetch(request)
+  }
+  
+  try {
+    // Try cache first
+    const cachedResponse = await caches.match(request)
+    if (cachedResponse) {
+      return cachedResponse
+    }
+    
+    // If not in cache, fetch from network
+    const networkResponse = await fetch(request)
+    
+    // Cache successful responses
+    if (networkResponse.ok) {
+      const cache = await caches.open(STATIC_CACHE)
+      cache.put(request, networkResponse.clone())
+    }
+    
+    return networkResponse
+  } catch (error) {
+    // If both cache and network fail, return offline page for navigation requests
+    if (request.mode === 'navigate') {
+      const offlinePage = await caches.match('/')
+      if (offlinePage) {
+        return offlinePage
+      }
+    }
+    
+    throw error
+  }
+}
+
+// Enhanced cache strategy for CSS and JS files
+async function handleAssetRequest(request) {
+  const url = new URL(request.url)
+  
+  // Handle CSS and JS files with aggressive caching
+  if (url.pathname.includes('/_next/static/') || 
+      url.pathname.endsWith('.css') || 
+      url.pathname.endsWith('.js')) {
+    
+    try {
+      // Try cache first
+      const cachedResponse = await caches.match(request)
+      if (cachedResponse) {
+        return cachedResponse
+      }
+      
+      // Fetch from network
+      const networkResponse = await fetch(request)
+      
+      if (networkResponse.ok) {
+        // Cache for longer period
+        const cache = await caches.open(STATIC_CACHE)
+        cache.put(request, networkResponse.clone())
+      }
+      
+      return networkResponse
+    } catch (error) {
+      // Return cached version if available
+      const cachedResponse = await caches.match(request)
+      if (cachedResponse) {
+        return cachedResponse
+      }
+      throw error
+    }
+  }
+  
+  // For other requests, use default strategy
+  return handleStaticRequest(request)
+}
 
 // Activate event
 self.addEventListener('activate', (event) => {
@@ -48,7 +213,7 @@ self.addEventListener('activate', (event) => {
     caches.keys().then((cacheNames) => {
       return Promise.all(
         cacheNames.map((cacheName) => {
-          if (cacheName !== CACHE_NAME) {
+          if (cacheName !== STATIC_CACHE && cacheName !== DYNAMIC_CACHE) {
             console.log('Deleting old cache:', cacheName)
             return caches.delete(cacheName)
           }
@@ -56,6 +221,8 @@ self.addEventListener('activate', (event) => {
       )
     })
   )
+  // Take control of all clients immediately
+  self.clients.claim()
 })
 
 // Background sync

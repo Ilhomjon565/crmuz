@@ -14,7 +14,8 @@ import { Checkbox } from "@/components/ui/checkbox"
 import { Loader2, CheckCircle2, AlertCircle, Phone, User, Home, BookOpen, ArrowRight, ArrowLeft } from "lucide-react"
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert"
 import Image from "next/image"
-import axios from "axios"
+import { apiClient, handleApiError } from "@/lib/api-client"
+import OfflineNotification from "@/components/offline-notification"
 
 // Simple background component
 const PageBackground = ({ children }) => (
@@ -78,6 +79,7 @@ function FormPage() {
   const [location, setLocation] = useState(null)
   const [locationError, setLocationError] = useState(null)
   const [currentStep, setCurrentStep] = useState(1)
+  const [isRetrying, setIsRetrying] = useState(false)
   const { formId } = useParams()
 
   const totalSteps = 3
@@ -121,7 +123,7 @@ function FormPage() {
       setError(null)
       try {
         // Only get courses using lidId from localhost:5000
-        const coursesResponse = await axios.get(`https://backend-edu.uz/get-lid-courses/${formId}`)
+        const coursesResponse = await apiClient.get(`https://backend-edu.uz/get-lid-courses/${formId}`)
         setFormData({
           courses: coursesResponse.data.data || coursesResponse.data.data, // Handle both response formats
           educationName: "Ta'lim markazi", // Default name since we're not fetching form data
@@ -129,7 +131,8 @@ function FormPage() {
         })
       } catch (err) {
         console.error("Error fetching courses:", err)
-        setError("Kurslarni yuklashda xatolik yuz berdi")
+        const errorMessage = handleApiError(err)
+        setError(errorMessage)
       } finally {
         setIsLoading(false)
       }
@@ -184,7 +187,7 @@ function FormPage() {
         courses: selectedCourses,
       }
 
-      const response = await axios.post(`https://backend-edu.uz/connect-lid/${formId}`, payload, {
+      const response = await apiClient.post(`https://backend-edu.uz/connect-lid/${formId}`, payload, {
         headers: {
           'Content-Type': 'application/json',
         },
@@ -198,11 +201,8 @@ function FormPage() {
       }
     } catch (err) {
       console.error("Error submitting form:", err)
-      setError(
-        err.response?.data?.message ||
-        err.message ||
-        "Formani yuborishda xatolik yuz berdi. Iltimos, qaytadan urinib ko'ring."
-      )
+      const errorMessage = handleApiError(err)
+      setError(errorMessage)
     } finally {
       setIsSubmitting(false)
     }
@@ -217,6 +217,24 @@ function FormPage() {
   const prevStep = () => {
     if (currentStep > 1) {
       setCurrentStep(prev => prev - 1)
+    }
+  }
+
+  const handleRetry = async () => {
+    setIsRetrying(true)
+    setError(null)
+    try {
+      const coursesResponse = await apiClient.get(`https://backend-edu.uz/get-lid-courses/${formId}`)
+      setFormData({
+        courses: coursesResponse.data.data || coursesResponse.data.data,
+        educationName: "Ta'lim markazi",
+        description: "Kurslarni tanlang va ariza topshiring"
+      })
+    } catch (err) {
+      const errorMessage = handleApiError(err)
+      setError(errorMessage)
+    } finally {
+      setIsRetrying(false)
     }
   }
 
@@ -405,6 +423,7 @@ function FormPage() {
 
   return (
     <PageBackground>
+      <OfflineNotification onRetry={handleRetry} />
       <div className="py-6 px-4">
         <div className="max-w-lg mx-auto">
           {/* Simple Header */}
