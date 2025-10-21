@@ -7,6 +7,7 @@ import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet"
 import { useTheme } from "next-themes"
 import { Menu, Moon, Sun, Sparkles } from 'lucide-react'
 import { motion } from "framer-motion"
+import Image from "next/image"
 
 export default function Header() {
   const { theme, setTheme } = useTheme()
@@ -27,11 +28,10 @@ export default function Header() {
       initial={{ y: -100 }}
       animate={{ y: 0 }}
       transition={{ duration: 0.5 }}
-      className={`sticky top-0 z-50 w-full transition-all duration-300 ${
-        scrolled
+      className={`sticky top-0 z-50 w-full transition-all duration-300 ${scrolled
           ? "bg-white/80 dark:bg-slate-950/80 backdrop-blur-xl shadow-lg dark:shadow-indigo-500/10"
           : "bg-transparent"
-      }`}
+        }`}
     >
       <div className="container flex h-20 items-center justify-between">
         <motion.div
@@ -41,15 +41,7 @@ export default function Header() {
           className="flex items-center gap-2"
         >
           <Link href="/" className="flex items-center gap-2">
-            <div className="relative w-10 h-10">
-              <div className="h-10 w-10 rounded-full bg-gradient-to-br from-indigo-600 to-blue-600 flex items-center justify-center text-white font-bold text-lg">
-                E
-              </div>
-              <div className="absolute inset-0 bg-indigo-600/20 rounded-full blur-xl -z-10"></div>
-            </div>
-            <span className="text-xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-indigo-600 to-blue-600 dark:from-indigo-400 dark:to-blue-400">
-              EduCRM
-            </span>
+            <Image src="/logo.png" alt="EduCRM" width={100} height={100} />
           </Link>
         </motion.div>
 
