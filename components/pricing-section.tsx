@@ -12,12 +12,12 @@ export default function PricingSection() {
   const plans = [
     {
       name: "Starter",
-      price: "299,000",
+      price: "199,000",
       period: "oyiga",
       description: "Kichik o'quv markazlari uchun",
       features: [
-        "50 tagacha o'quvchi",
-        "5 tagacha o'qituvchi",
+        "200 tagacha o'quvchi",
+        "15 tagacha o'qituvchi",
         "Dars jadvali",
         "To'lovlar nazorati",
         "Davomat nazorati",
@@ -27,12 +27,12 @@ export default function PricingSection() {
     },
     {
       name: "Professional",
-      price: "599,000",
+      price: "399,000",
       period: "oyiga",
       description: "O'rta hajmdagi o'quv markazlari uchun",
       features: [
-        "200 tagacha o'quvchi",
-        "15 tagacha o'qituvchi",
+        "500 tagacha o'quvchi",
+        "30 tagacha o'qituvchi",
         "Dars jadvali",
         "To'lovlar nazorati",
         "Davomat nazorati",
@@ -45,12 +45,12 @@ export default function PricingSection() {
     },
     {
       name: "Enterprise",
-      price: "999,000",
+      price: "699,000",
       period: "oyiga",
       description: "Katta o'quv markazlari uchun",
       features: [
-        "Cheksiz o'quvchilar",
-        "Cheksiz o'qituvchilar",
+        "1000 o'quvchilar",
+        "50 o'qituvchilar",
         "Dars jadvali",
         "To'lovlar nazorati",
         "Davomat nazorati",
