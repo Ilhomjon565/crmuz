@@ -1,148 +1,145 @@
 "use client"
 
-import { useEffect, useRef } from "react"
-import { useTheme } from "next-themes"
+import { motion } from "framer-motion"
+import { useEffect, useState } from "react"
 
 export default function AnimatedBackground() {
-  const canvasRef = useRef<HTMLCanvasElement>(null)
-  const { theme } = useTheme()
+  const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 })
 
   useEffect(() => {
-    const canvas = canvasRef.current
-    if (!canvas) return
-
-    const ctx = canvas.getContext("2d")
-    if (!ctx) return
-
-    // Set canvas to full screen
-    const handleResize = () => {
-      canvas.width = window.innerWidth
-      canvas.height = window.innerHeight
+    const handleMouseMove = (e: MouseEvent) => {
+      setMousePosition({ x: e.clientX, y: e.clientY })
     }
 
-    window.addEventListener("resize", handleResize)
-    handleResize()
-
-    // Create particles
-    const particles: Array<{
-      x: number
-      y: number
-      radius: number
-      color: string
-      speedX: number
-      speedY: number
-      opacity: number
-      growing: boolean
-    }> = []
-
-    const particleCount = Math.min(Math.floor(window.innerWidth / 15), 80)
-    const isDark = theme === "dark"
-
-    for (let i = 0; i < particleCount; i++) {
-      const radius = Math.random() * 3 + 1
-      particles.push({
-        x: Math.random() * canvas.width,
-        y: Math.random() * canvas.height,
-        radius,
-        color: isDark ? `hsl(${220 + Math.random() * 40}, 70%, 60%)` : `hsl(${220 + Math.random() * 40}, 70%, 60%)`,
-        speedX: (Math.random() - 0.5) * 0.3,
-        speedY: (Math.random() - 0.5) * 0.3,
-        opacity: Math.random() * 0.5 + 0.2,
-        growing: Math.random() > 0.5,
-      })
-    }
-
-    // Animation loop
-    const animate = () => {
-      // Clear canvas with gradient background
-      const gradient = ctx.createLinearGradient(0, 0, 0, canvas.height)
-
-      if (isDark) {
-        gradient.addColorStop(0, "rgba(10, 10, 30, 1)")
-        gradient.addColorStop(1, "rgba(30, 30, 60, 1)")
-      } else {
-        gradient.addColorStop(0, "rgba(240, 240, 255, 1)")
-        gradient.addColorStop(1, "rgba(250, 250, 255, 1)")
-      }
-
-      ctx.fillStyle = gradient
-      ctx.fillRect(0, 0, canvas.width, canvas.height)
-
-      // Update and draw particles
-      particles.forEach((particle, index) => {
-        // Update position
-        particle.x += particle.speedX
-        particle.y += particle.speedY
-
-        // Bounce off edges
-        if (particle.x > canvas.width || particle.x < 0) {
-          particle.speedX = -particle.speedX
-        }
-
-        if (particle.y > canvas.height || particle.y < 0) {
-          particle.speedY = -particle.speedY
-        }
-
-        // Pulse effect - grow and shrink
-        if (particle.growing) {
-          particle.radius += 0.02
-          if (particle.radius > 4) {
-            particle.growing = false
-          }
-        } else {
-          particle.radius -= 0.02
-          if (particle.radius < 1) {
-            particle.growing = true
-          }
-        }
-
-        // Draw particle
-        ctx.beginPath()
-        ctx.arc(particle.x, particle.y, particle.radius, 0, Math.PI * 2)
-        ctx.fillStyle =
-          particle.color +
-          Math.floor(particle.opacity * 255)
-            .toString(16)
-            .padStart(2, "0")
-        ctx.fill()
-
-        // Draw connections
-        particles.forEach((otherParticle, otherIndex) => {
-          if (index === otherIndex) return
-
-          const dx = particle.x - otherParticle.x
-          const dy = particle.y - otherParticle.y
-          const distance = Math.sqrt(dx * dx + dy * dy)
-
-          if (distance < 150) {
-            ctx.beginPath()
-            ctx.strokeStyle = `${particle.color}${Math.floor((1 - distance / 150) * 0.2 * 255)
-              .toString(16)
-              .padStart(2, "0")}`
-            ctx.lineWidth = 0.5
-            ctx.moveTo(particle.x, particle.y)
-            ctx.lineTo(otherParticle.x, otherParticle.y)
-            ctx.stroke()
-          }
-        })
-      })
-
-      requestAnimationFrame(animate)
-    }
-
-    const animationId = requestAnimationFrame(animate)
-
-    // Cleanup
-    return () => {
-      window.removeEventListener("resize", handleResize)
-      cancelAnimationFrame(animationId)
-    }
-  }, [theme])
+    window.addEventListener('mousemove', handleMouseMove)
+    return () => window.removeEventListener('mousemove', handleMouseMove)
+  }, [])
 
   return (
-    <div className="fixed inset-0 z-0 pointer-events-none">
-      <canvas ref={canvasRef} className="w-full h-full" aria-hidden="true" />
-      <div className="absolute inset-0 backdrop-blur-[2px]"></div>
+    <div className="absolute inset-0 overflow-hidden pointer-events-none">
+      {/* Main gradient orbs */}
+      <motion.div
+        className="absolute top-1/4 -left-32 w-96 h-96 bg-gradient-to-r from-indigo-400/20 to-blue-400/20 dark:from-indigo-500/10 dark:to-blue-500/10 rounded-full blur-3xl"
+        animate={{
+          x: [0, 50, 0],
+          y: [0, -30, 0],
+          scale: [1, 1.1, 1],
+        }}
+        transition={{
+          duration: 8,
+          repeat: Infinity,
+          ease: "easeInOut",
+        }}
+      />
+      
+      <motion.div
+        className="absolute bottom-1/4 -right-32 w-80 h-80 bg-gradient-to-l from-purple-400/20 to-pink-400/20 dark:from-purple-500/10 dark:to-pink-500/10 rounded-full blur-3xl"
+        animate={{
+          x: [0, -40, 0],
+          y: [0, 20, 0],
+          scale: [1, 0.9, 1],
+        }}
+        transition={{
+          duration: 10,
+          repeat: Infinity,
+          ease: "easeInOut",
+        }}
+      />
+
+      <motion.div
+        className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-gradient-to-r from-cyan-400/10 to-emerald-400/10 dark:from-cyan-500/5 dark:to-emerald-500/5 rounded-full blur-3xl"
+        animate={{
+          scale: [1, 1.2, 1],
+          opacity: [0.5, 0.8, 0.5],
+        }}
+        transition={{
+          duration: 6,
+          repeat: Infinity,
+          ease: "easeInOut",
+        }}
+      />
+
+      {/* Mouse-following elements */}
+      <motion.div
+        className="absolute w-32 h-32 bg-gradient-to-r from-indigo-400/10 to-blue-400/10 dark:from-indigo-500/5 dark:to-blue-500/5 rounded-full blur-2xl"
+        animate={{
+          x: mousePosition.x * 0.1,
+          y: mousePosition.y * 0.1,
+        }}
+        transition={{
+          type: "spring",
+          stiffness: 50,
+          damping: 15,
+        }}
+      />
+
+      {/* Animated grid pattern */}
+      <div className="absolute inset-0 opacity-5 dark:opacity-10">
+        <svg width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse">
+              <path d="M 40 0 L 0 0 0 40" fill="none" stroke="currentColor" strokeWidth="1"/>
+            </pattern>
+          </defs>
+          <rect width="100%" height="100%" fill="url(#grid)" />
+        </svg>
+      </div>
+
+      {/* Floating geometric shapes */}
+      {[...Array(12)].map((_, i) => (
+        <motion.div
+          key={i}
+          className={`absolute w-6 h-6 bg-gradient-to-r ${
+            i % 4 === 0 ? 'from-indigo-400/20 to-blue-400/20' :
+            i % 4 === 1 ? 'from-purple-400/20 to-pink-400/20' :
+            i % 4 === 2 ? 'from-cyan-400/20 to-teal-400/20' :
+            'from-emerald-400/20 to-green-400/20'
+          } rounded-full blur-sm`}
+          style={{
+            left: `${10 + (i * 8)}%`,
+            top: `${15 + (i * 6)}%`,
+          }}
+          animate={{
+            y: [0, -40, 0],
+            x: [0, Math.random() * 30 - 15, 0],
+            rotate: [0, 360],
+            scale: [0.5, 1.5, 0.5],
+            opacity: [0.3, 0.8, 0.3],
+          }}
+          transition={{
+            duration: 6 + Math.random() * 4,
+            repeat: Infinity,
+            delay: Math.random() * 3,
+            ease: "easeInOut",
+          }}
+        />
+      ))}
+
+      {/* Wave animations */}
+      <motion.div
+        className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-indigo-500/10 to-transparent"
+        animate={{
+          opacity: [0.3, 0.7, 0.3],
+        }}
+        transition={{
+          duration: 4,
+          repeat: Infinity,
+          ease: "easeInOut",
+        }}
+      />
+
+      <motion.div
+        className="absolute top-0 left-0 right-0 h-32 bg-gradient-to-b from-blue-500/10 to-transparent"
+        animate={{
+          opacity: [0.2, 0.6, 0.2],
+        }}
+        transition={{
+          duration: 5,
+          repeat: Infinity,
+          ease: "easeInOut",
+          delay: 1,
+        }}
+      />
     </div>
   )
 }

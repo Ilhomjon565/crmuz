@@ -1,26 +1,44 @@
-import BlogSection from "@/components/blog-section"
-import TestimonialSection from "@/components/testimonial-section"
-import FreeTrialSection from "@/components/free-trial-section"
-import Footer from "@/components/footer"
-import StatsSection from "@/components/stats-section"
-import FeaturesGrid from "@/components/features-grid"
+// Core Layout Components
 import Header from "@/components/header"
+import Footer from "@/components/footer"
+
+// Main Page Sections
 import HeroSection from "@/components/hero-section"
-import VideoSection from "@/components/video-section"
 import ContactSection from "@/components/contact-section"
-import SEOHead from "@/components/seo-head"
+
+// Statistics and Metrics
+import StatsSection from "@/components/stats-section"
+import CreativeStatsSection from "@/components/creative-stats-section"
+
+// Features and Capabilities
+import FeaturesGrid from "@/components/features-grid"
+import CreativeFeaturesSection from "@/components/creative-features-section"
+
+// Promotional Components
 import FreeAnnouncement from "@/components/free-announcement"
 import FreeBanner from "@/components/free-banner"
+
+// SEO and Optimization
+import SEOHead from "@/components/seo-head"
 import SEOOptimizer from "@/components/seo-optimizer"
 import KeywordOptimizer from "@/components/keyword-optimizer"
 import InternalLinks from "@/components/internal-links"
+
+// Background and Animation Effects
+import AnimatedBackground from "@/components/animated-background"
+import FloatingElements from "@/components/floating-elements"
+
+// TypeScript and Constants
 import { Metadata } from "next"
 import { SEO_TEXTS } from "@/lib/text-constants"
 
 export const metadata: Metadata = {
+  // Basic SEO Information
   title: SEO_TEXTS.title,
   description: SEO_TEXTS.description,
   keywords: SEO_TEXTS.keywords.join(", "),
+  
+  // Open Graph Meta Tags for Social Media
   openGraph: {
     title: SEO_TEXTS.title,
     description: SEO_TEXTS.description,
@@ -37,6 +55,8 @@ export const metadata: Metadata = {
     locale: "uz_UZ",
     type: "website",
   },
+  
+  // Twitter Card Meta Tags
   twitter: {
     card: "summary_large_image",
     title: SEO_TEXTS.title,
@@ -44,6 +64,8 @@ export const metadata: Metadata = {
     images: ["/twitter-image.jpg"],
     creator: "@educrm_uz",
   },
+  
+  // Canonical URL
   alternates: {
     canonical: "/",
   },
@@ -51,46 +73,44 @@ export const metadata: Metadata = {
 
 export default function Home() {
   return (
-    <div style={{ width: '100%', overflowX: 'hidden' }}>
+    <div className="w-full overflow-x-hidden">
+      {/* SEO and Optimization Components */}
       <SEOHead />
       <SEOOptimizer pageType="home" />
       <KeywordOptimizer pageType="home" />
+      
+      {/* Free Announcement Modal */}
       <FreeAnnouncement />
-      <main className="min-h-screen" style={{ width: '100%', overflowX: 'hidden' }}>
-        {/* Header */}
+      
+      {/* Global Background Effects */}
+      <AnimatedBackground />
+      <FloatingElements />
+      
+      <main className="min-h-screen relative w-full overflow-x-hidden">
+        {/* Navigation Header */}
         <Header />
 
-        {/* Free Banner */}
+        {/* Promotional Banner */}
         <FreeBanner />
 
-        {/* Hero Section */}
+        {/* Main Hero Section with Enhanced Animations */}
         <HeroSection />
 
-        {/* Stats Section */}
+        {/* Statistics and Performance Metrics */}
+        <CreativeStatsSection />
         <StatsSection />
 
-        {/* Features Grid */}
+        {/* Features and Capabilities Showcase */}
+        <CreativeFeaturesSection />
         <FeaturesGrid />
 
-        {/* Video Section */}
-        <VideoSection />
-
-        {/* Blog Section */}
-        <BlogSection />
-
-        {/* Testimonial Section */}
-        <TestimonialSection />
-
-        {/* Free Trial Section */}
-        <FreeTrialSection />
-
-        {/* Contact Section */}
+        {/* Contact and Support */}
         <ContactSection />
 
-        {/* Internal Links */}
+        {/* Internal Navigation Links */}
         <InternalLinks currentPage="home" />
 
-        {/* Footer */}
+        {/* Footer with Links and Information */}
         <Footer />
       </main>
     </div>

@@ -54,11 +54,6 @@ export default function FreeAnnouncement() {
 
               {/* Header */}
               <div className="text-center mb-4 sm:mb-6 lg:mb-8 relative z-10">
-                <div className="flex justify-center mb-4 sm:mb-6">
-                  <div className="bg-gradient-to-r from-green-500 via-blue-500 to-purple-500 p-2 sm:p-3 lg:p-4 rounded-full animate-pulse">
-                    <Gift className="h-6 w-6 sm:h-8 sm:w-8 lg:h-10 lg:w-10 text-white" />
-                  </div>
-                </div>
                 <div className="flex items-center justify-center gap-1 sm:gap-2 mb-2 sm:mb-4">
                   <Sparkles className="h-4 w-4 sm:h-6 sm:w-6 text-yellow-500 animate-bounce" />
                   <h2 className="text-xl sm:text-2xl lg:text-4xl font-bold bg-gradient-to-r from-green-600 via-blue-600 to-purple-600 bg-clip-text text-transparent">

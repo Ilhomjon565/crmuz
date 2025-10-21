@@ -1,86 +1,96 @@
 "use client"
 
-import { useEffect, useState } from "react"
 import { motion } from "framer-motion"
+import { Star, Zap, Heart, Sparkles, Shield, Users, TrendingUp, Award } from "lucide-react"
 
 export default function FloatingElements() {
-  const [mounted, setMounted] = useState(false)
-
-  useEffect(() => {
-    setMounted(true)
-  }, [])
-
-  if (!mounted) return null
+  const floatingIcons = [
+    { Icon: Star, color: "from-yellow-400 to-orange-400", delay: 0 },
+    { Icon: Zap, color: "from-blue-400 to-cyan-400", delay: 0.5 },
+    { Icon: Heart, color: "from-pink-400 to-rose-400", delay: 1 },
+    { Icon: Sparkles, color: "from-purple-400 to-indigo-400", delay: 1.5 },
+    { Icon: Shield, color: "from-green-400 to-emerald-400", delay: 2 },
+    { Icon: Users, color: "from-indigo-400 to-blue-400", delay: 2.5 },
+    { Icon: TrendingUp, color: "from-cyan-400 to-teal-400", delay: 3 },
+    { Icon: Award, color: "from-amber-400 to-yellow-400", delay: 3.5 },
+  ]
 
   return (
-    <div className="fixed inset-0 pointer-events-none z-0 overflow-hidden">
-      {/* Floating elements */}
-      <motion.div
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 0.5 }}
-        transition={{ duration: 1 }}
-        className="absolute top-[10%] right-[5%] w-64 h-64 bg-gradient-to-r from-indigo-400/20 to-blue-400/20 rounded-full blur-3xl"
-      />
+    <div className="absolute inset-0 overflow-hidden pointer-events-none">
+      {floatingIcons.map((item, index) => (
+        <motion.div
+          key={index}
+          className={`absolute w-8 h-8 bg-gradient-to-r ${item.color} rounded-full flex items-center justify-center shadow-lg`}
+          style={{
+            left: `${10 + (index * 12)}%`,
+            top: `${20 + (index * 8)}%`,
+          }}
+          animate={{
+            y: [0, -20, 0],
+            rotate: [0, 180, 360],
+            scale: [1, 1.2, 1],
+          }}
+          transition={{
+            duration: 4 + Math.random() * 2,
+            repeat: Infinity,
+            delay: item.delay,
+            ease: "easeInOut",
+          }}
+        >
+          <item.Icon className="h-4 w-4 text-white" />
+        </motion.div>
+      ))}
 
-      <motion.div
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 0.4 }}
-        transition={{ duration: 1, delay: 0.3 }}
-        className="absolute bottom-[20%] left-[10%] w-80 h-80 bg-gradient-to-r from-purple-400/20 to-indigo-400/20 rounded-full blur-3xl"
-      />
+      {/* Additional floating particles */}
+      {[...Array(15)].map((_, i) => (
+        <motion.div
+          key={`particle-${i}`}
+          className="absolute w-2 h-2 bg-gradient-to-r from-indigo-400/40 to-blue-400/40 dark:from-indigo-500/30 dark:to-blue-500/30 rounded-full"
+          style={{
+            left: `${Math.random() * 100}%`,
+            top: `${Math.random() * 100}%`,
+          }}
+          animate={{
+            y: [0, -30, 0],
+            opacity: [0.3, 1, 0.3],
+            scale: [0.5, 1, 0.5],
+          }}
+          transition={{
+            duration: 3 + Math.random() * 3,
+            repeat: Infinity,
+            delay: Math.random() * 3,
+            ease: "easeInOut",
+          }}
+        />
+      ))}
 
-      <motion.div
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 0.3 }}
-        transition={{ duration: 1, delay: 0.6 }}
-        className="absolute top-[40%] left-[30%] w-72 h-72 bg-gradient-to-r from-blue-400/20 to-cyan-400/20 rounded-full blur-3xl"
-      />
-
-      {/* Floating shapes */}
-      <motion.div
-        initial={{ y: -100, opacity: 0 }}
-        animate={{
-          y: [0, 20, 0],
-          opacity: 0.7,
-          rotate: [0, 5, 0],
-        }}
-        transition={{
-          y: { duration: 8, repeat: Number.POSITIVE_INFINITY, repeatType: "reverse" },
-          rotate: { duration: 10, repeat: Number.POSITIVE_INFINITY, repeatType: "reverse" },
-          opacity: { duration: 1 },
-        }}
-        className="absolute top-[15%] left-[15%] w-16 h-16 bg-indigo-500/10 dark:bg-indigo-500/20 rounded-lg backdrop-blur-md border border-indigo-500/20 dark:border-indigo-500/30"
-      />
-
-      <motion.div
-        initial={{ y: 100, opacity: 0 }}
-        animate={{
-          y: [0, -30, 0],
-          opacity: 0.7,
-          rotate: [0, -8, 0],
-        }}
-        transition={{
-          y: { duration: 10, repeat: Number.POSITIVE_INFINITY, repeatType: "reverse" },
-          rotate: { duration: 12, repeat: Number.POSITIVE_INFINITY, repeatType: "reverse" },
-          opacity: { duration: 1 },
-        }}
-        className="absolute bottom-[20%] right-[20%] w-20 h-20 bg-blue-500/10 dark:bg-blue-500/20 rounded-full backdrop-blur-md border border-blue-500/20 dark:border-blue-500/30"
-      />
-
-      <motion.div
-        initial={{ y: -50, opacity: 0 }}
-        animate={{
-          y: [0, 15, 0],
-          opacity: 0.7,
-          rotate: [0, 10, 0],
-        }}
-        transition={{
-          y: { duration: 7, repeat: Number.POSITIVE_INFINITY, repeatType: "reverse" },
-          rotate: { duration: 9, repeat: Number.POSITIVE_INFINITY, repeatType: "reverse" },
-          opacity: { duration: 1 },
-        }}
-        className="absolute top-[35%] right-[25%] w-12 h-12 bg-purple-500/10 dark:bg-purple-500/20 rounded-md backdrop-blur-md border border-purple-500/20 dark:border-purple-500/30"
-      />
+      {/* Floating geometric shapes */}
+      {[...Array(8)].map((_, i) => (
+        <motion.div
+          key={`shape-${i}`}
+          className={`absolute w-4 h-4 bg-gradient-to-r ${
+            i % 3 === 0 ? 'from-purple-400/30 to-pink-400/30' :
+            i % 3 === 1 ? 'from-blue-400/30 to-cyan-400/30' :
+            'from-green-400/30 to-emerald-400/30'
+          } rounded-full`}
+          style={{
+            left: `${15 + (i * 10)}%`,
+            top: `${30 + (i * 5)}%`,
+          }}
+          animate={{
+            y: [0, -25, 0],
+            x: [0, Math.random() * 20 - 10, 0],
+            rotate: [0, 360],
+            scale: [0.8, 1.2, 0.8],
+          }}
+          transition={{
+            duration: 5 + Math.random() * 3,
+            repeat: Infinity,
+            delay: Math.random() * 4,
+            ease: "easeInOut",
+          }}
+        />
+      ))}
     </div>
   )
 }
