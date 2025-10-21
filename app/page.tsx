@@ -111,6 +111,7 @@ export default function Home() {
         <InternalLinks currentPage="home" />
 
         {/* Footer with Links and Information */}
+        
         <Footer />
       </main>
     </div>

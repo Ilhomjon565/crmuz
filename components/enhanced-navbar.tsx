@@ -56,7 +56,7 @@ export default function EnhancedNavbar() {
           transition={{ delay: 0.3 }}
           className="hidden md:flex items-center gap-6"
         >
-          {["xizmatlar", "ustunliklar", "narxlar", "boglanish"].map((item, index) => (
+          {["Xizmatlar", "ustunliklar", "narxlar", "boglanish"].map((item, index) => (
             <motion.div
               key={item}
               initial={{ opacity: 0, y: -10 }}
@@ -113,7 +113,7 @@ export default function EnhancedNavbar() {
             </SheetTrigger>
             <SheetContent side="right" className="backdrop-blur-lg bg-background/90">
               <nav className="flex flex-col gap-4 mt-8">
-                {["xizmatlar", "ustunliklar", "narxlar", "boglanish"].map((item, index) => (
+                {["Xizmatlar", "ustunliklar", "narxlar", "boglanish"].map((item, index) => (
                   <motion.div
                     key={item}
                     initial={{ opacity: 0, x: 20 }}

@@ -68,10 +68,9 @@ export const SOCIAL_PROOF = {
 
 // Navigation items with consistent structure
 export const NAVIGATION_ITEMS = [
-  { name: NAVIGATION_TEXTS.services, href: "#features" },
-  { name: NAVIGATION_TEXTS.pricing, href: "#pricing" },
-  { name: NAVIGATION_TEXTS.blog, href: "#blog" },
-  { name: NAVIGATION_TEXTS.support, href: "#support" },
+  { name: NAVIGATION_TEXTS.services, href: "/features" },
+  { name: NAVIGATION_TEXTS.pricing, href: "/pricing" },
+  { name: NAVIGATION_TEXTS.support, href: "/support" },
 ] as const;
 
 // Feature cards data

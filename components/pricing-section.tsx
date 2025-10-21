@@ -23,7 +23,7 @@ export default function PricingSection() {
         "Davomat nazorati",
       ],
       cta: "Boshlash",
-      popular: false,
+      popular: true,
     },
     {
       name: "Professional",
@@ -62,76 +62,36 @@ export default function PricingSection() {
         "24/7 qo'llab-quvvatlash",
       ],
       cta: "Boshlash",
-      popular: false,
+      popular: true,
     },
   ]
 
   return (
-    <section className="w-full py-12 md:py-24 lg:py-32 bg-gray-50 dark:bg-gray-900/50" id="narxlar" ref={sectionRef}>
-      <div className="container px-4 md:px-6">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
-          transition={{ duration: 0.5 }}
-          className="flex flex-col items-center justify-center space-y-4 text-center"
-        >
-          <div className="space-y-2">
-            <motion.div
-              initial={{ opacity: 0, scale: 0.8 }}
-              animate={isInView ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0.8 }}
-              transition={{ duration: 0.3 }}
-              className="inline-block rounded-lg bg-primary/10 dark:bg-primary/20 px-3 py-1 text-sm text-primary dark:text-primary-foreground"
-            >
-              Narxlar
-            </motion.div>
-            <motion.h2
-              initial={{ opacity: 0, y: 20 }}
-              animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
-              transition={{ duration: 0.5, delay: 0.1 }}
-              className="text-3xl font-bold tracking-tighter sm:text-5xl bg-clip-text text-transparent bg-gradient-to-r from-gray-900 to-gray-700 dark:from-gray-100 dark:to-gray-300"
-            >
-              Qulay narxlar
-            </motion.h2>
-            <motion.p
-              initial={{ opacity: 0, y: 20 }}
-              animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
-              transition={{ duration: 0.5, delay: 0.2 }}
-              className="max-w-[900px] text-muted-foreground md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed"
-            >
-              Har qanday hajmdagi o'quv markazi uchun mos tarif rejasi
-            </motion.p>
-          </div>
-        </motion.div>
-        <div className="grid grid-cols-1 gap-6 md:grid-cols-3 lg:gap-8 mt-12">
+    <section className="w-full bg-gray-50 dark:bg-gray-900/50" id="narxlar" ref={sectionRef}>
+     
+        <div className="grid grid-cols-1 gap-6 md:grid-cols-3 lg:gap-8">
           {plans.map((plan, index) => (
             <motion.div
               key={index}
               initial={{ opacity: 0, y: 20 }}
               animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
               transition={{ duration: 0.5, delay: 0.2 + index * 0.1 }}
-              className={`flex flex-col rounded-xl p-6 ${
+              className={`group flex flex-col rounded-xl p-6 transition-all duration-300 hover:shadow-2xl hover:scale-105 ${
                 plan.popular
-                  ? "bg-primary text-primary-foreground shadow-2xl shadow-primary/40 scale-105 z-10"
-                  : "bg-white dark:bg-gray-800 shadow-xl"
+                  ? "bg-primary text-primary-foreground shadow-2xl shadow-primary/50 scale-105 z-10 hover:shadow-3xl hover:shadow-primary/60 hover:bg-primary/90 hover:scale-110"
+                  : "bg-white dark:bg-gray-800 shadow-xl hover:shadow-2xl hover:shadow-gray-300/50 dark:hover:shadow-gray-600/50 hover:bg-primary hover:text-primary-foreground hover:shadow-primary/50 hover:scale-110"
               }`}
             >
-              {plan.popular && (
-                <div className="absolute top-0 right-0 -mt-2 -mr-2">
-                  <div className="rounded-full bg-green-500 px-3 py-1 text-xs font-medium text-white shadow-sm">
-                    Eng mashhur
-                  </div>
-                </div>
-              )}
               <div className="mb-4">
                 <h3 className="text-xl font-bold">{plan.name}</h3>
-                <p className={`text-sm ${plan.popular ? "text-primary-foreground/80" : "text-muted-foreground"}`}>
+                <p className={`text-sm ${plan.popular ? "text-primary-foreground/80" : "text-muted-foreground group-hover:text-primary-foreground/80"}`}>
                   {plan.description}
                 </p>
               </div>
               <div className="mb-4 flex items-baseline">
                 <span className="text-3xl font-bold">{plan.price}</span>
                 <span
-                  className={`ml-1 text-sm ${plan.popular ? "text-primary-foreground/80" : "text-muted-foreground"}`}
+                  className={`ml-1 text-sm ${plan.popular ? "text-primary-foreground/80" : "text-muted-foreground group-hover:text-primary-foreground/80"}`}
                 >
                   {plan.period}
                 </span>
@@ -139,19 +99,19 @@ export default function PricingSection() {
               <ul className="mb-6 space-y-2">
                 {plan.features.map((feature, featureIndex) => (
                   <li key={featureIndex} className="flex items-center gap-2">
-                    <Check className={`h-4 w-4 ${plan.popular ? "text-primary-foreground" : "text-primary"}`} />
-                    <span className={`text-sm ${plan.popular ? "text-primary-foreground" : "dark:text-gray-300"}`}>
+                    <Check className={`h-4 w-4 ${plan.popular ? "text-primary-foreground" : "text-primary group-hover:text-primary-foreground"}`} />
+                    <span className={`text-sm ${plan.popular ? "text-primary-foreground" : "dark:text-gray-300 group-hover:text-primary-foreground"}`}>
                       {feature}
                     </span>
                   </li>
                 ))}
               </ul>
-              <div className="mt-auto">
+              <div className="mt-auto mb-4">
                 <Button
                   className={`w-full ${
                     plan.popular
                       ? "bg-white text-primary hover:bg-gray-100"
-                      : "bg-primary text-primary-foreground hover:bg-primary/90"
+                      : "bg-primary text-primary-foreground hover:bg-primary/90 group-hover:bg-white group-hover:text-primary"
                   }`}
                 >
                   {plan.cta}
@@ -159,7 +119,6 @@ export default function PricingSection() {
               </div>
             </motion.div>
           ))}
-        </div>
       </div>
     </section>
   )

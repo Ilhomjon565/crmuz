@@ -188,7 +188,7 @@ export default function InternalLinks({
       { 
         name: 'Xususiyatlar', 
         href: '/features', 
-        description: 'Bizning xizmatlar',
+        description: 'Bizning Xizmatlar',
         icon: Star,
         color: 'from-blue-500 to-cyan-500',
         bgColor: 'from-blue-50 to-cyan-50 dark:from-blue-950/30 dark:to-cyan-950/30'

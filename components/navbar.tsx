@@ -58,10 +58,10 @@ export default function Navbar() {
           className="hidden md:flex items-center gap-6"
         >
           {[
-            { name: "Xizmatlar", href: "#xizmatlar" },
-            { name: "Ustunliklar", href: "#ustunliklar" },
-            { name: "Narxlar", href: "#narxlar" },
-            { name: "Bog'lanish", href: "#boglanish" },
+            { name: "Xizmatlar", href: "/features" },
+            { name: "Narxlar", href: "/pricing" },
+            { name: "Yordam", href: "/support" },
+            { name: "Bog'lanish", href: "/contact" },
           ].map((item, index) => (
             <motion.div
               key={item.name}
@@ -125,10 +125,10 @@ export default function Navbar() {
             <SheetContent side="right" className="backdrop-blur-lg bg-background/90">
               <nav className="flex flex-col gap-4 mt-8">
                 {[
-                  { name: "Xizmatlar", href: "#xizmatlar" },
-                  { name: "Ustunliklar", href: "#ustunliklar" },
-                  { name: "Narxlar", href: "#narxlar" },
-                  { name: "Bog'lanish", href: "#boglanish" },
+                  { name: "Xizmatlar", href: "/features" },
+                  { name: "Narxlar", href: "/pricing" },
+                  { name: "Yordam", href: "/support" },
+                  { name: "Bog'lanish", href: "/contact" },
                 ].map((item, index) => (
                   <motion.div
                     key={item.name}

@@ -25,8 +25,8 @@ export default function FeaturesGrid() {
     },
     {
       icon: Users,
-      title: "O'quvchilar boshqaruvi",
-      description: "O'quvchilar ma'lumotlarini saqlang va ularning o'zlashtirish darajasini kuzating",
+      title: "Talabalar boshqaruvi",
+      description: "talabalar ma'lumotlarini saqlang va ularning o'zlashtirish darajasini kuzating",
       color: "from-purple-600 to-pink-600",
       shadowColor: "shadow-purple-600/20 dark:shadow-purple-900/20",
     },
@@ -40,7 +40,7 @@ export default function FeaturesGrid() {
     {
       icon: MessageSquare,
       title: "Ichki chat",
-      description: "O'qituvchilar va o'quvchilar bilan ichki chat orqali muloqot qiling",
+      description: "O'qituvchilar va talabalar bilan ichki chat orqali muloqot qiling",
       color: "from-rose-600 to-red-600",
       shadowColor: "shadow-rose-600/20 dark:shadow-rose-900/20",
     },
@@ -54,7 +54,7 @@ export default function FeaturesGrid() {
     {
       icon: BookOpen,
       title: "O'quv materiallari",
-      description: "O'quv materiallarini saqlang va o'quvchilar bilan ulashing",
+      description: "O'quv materiallarini saqlang va talabalar bilan ulashing",
       color: "from-orange-600 to-amber-600",
       shadowColor: "shadow-orange-600/20 dark:shadow-orange-900/20",
     },
@@ -68,7 +68,7 @@ export default function FeaturesGrid() {
     {
       icon: Clock,
       title: "Davomat nazorati",
-      description: "O'quvchilar davomatini avtomatik ravishda kuzatib boring",
+      description: "Talabalar davomatini avtomatik ravishda kuzatib boring",
       color: "from-yellow-600 to-lime-600",
       shadowColor: "shadow-yellow-600/20 dark:shadow-yellow-900/20",
     },
@@ -91,7 +91,7 @@ export default function FeaturesGrid() {
 
   return (
     <section
-      className="py-20 md:py-32 bg-gradient-to-b from-indigo-50 to-white dark:from-indigo-950/30 dark:to-slate-900"
+      className="from-indigo-50 to-white dark:from-indigo-950/30 dark:to-slate-900"
       id="features"
       ref={sectionRef}
     >
@@ -102,16 +102,6 @@ export default function FeaturesGrid() {
           transition={{ duration: 0.5 }}
           className="text-center mb-16 space-y-4"
         >
-          <div className="inline-flex items-center px-3 py-1 rounded-full bg-indigo-100 dark:bg-indigo-900/50 text-indigo-600 dark:text-indigo-300 text-sm font-medium shadow-lg shadow-indigo-600/10 dark:shadow-indigo-500/20">
-            <span className="flex h-2 w-2 rounded-full bg-indigo-600 dark:bg-indigo-400 mr-2"></span>
-            Xizmatlar
-          </div>
-          <h2 className="text-3xl md:text-4xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-indigo-600 to-blue-500 dark:from-indigo-400 dark:to-blue-300 drop-shadow-sm">
-            Bizning xizmatlarimiz
-          </h2>
-          <p className="text-lg text-slate-700 dark:text-slate-200 max-w-2xl mx-auto font-medium">
-            EduCRM tizimi orqali o'quv markazingizni samarali boshqaring
-          </p>
         </motion.div>
 
         <motion.div
@@ -134,13 +124,15 @@ export default function FeaturesGrid() {
                 className={`relative flex flex-col p-8 h-full bg-white dark:bg-slate-800 rounded-2xl shadow-xl ${feature.shadowColor} border border-slate-100 dark:border-slate-700 overflow-hidden z-10`}
               >
                 <div className={`absolute top-0 left-0 h-2 w-full bg-gradient-to-r ${feature.color}`}></div>
+                <div className="flex items-center gap-4">
                 <div
                   className={`p-4 rounded-xl bg-gradient-to-r ${feature.color} text-white mb-6 self-start shadow-lg ${feature.shadowColor}`}
                 >
                   <feature.icon className="h-6 w-6" />
                 </div>
-                <h3 className="text-xl font-bold mb-2 text-slate-800 dark:text-white">{feature.title}</h3>
-                <p className="text-slate-600 dark:text-slate-300 text-sm">{feature.description}</p>
+                <h3 className="text-xl font-bold mb-2 text-slate-800 dark:text-white uppercase">{feature.title}</h3>
+                </div>
+                <p className="text-slate-600 dark:text-slate-300 text-lg">{feature.description}</p>
               </div>
             </motion.div>
           ))}

@@ -16,7 +16,7 @@ export const metadata: Metadata = {
   ].join(", "),
   openGraph: {
     title: "Foydalanish shartlari - EduCRM O'quv Markazlarni Avtomatlashtiruvchi Tizim",
-    description: "EduCRM foydalanish shartlari va xizmatlar qoidalari",
+    description: "EduCRM foydalanish shartlari va Xizmatlar qoidalari",
     url: "https://educrm.uz/terms",
   },
   alternates: {
@@ -36,7 +36,7 @@ export default function TermsPage() {
               Foydalanish shartlari
             </h1>
             <p className="text-xl text-slate-600 dark:text-slate-300 max-w-3xl mx-auto">
-              EduCRM foydalanish shartlari va xizmatlar qoidalari
+              EduCRM foydalanish shartlari va Xizmatlar qoidalari
             </p>
           </div>
           
@@ -45,11 +45,11 @@ export default function TermsPage() {
               <div className="prose prose-lg dark:prose-invert max-w-none">
                 <h2>1. Umumiy qoidalar</h2>
                 <p>
-                  EduCRM xizmatlaridan foydalanish orqali siz bu foydalanish shartlarini qabul qilasiz. Agar siz bu shartlar bilan rozi bo'lmasangiz, xizmatlardan foydalanmang.
+                  EduCRM Xizmatlaridan foydalanish orqali siz bu foydalanish shartlarini qabul qilasiz. Agar siz bu shartlar bilan rozi bo'lmasangiz, Xizmatlardan foydalanmang.
                 </p>
                 
                 <h2>2. Xizmatlar tavsifi</h2>
-                <p>EduCRM quyidagi xizmatlarni taqdim etadi:</p>
+                <p>EduCRM quyidagi Xizmatlarni taqdim etadi:</p>
                 <ul>
                   <li>O'quvchilar boshqaruvi</li>
                   <li>O'qituvchilar nazorati</li>
@@ -97,11 +97,11 @@ export default function TermsPage() {
                   <li>Kutilmagan texnik muammolar</li>
                   <li>Internet uzilishlari</li>
                   <li>Foydalanuvchi xatolari</li>
-                  <li>Uchinchi tomon xizmatlari uzilishi</li>
+                  <li>Uchinchi tomon Xizmatlari uzilishi</li>
                 </ul>
                 
                 <h2>8. Xizmatlarni to'xtatish</h2>
-                <p>Kompaniya quyidagi hollarda xizmatlarni to'xtatishi mumkin:</p>
+                <p>Kompaniya quyidagi hollarda Xizmatlarni to'xtatishi mumkin:</p>
                 <ul>
                   <li>Foydalanuvchi shartlarni buzganida</li>
                   <li>To'lov amalga oshirilmaganida</li>

@@ -43,7 +43,7 @@ export default function EnhancedFeaturesSection() {
   }
 
   return (
-    <section className="w-full py-12 md:py-24 lg:py-32 relative" id="xizmatlar" ref={sectionRef}>
+    <section className="w-full py-12 md:py-24 lg:py-32 relative" id="Xizmatlar" ref={sectionRef}>
       <div className="container px-4 md:px-6">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -66,7 +66,7 @@ export default function EnhancedFeaturesSection() {
               transition={{ duration: 0.5, delay: 0.1 }}
               className="text-3xl font-bold tracking-tighter sm:text-5xl bg-clip-text text-transparent bg-gradient-to-r from-gray-900 to-gray-700 dark:from-gray-100 dark:to-gray-300"
             >
-              Bizning xizmatlarimiz
+              Bizning Xizmatlarimiz
             </motion.h2>
             <motion.p
               initial={{ opacity: 0, y: 20 }}

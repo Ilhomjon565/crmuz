@@ -53,7 +53,7 @@ export default function BlogSection() {
 
   return (
     <section
-      className="py-20 md:py-32 bg-gradient-to-b from-blue-50 to-white dark:from-blue-950/30 dark:to-slate-900"
+      className="py-12 md:py-32 bg-gradient-to-b from-blue-50 to-white dark:from-blue-950/30 dark:to-slate-900"
       id="blog"
       ref={sectionRef}
     >
@@ -62,7 +62,7 @@ export default function BlogSection() {
           initial={{ opacity: 0, y: 20 }}
           animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
           transition={{ duration: 0.5 }}
-          className="text-center mb-16 space-y-4"
+          className="text-center mb-2 space-y-4"
         >
           <div className="inline-flex items-center px-3 py-1 rounded-full bg-blue-100 dark:bg-blue-900/50 text-blue-600 dark:text-blue-300 text-sm font-medium shadow-lg shadow-blue-600/10 dark:shadow-blue-500/20">
             <span className="flex h-2 w-2 rounded-full bg-blue-600 dark:bg-blue-400 mr-2"></span>
