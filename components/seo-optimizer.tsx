@@ -193,8 +193,8 @@ export default function SEOOptimizer({
 
   useEffect(() => {
     // Add page view tracking
-    if (typeof window !== 'undefined' && window.gtag) {
-      window.gtag('config', 'GA_MEASUREMENT_ID', {
+    if (typeof window !== 'undefined' && window.gtag && process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID) {
+      window.gtag('config', process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID, {
         page_title: title || 'EduCRM',
         page_location: url || window.location.href,
         custom_map: {

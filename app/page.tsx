@@ -15,36 +15,15 @@ import SEOOptimizer from "@/components/seo-optimizer"
 import KeywordOptimizer from "@/components/keyword-optimizer"
 import InternalLinks from "@/components/internal-links"
 import { Metadata } from "next"
+import { SEO_TEXTS } from "@/lib/text-constants"
 
 export const metadata: Metadata = {
-  title: "EduCRM - O'quv Markazlarni Avtomatlashtiruvchi Tizim | Education CRM",
-  description: "O'zbekistondagi o'quv markazlar uchun professional CRM tizimi. O'quvchilar, o'qituvchilar va to'lovlarni nazorat qilish. EduCRM.uz - ta'lim sohasida eng yaxshi yechim.",
-  keywords: [
-    "o'quv markazlarni avtomatlashtiruvchi tizim",
-    "o'quv markazni nazorat qiluvchi tizim", 
-    "o'zbekcha o'quv markaz nazorat qiluvchi tizim",
-    "educrm.uz",
-    "education crm",
-    "crm edu",
-    "edu uz",
-    "o'quv markaz crm",
-    "ta'lim crm",
-    "maktab boshqaruvi",
-    "o'quvchilar bazasi",
-    "o'qituvchilar nazorati",
-    "to'lovlar boshqaruvi",
-    "o'quv markaz dasturi",
-    "ta'lim tizimi",
-    "uzbekistan education",
-    "school management system",
-    "student management",
-    "teacher management",
-    "payment tracking",
-    "educational software"
-  ].join(", "),
+  title: SEO_TEXTS.title,
+  description: SEO_TEXTS.description,
+  keywords: SEO_TEXTS.keywords.join(", "),
   openGraph: {
-    title: "EduCRM - O'quv Markazlarni Avtomatlashtiruvchi Tizim",
-    description: "O'zbekistondagi o'quv markazlar uchun professional CRM tizimi. O'quvchilar, o'qituvchilar va to'lovlarni nazorat qilish.",
+    title: SEO_TEXTS.title,
+    description: SEO_TEXTS.description,
     url: "https://educrm.uz",
     siteName: "EduCRM.uz",
     images: [
@@ -52,7 +31,7 @@ export const metadata: Metadata = {
         url: "/og-image.jpg",
         width: 1200,
         height: 630,
-        alt: "EduCRM - O'quv Markazlarni Avtomatlashtiruvchi Tizim",
+        alt: SEO_TEXTS.title,
       },
     ],
     locale: "uz_UZ",
@@ -60,8 +39,8 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "EduCRM - O'quv Markazlarni Avtomatlashtiruvchi Tizim",
-    description: "O'zbekistondagi o'quv markazlar uchun professional CRM tizimi",
+    title: SEO_TEXTS.title,
+    description: SEO_TEXTS.description,
     images: ["/twitter-image.jpg"],
     creator: "@educrm_uz",
   },

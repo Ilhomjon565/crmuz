@@ -4,13 +4,14 @@ import { useState, useEffect } from 'react'
 import { X, Gift, Calendar, Star, Sparkles, Zap, CheckCircle } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import { Card, CardContent } from '@/components/ui/card'
+import { FREE_ANNOUNCEMENT_TEXTS } from '@/lib/text-constants'
 
 export default function FreeAnnouncement() {
   const [isVisible, setIsVisible] = useState(false)
   const [isExpanded, setIsExpanded] = useState(false)
 
   useEffect(() => {
-    // Show announcement for everyone every time they visit
+    // Show announcement for everyone every time they visit (no cookies saved)
     const timer = setTimeout(() => {
       setIsVisible(true)
       setIsExpanded(true)
@@ -61,18 +62,18 @@ export default function FreeAnnouncement() {
                 <div className="flex items-center justify-center gap-1 sm:gap-2 mb-2 sm:mb-4">
                   <Sparkles className="h-4 w-4 sm:h-6 sm:w-6 text-yellow-500 animate-bounce" />
                   <h2 className="text-xl sm:text-2xl lg:text-4xl font-bold bg-gradient-to-r from-green-600 via-blue-600 to-purple-600 bg-clip-text text-transparent">
-                    🎉 KATTA YANGILIK! 🎉
+                    {FREE_ANNOUNCEMENT_TEXTS.title}
                   </h2>
                   <Sparkles className="h-4 w-4 sm:h-6 sm:w-6 text-yellow-500 animate-bounce" />
                 </div>
                 <p className="text-sm sm:text-lg lg:text-xl text-gray-700 mb-1 sm:mb-2">
-                  EduCRM tizimi <span className="font-bold text-green-600 text-base sm:text-xl lg:text-2xl">2025 yil oxirigacha</span>
+                  {FREE_ANNOUNCEMENT_TEXTS.subtitle} <span className="font-bold text-green-600 text-base sm:text-xl lg:text-2xl">{FREE_ANNOUNCEMENT_TEXTS.period}</span>
                 </p>
                 <p className="text-lg sm:text-xl lg:text-2xl font-bold text-green-600 mb-2 sm:mb-4">
-                  <span className="bg-green-100 px-2 sm:px-3 lg:px-4 py-1 sm:py-2 rounded-lg text-sm sm:text-base lg:text-lg">TEKIN</span> va <span className="bg-blue-100 px-2 sm:px-3 lg:px-4 py-1 sm:py-2 rounded-lg text-sm sm:text-base lg:text-lg">OCHIQ</span>!
+                  <span className="bg-green-100 px-2 sm:px-3 lg:px-4 py-1 sm:py-2 rounded-lg text-sm sm:text-base lg:text-lg">{FREE_ANNOUNCEMENT_TEXTS.free}</span> va <span className="bg-blue-100 px-2 sm:px-3 lg:px-4 py-1 sm:py-2 rounded-lg text-sm sm:text-base lg:text-lg">{FREE_ANNOUNCEMENT_TEXTS.open}</span>!
                 </p>
                 <div className="bg-gradient-to-r from-green-500 to-blue-500 text-white px-3 sm:px-4 lg:px-6 py-2 sm:py-3 rounded-full inline-block">
-                  <span className="font-bold text-sm sm:text-base">🎁 Barcha funksiyalar bepul!</span>
+                  <span className="font-bold text-sm sm:text-base">{FREE_ANNOUNCEMENT_TEXTS.allFeatures}</span>
                 </div>
               </div>
 
@@ -108,17 +109,6 @@ export default function FreeAnnouncement() {
                   <p className="text-xs sm:text-sm lg:text-base text-gray-600">Ro'yxatdan o'ting va darhol CRM tizimidan foydalanishni boshlang</p>
                 </div>
               </div>
-
-              {/* Special offer highlight */}
-              <div className="bg-gradient-to-r from-yellow-400 to-orange-500 text-white p-3 sm:p-4 lg:p-6 rounded-xl mb-4 sm:mb-6 lg:mb-8 text-center relative z-10">
-                <div className="flex items-center justify-center gap-2 sm:gap-3 mb-1 sm:mb-2">
-                  <Star className="h-6 w-6 sm:h-8 sm:w-8 animate-pulse" />
-                  <h3 className="text-lg sm:text-xl lg:text-2xl font-bold">MAXSUS TAKLIF!</h3>
-                  <Star className="h-6 w-6 sm:h-8 sm:w-8 animate-pulse" />
-                </div>
-                <p className="text-sm sm:text-base lg:text-lg">500+ o'quv markazlari allaqachon foydalanmoqda. Siz ham qo'shiling!</p>
-              </div>
-
               {/* Action buttons */}
               <div className="flex flex-col sm:flex-row gap-2 sm:gap-3 lg:gap-4 relative z-10">
                 <Button 
@@ -132,7 +122,7 @@ export default function FreeAnnouncement() {
                   onClick={handleMinimize}
                   className="flex-1 border-2 border-gray-300 hover:border-gray-400 font-semibold py-2 sm:py-3 lg:py-4 text-sm sm:text-base lg:text-lg"
                 >
-                  Kichik qilish
+                  {FREE_ANNOUNCEMENT_TEXTS.minimizeButton}
                 </Button>
               </div>
             </CardContent>

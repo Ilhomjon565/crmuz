@@ -6,6 +6,7 @@ import { Play, ChevronRight } from 'lucide-react'
 import DashboardPreview from "@/components/dashboard-preview"
 import CanvasBackground from "@/components/canvas-background"
 import { motion } from "framer-motion"
+import { HERO_TEXTS, SOCIAL_PROOF } from "@/lib/text-constants"
 
 export default function HeroSection() {
   return (
@@ -25,7 +26,7 @@ export default function HeroSection() {
           >
             <div className="inline-flex items-center px-3 py-1 rounded-full bg-indigo-100 dark:bg-indigo-900/50 text-indigo-600 dark:text-indigo-300 text-sm font-medium shadow-lg shadow-indigo-600/10 dark:shadow-indigo-500/20">
               <span className="flex h-2 w-2 rounded-full bg-indigo-600 dark:bg-indigo-400 mr-2"></span>
-              Ta'lim markazlari uchun #1 CRM platforma
+              {HERO_TEXTS.badge}
             </div>
 
             <motion.h1
@@ -34,7 +35,7 @@ export default function HeroSection() {
               transition={{ delay: 0.2, duration: 0.7 }}
               className="text-5xl md:text-6xl lg:text-7xl font-bold tracking-tight bg-clip-text text-transparent bg-gradient-to-r from-indigo-600 to-blue-500 dark:from-indigo-400 dark:to-blue-300 drop-shadow-sm"
             >
-              O'quv Markazlarni Avtomatlashtiruvchi Tizim
+              {HERO_TEXTS.title}
             </motion.h1>
 
             <motion.p
@@ -43,7 +44,7 @@ export default function HeroSection() {
               transition={{ delay: 0.3, duration: 0.7 }}
               className="text-xl text-slate-700 dark:text-slate-200 max-w-xl font-medium drop-shadow-sm"
             >
-              O'zbekistondagi o'quv markazlar uchun professional CRM tizimi. O'quvchilar, o'qituvchilar va to'lovlarni nazorat qilish. EduCRM.uz - ta'lim sohasida eng yaxshi yechim.
+              {HERO_TEXTS.description}
             </motion.p>
 
             <motion.div
@@ -62,7 +63,7 @@ export default function HeroSection() {
                   rel="noopener noreferrer"
                   className="flex items-center"
                 >
-                  Hozir boshlash
+                  {HERO_TEXTS.startButton}
                   <ChevronRight className="ml-2 h-5 w-5 transition-transform group-hover:translate-x-1" />
                 </Link>
               </Button>
@@ -73,7 +74,7 @@ export default function HeroSection() {
                 className="border-indigo-200 dark:border-indigo-800 text-indigo-600 dark:text-indigo-300 hover:bg-indigo-50 dark:hover:bg-indigo-900/30 rounded-full h-14 px-8 shadow-lg"
               >
                 <Link href="#demo" className="flex items-center">
-                  Demo ko'rish
+                  {HERO_TEXTS.demoButton}
                   <Play className="ml-2 h-4 w-4" />
                 </Link>
               </Button>
@@ -86,21 +87,22 @@ export default function HeroSection() {
               className="flex items-center gap-4 pt-4"
             >
               <div className="flex -space-x-2">
-                <div className="w-8 h-8 rounded-full bg-indigo-400 flex items-center justify-center text-white text-xs font-medium ring-2 ring-white dark:ring-slate-900">
-                  A
-                </div>
-                <div className="w-8 h-8 rounded-full bg-blue-400 flex items-center justify-center text-white text-xs font-medium ring-2 ring-white dark:ring-slate-900">
-                  B
-                </div>
-                <div className="w-8 h-8 rounded-full bg-purple-400 flex items-center justify-center text-white text-xs font-medium ring-2 ring-white dark:ring-slate-900">
-                  C
-                </div>
-                <div className="w-8 h-8 rounded-full bg-indigo-600 flex items-center justify-center text-white text-xs font-medium ring-2 ring-white dark:ring-slate-900">
-                  +
-                </div>
+                {SOCIAL_PROOF.users.map((user, index) => (
+                  <div 
+                    key={index}
+                    className={`w-8 h-8 rounded-full flex items-center justify-center text-white text-xs font-medium ring-2 ring-white dark:ring-slate-900 ${
+                      index === 0 ? 'bg-indigo-400' :
+                      index === 1 ? 'bg-blue-400' :
+                      index === 2 ? 'bg-purple-400' :
+                      'bg-indigo-600'
+                    }`}
+                  >
+                    {user}
+                  </div>
+                ))}
               </div>
               <p className="text-sm text-slate-700 dark:text-slate-300 font-medium">
-                <span className="font-semibold">500+</span> o'quv markazlari ishonch bildirgan
+                {SOCIAL_PROOF.trustMessage}
               </p>
             </motion.div>
           </motion.div>

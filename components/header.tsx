@@ -8,6 +8,7 @@ import { useTheme } from "next-themes"
 import { Menu, Moon, Sun, Sparkles } from 'lucide-react'
 import { motion } from "framer-motion"
 import Image from "next/image"
+import { NAVIGATION_TEXTS, NAVIGATION_ITEMS } from "@/lib/text-constants"
 
 export default function Header() {
   const { theme, setTheme } = useTheme()
@@ -51,12 +52,7 @@ export default function Header() {
           transition={{ delay: 0.3 }}
           className="hidden md:flex items-center gap-8"
         >
-          {[
-            { name: "Xizmatlar", href: "#features" },
-            { name: "Narxlar", href: "#pricing" },
-            { name: "Blog", href: "#blog" },
-            { name: "Yordam", href: "#support" },
-          ].map((item, index) => (
+          {NAVIGATION_ITEMS.map((item, index) => (
             <motion.div
               key={item.name}
               initial={{ opacity: 0, y: -10 }}
@@ -79,13 +75,13 @@ export default function Header() {
             <Button
               variant="ghost"
               size="icon"
-              aria-label="Mavzuni o'zgartirish"
+              aria-label={NAVIGATION_TEXTS.themeToggle}
               className="mr-2 relative"
               onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
             >
               <Sun className="h-5 w-5 rotate-0 scale-100 transition-all dark:-rotate-90 dark:scale-0" />
               <Moon className="absolute h-5 w-5 rotate-90 scale-0 transition-all dark:rotate-0 dark:scale-100" />
-              <span className="sr-only">Mavzuni o'zgartirish</span>
+              <span className="sr-only">{NAVIGATION_TEXTS.themeToggle}</span>
             </Button>
           </motion.div>
 
@@ -107,7 +103,7 @@ export default function Header() {
                 className="flex items-center gap-1"
               >
                 <Sparkles className="h-4 w-4 mr-1" />
-                Demo versiya
+                {NAVIGATION_TEXTS.demo}
               </Link>
             </Button>
           </motion.div>
@@ -116,17 +112,12 @@ export default function Header() {
             <SheetTrigger asChild>
               <Button variant="outline" size="icon" className="md:hidden">
                 <Menu className="h-5 w-5" />
-                <span className="sr-only">Menyuni ochish</span>
+                <span className="sr-only">{NAVIGATION_TEXTS.menu}</span>
               </Button>
             </SheetTrigger>
             <SheetContent side="right" className="backdrop-blur-lg bg-white/90 dark:bg-slate-950/90">
               <nav className="flex flex-col gap-4 mt-8">
-                {[
-                  { name: "Xizmatlar", href: "#features" },
-                  { name: "Narxlar", href: "#pricing" },
-                  { name: "Blog", href: "#blog" },
-                  { name: "Yordam", href: "#support" },
-                ].map((item, index) => (
+                {NAVIGATION_ITEMS.map((item, index) => (
                   <motion.div
                     key={item.name}
                     initial={{ opacity: 0, x: 20 }}
@@ -156,7 +147,7 @@ export default function Header() {
                       className="flex items-center gap-1"
                     >
                       <Sparkles className="h-4 w-4 mr-1" />
-                      Demo versiya
+                      {NAVIGATION_TEXTS.demo}
                     </Link>
                   </Button>
                 </motion.div>

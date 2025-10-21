@@ -5,6 +5,7 @@ import { motion, useInView } from "framer-motion"
 import { Button } from "@/components/ui/button"
 import Image from "next/image"
 import { ArrowRight } from 'lucide-react'
+import { FREE_TRIAL_TEXTS } from "@/lib/text-constants"
 
 export default function FreeTrialSection() {
   const sectionRef = useRef(null)
@@ -35,19 +36,13 @@ export default function FreeTrialSection() {
                   animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
                   transition={{ duration: 0.5, delay: 0.2 }}
                 >
-                  <h2 className="text-3xl md:text-4xl font-bold mb-6">Bepul sinov muddatini boshlang</h2>
+                  <h2 className="text-3xl md:text-4xl font-bold mb-6">{FREE_TRIAL_TEXTS.title}</h2>
                   <p className="text-white/80 mb-8 text-lg">
-                    EduCRM tizimining to'liq imkoniyatlaridan foydalaning va biznesingizni yangi bosqichga olib chiqing. Bugun ro'yxatdan o'ting!
+                    {FREE_TRIAL_TEXTS.description}
                   </p>
 
                   <ul className="space-y-4 mb-8">
-                    {[
-                      "14 kunlik bepul sinov muddati",
-                      "Hech qanday kredit karta ma'lumotlari talab qilinmaydi",
-                      "Cheklanmagan o'quvchilar soni",
-                      "To'liq funksionallik",
-                      "24/7 qo'llab-quvvatlash",
-                    ].map((feature, index) => (
+                    {FREE_TRIAL_TEXTS.features.map((feature, index) => (
                       <motion.li
                         key={index}
                         initial={{ opacity: 0, x: -20 }}

@@ -109,7 +109,7 @@ export function usePerformanceMonitoring() {
     // Monitor user interactions
     const handleUserInteraction = () => {
       // Track user engagement
-      if (typeof window !== 'undefined' && window.gtag) {
+      if (typeof window !== 'undefined' && window.gtag && process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID) {
         window.gtag('event', 'user_interaction', {
           event_category: 'engagement',
           event_label: 'page_interaction'

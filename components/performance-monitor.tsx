@@ -14,7 +14,7 @@ export default function PerformanceMonitor() {
             console.log('LCP:', lcp)
             
             // Send to analytics
-            if (typeof window !== 'undefined' && window.gtag) {
+            if (typeof window !== 'undefined' && window.gtag && process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID) {
               window.gtag('event', 'web_vitals', {
                 event_category: 'Web Vitals',
                 event_label: 'LCP',
@@ -28,7 +28,7 @@ export default function PerformanceMonitor() {
             const fid = entry.processingStart - entry.startTime
             console.log('FID:', fid)
             
-            if (typeof window !== 'undefined' && window.gtag) {
+            if (typeof window !== 'undefined' && window.gtag && process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID) {
               window.gtag('event', 'web_vitals', {
                 event_category: 'Web Vitals',
                 event_label: 'FID',
@@ -42,7 +42,7 @@ export default function PerformanceMonitor() {
             const cls = entry.value
             console.log('CLS:', cls)
             
-            if (typeof window !== 'undefined' && window.gtag) {
+            if (typeof window !== 'undefined' && window.gtag && process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID) {
               window.gtag('event', 'web_vitals', {
                 event_category: 'Web Vitals',
                 event_label: 'CLS',
@@ -69,7 +69,7 @@ export default function PerformanceMonitor() {
         console.log('DOM Content Loaded:', domContentLoaded)
         
         // Send to analytics
-        if (typeof window !== 'undefined' && window.gtag) {
+        if (typeof window !== 'undefined' && window.gtag && process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID) {
           window.gtag('event', 'timing_complete', {
             name: 'page_load',
             value: Math.round(pageLoadTime)
@@ -91,7 +91,7 @@ export default function PerformanceMonitor() {
       if (interactionCount === 1) {
         console.log('First user interaction')
         
-        if (typeof window !== 'undefined' && window.gtag) {
+        if (typeof window !== 'undefined' && window.gtag && process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID) {
           window.gtag('event', 'user_interaction', {
             event_category: 'engagement',
             event_label: 'first_interaction'
@@ -126,7 +126,7 @@ export default function PerformanceMonitor() {
       console.log('Time on page:', timeOnPage)
       
       // Send to analytics
-      if (typeof window !== 'undefined' && window.gtag) {
+      if (typeof window !== 'undefined' && window.gtag && process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID) {
         window.gtag('event', 'timing_complete', {
           name: 'time_on_page',
           value: Math.round(timeOnPage / 1000)
@@ -138,7 +138,7 @@ export default function PerformanceMonitor() {
     const handleError = (event: ErrorEvent) => {
       console.error('JavaScript Error:', event.error)
       
-      if (typeof window !== 'undefined' && window.gtag) {
+      if (typeof window !== 'undefined' && window.gtag && process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID) {
         window.gtag('event', 'exception', {
           description: event.error?.message || 'Unknown error',
           fatal: false
