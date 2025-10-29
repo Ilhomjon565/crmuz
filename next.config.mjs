@@ -47,6 +47,12 @@ const nextConfig = {
             key: 'Permissions-Policy',
             value: 'camera=(), microphone=(), geolocation=()',
           },
+          {
+            key: 'Access-Control-Allow-Origin',
+            value: process.env.NODE_ENV === 'production' 
+              ? 'https://educrm.uz, https://teacher.educrm.uz, https://manager.educrm.uz, https://director.educrm.uz'
+              : '*',
+          },
         ],
       },
         {

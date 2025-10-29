@@ -17,8 +17,20 @@ export default function FreeAnnouncement() {
       setIsExpanded(true)
     }, 1500)
     
-    return () => clearTimeout(timer)
-  }, [])
+    // ESC tugmasi bosilganda modalni yopish
+    const handleEscKey = (event: KeyboardEvent) => {
+      if (event.key === 'Escape' && isExpanded) {
+        handleClose()
+      }
+    }
+    
+    document.addEventListener('keydown', handleEscKey)
+    
+    return () => {
+      clearTimeout(timer)
+      document.removeEventListener('keydown', handleEscKey)
+    }
+  }, [isExpanded])
 
   const handleClose = () => {
     setIsVisible(false)

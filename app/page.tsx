@@ -5,6 +5,7 @@ import Footer from "@/components/footer"
 // Main Page Sections
 import HeroSection from "@/components/hero-section"
 import ContactSection from "@/components/contact-section"
+import AdminAccessSection from "@/components/admin-access-section"
 
 // Statistics and Metrics
 import StatsSection from "@/components/stats-section"
@@ -79,8 +80,8 @@ export default function Home() {
       <SEOOptimizer pageType="home" />
       <KeywordOptimizer pageType="home" />
       
-      {/* Free Announcement Modal */}
-      <FreeAnnouncement />
+      {/* Free Announcement Modal - Disabled */}
+      {/* <FreeAnnouncement /> */}
       
       {/* Global Background Effects */}
       <AnimatedBackground />
@@ -95,6 +96,9 @@ export default function Home() {
 
         {/* Main Hero Section with Enhanced Animations */}
         <HeroSection />
+
+        {/* Admin Access Panels */}
+        <AdminAccessSection />
 
         {/* Statistics and Performance Metrics */}
         <CreativeStatsSection />

@@ -177,7 +177,7 @@ export default function EnhancedHeroSection() {
                 size="lg"
                 className="bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 text-white shadow-lg shadow-blue-600/20 dark:shadow-blue-900/30"
               >
-                <Link href="#boglanish" className="flex items-center gap-1">
+                <Link href="https://director.educrm.uz/register" target="_blank" className="flex items-center gap-1">
                   Boshlash
                   <ChevronRight className="h-4 w-4 ml-1" />
                 </Link>

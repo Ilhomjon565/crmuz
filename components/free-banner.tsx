@@ -3,6 +3,7 @@
 import { useState, useEffect } from 'react'
 import { Gift, Star, Zap, X } from 'lucide-react'
 import { Button } from '@/components/ui/button'
+import Link from 'next/link'
 
 export default function FreeBanner() {
   const [isVisible, setIsVisible] = useState(true)
@@ -48,12 +49,14 @@ export default function FreeBanner() {
             <Zap className="h-3 w-3 sm:h-4 sm:w-4" />
             <span>Barcha funksiyalar bepul!</span>
           </div>
-          <Button 
-            size="sm"
-            className="bg-white/20 hover:bg-white/30 text-white border border-white/30 font-semibold text-xs sm:text-sm px-2 sm:px-3 py-1 sm:py-2"
-          >
-            Boshlash
-          </Button>
+          <Link href="https://director.educrm.uz/register" target="_blank">
+            <Button 
+              size="sm"
+              className="bg-white/20 hover:bg-white/30 text-white border border-white/30 font-semibold text-xs sm:text-sm px-2 sm:px-3 py-1 sm:py-2"
+            >
+              Boshlash
+            </Button>
+          </Link>
           <Button
             variant="ghost"
             size="sm"

@@ -16,6 +16,40 @@
 - 📊 **Hisobotlar va Tahlillar** - Batafsil hisobotlar va statistikalar
 - 📱 **Mobil Qo'llab-quvvatlash** - Har qanday qurilmada ishlash
 - 🌐 **O'zbekcha Interfeys** - To'liq o'zbekcha til qo'llab-quvvatlash
+- 🎯 **3 Ta Professional Panel** - Teacher, Manager va Director panellari
+
+### 🎨 Boshqaruv Panellari
+
+**EduCRM** tizimida uchta alohida boshqaruv paneli mavjud:
+
+#### 👨‍🏫 Teacher Panel (`/teacher`)
+O'qituvchilar uchun maxsus panel:
+- 📖 Darslar va dars rejalari
+- 👥 O'quvchilar ro'yxati va monitoring
+- 📝 Topshiriqlar yaratish va tekshirish
+- 🏆 Baholar qo'yish
+- 📅 Shaxsiy dars jadvali
+- 💬 O'quvchilar va ota-onalar bilan aloqa
+
+#### 👔 Manager Panel (`/manager`)
+Menejerlar uchun kengaytirilgan panel:
+- 📊 Umumiy statistika va hisobotlar
+- 👥 O'quvchilarni qo'shish va boshqarish
+- 📚 Kurslar va guruhlar boshqaruvi
+- 📅 Dars jadvali tuzish
+- 💬 Ommaviy xabarlar yuborish
+- ⚙️ Filial sozlamalari
+
+#### 🛡️ Director Panel (`/director`)
+Direktorlar uchun to'liq nazorat paneli:
+- 📈 Barcha filiallar analitikasi
+- 💰 Moliyaviy hisobotlar va daromadlar
+- 👔 Xodimlar boshqaruvi
+- 📄 Professional hisobotlar (Excel/PDF)
+- 🎯 Performance metrics
+- ⚙️ Tizim sozlamalari
+
+**📖 To'liq dokumentatsiya:** [ADMIN_PANELS.md](ADMIN_PANELS.md)
 
 ### 🚀 Tez Boshlash
 
