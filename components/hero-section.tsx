@@ -127,6 +127,7 @@ export default function HeroSection() {
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
               >
+                <a href="https://director.educrm.uz/register" target="_blank" rel="noopener noreferrer" className="flex items-center">
                 <Button
                   variant="outline"
                   size="lg"
@@ -137,6 +138,7 @@ export default function HeroSection() {
                     {HERO_TEXTS.demoButton}
                   </Link>
                 </Button>
+                </a>
               </motion.div>
             </motion.div>
 
