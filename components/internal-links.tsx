@@ -103,7 +103,7 @@ export default function InternalLinks({
       },
       { 
         name: 'O\'quvchilar Boshqaruvi', 
-        href: '/o\'quvchilar-boshqaruvi', 
+        href: '/oquvchilar-boshqaruvi', 
         description: 'O\'quvchilarni samarali boshqaring',
         icon: Users,
         color: 'from-purple-500 to-pink-500',
@@ -119,7 +119,7 @@ export default function InternalLinks({
       },
       { 
         name: 'To\'lovlar Boshqaruvi', 
-        href: '/to\'lovlar-boshqaruvi', 
+        href: '/tolovlar-boshqaruvi', 
         description: 'To\'lovlarni avtomatik boshqarish',
         icon: CreditCard,
         color: 'from-indigo-500 to-blue-500',

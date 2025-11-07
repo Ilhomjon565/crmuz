@@ -20,10 +20,10 @@ export const metadata: Metadata = {
   openGraph: {
     title: "O'qituvchilar Nazorati - EduCRM",
     description: "O'qituvchilarni samarali nazorat qilish uchun professional tizim",
-    url: "https://educrm.uz/o'qituvchilar-nazorati",
+    url: "https://educrm.uz/oqituvchilar-nazorati",
   },
   alternates: {
-    canonical: "/o'qituvchilar-nazorati",
+    canonical: "/oqituvchilar-nazorati",
   },
 }
 

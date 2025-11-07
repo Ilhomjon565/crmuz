@@ -77,19 +77,19 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: 0.5,
     },
     {
-      url: `${baseUrl}/o'quvchilar-boshqaruvi`,
+      url: `${baseUrl}/oquvchilar-boshqaruvi`,
       lastModified: new Date(),
       changeFrequency: 'monthly',
       priority: 0.8,
     },
     {
-      url: `${baseUrl}/o'qituvchilar-nazorati`,
+      url: `${baseUrl}/oqituvchilar-nazorati`,
       lastModified: new Date(),
       changeFrequency: 'monthly',
       priority: 0.8,
     },
     {
-      url: `${baseUrl}/to'lovlar-boshqaruvi`,
+      url: `${baseUrl}/tolovlar-boshqaruvi`,
       lastModified: new Date(),
       changeFrequency: 'monthly',
       priority: 0.8,
