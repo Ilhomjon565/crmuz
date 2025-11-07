@@ -19,7 +19,9 @@ import {
   Globe,
   ArrowRight,
   Shield,
-  Award
+  Award,
+  Gift,
+  Video
 } from 'lucide-react'
 
 interface BreadcrumbItem {
@@ -92,28 +94,44 @@ export default function InternalLinks({
         bgColor: 'from-blue-50 to-cyan-50 dark:from-blue-950/30 dark:to-cyan-950/30'
       },
       { 
-        name: 'Narxlar', 
-        href: '/pricing', 
-        description: 'Bepul va ochiq manba',
-        icon: CreditCard,
+        name: 'Bepul Sinov', 
+        href: '/bepul-sinov', 
+        description: 'Tizimni bepul sinab ko\'ring',
+        icon: Gift,
         color: 'from-green-500 to-emerald-500',
         bgColor: 'from-green-50 to-emerald-50 dark:from-green-950/30 dark:to-emerald-950/30'
       },
       { 
-        name: 'Aloqa', 
-        href: '/contact', 
-        description: 'Biz bilan bog\'laning',
-        icon: MessageCircle,
+        name: 'O\'quvchilar Boshqaruvi', 
+        href: '/o\'quvchilar-boshqaruvi', 
+        description: 'O\'quvchilarni samarali boshqaring',
+        icon: Users,
         color: 'from-purple-500 to-pink-500',
         bgColor: 'from-purple-50 to-pink-50 dark:from-purple-950/30 dark:to-pink-950/30'
       },
       { 
-        name: 'Haqida', 
-        href: '/about', 
-        description: 'EduCRM haqida ma\'lumot',
-        icon: Users,
+        name: 'Qanday Ishlaydi', 
+        href: '/qanday-ishlaydi', 
+        description: 'Tizimdan foydalanish ko\'rsatmasi',
+        icon: BookOpen,
         color: 'from-orange-500 to-red-500',
         bgColor: 'from-orange-50 to-red-50 dark:from-orange-950/30 dark:to-red-950/30'
+      },
+      { 
+        name: 'To\'lovlar Boshqaruvi', 
+        href: '/to\'lovlar-boshqaruvi', 
+        description: 'To\'lovlarni avtomatik boshqarish',
+        icon: CreditCard,
+        color: 'from-indigo-500 to-blue-500',
+        bgColor: 'from-indigo-50 to-blue-50 dark:from-indigo-950/30 dark:to-blue-950/30'
+      },
+      { 
+        name: 'Online Darslar', 
+        href: '/online-darslar', 
+        description: 'Online darslar o\'tkazish',
+        icon: Video,
+        color: 'from-cyan-500 to-teal-500',
+        bgColor: 'from-cyan-50 to-teal-50 dark:from-cyan-950/30 dark:to-teal-950/30'
       }
     ],
     features: [
