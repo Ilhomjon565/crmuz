@@ -52,6 +52,17 @@ export const metadata: Metadata = {
   alternates: {
     canonical: "/",
   },
+  icons: {
+    icon: [
+      { url: "/favicon.ico", sizes: "any" },
+      { url: "/icon-192x192.png", sizes: "192x192", type: "image/png" },
+      { url: "/icon-512x512.png", sizes: "512x512", type: "image/png" },
+    ],
+    apple: [
+      { url: "/apple-touch-icon.png", sizes: "180x180", type: "image/png" },
+    ],
+    shortcut: "/favicon.ico",
+  },
   openGraph: {
     title: "EduCRM - O'quv Markazlarni Avtomatlashtiruvchi Tizim",
     description: "O'zbekistondagi o'quv markazlar uchun professional CRM tizimi. O'quvchilar, o'qituvchilar va to'lovlarni nazorat qilish.",
@@ -109,10 +120,14 @@ export default function RootLayout({
     <html lang="uz" suppressHydrationWarning>
       <head>
         <link rel="icon" href="/favicon.ico" sizes="any" />
-        <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/icon-192x192.png" />
+        <link rel="icon" type="image/png" sizes="16x16" href="/icon-192x192.png" />
+        <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
         <link rel="manifest" href="/manifest.json" />
         <meta name="theme-color" content="#3b82f6" />
         <meta name="msapplication-TileColor" content="#3b82f6" />
+        <meta name="msapplication-TileImage" content="/icon-192x192.png" />
+        <link rel="image_src" href="https://educrm.uz/logo.png" />
         
         {/* Additional SEO Meta Tags */}
         <meta name="geo.region" content="UZ" />
@@ -218,7 +233,12 @@ export default function RootLayout({
               "@type": "Organization",
               "name": "EduCRM",
               "url": "https://educrm.uz",
-              "logo": "https://educrm.uz/logo.png",
+              "logo": {
+                "@type": "ImageObject",
+                "url": "https://educrm.uz/logo.png",
+                "width": 512,
+                "height": 512
+              },
               "description": "O'zbekistondagi o'quv markazlar uchun professional CRM tizimi",
               "address": {
                 "@type": "PostalAddress",
@@ -244,6 +264,14 @@ export default function RootLayout({
               "name": "EduCRM",
               "url": "https://educrm.uz",
               "description": "O'quv markazlarni avtomatlashtiruvchi tizim",
+              "publisher": {
+                "@type": "Organization",
+                "name": "EduCRM",
+                "logo": {
+                  "@type": "ImageObject",
+                  "url": "https://educrm.uz/logo.png"
+                }
+              },
               "potentialAction": {
                 "@type": "SearchAction",
                 "target": "https://educrm.uz/search?q={search_term_string}",
